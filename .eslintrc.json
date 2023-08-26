@@ -10,14 +10,12 @@
 		"plugin:import/typescript",
 		"plugin:react-perf/recommended",
 
-		// "plugin:jest/recommended",
 		"plugin:promise/recommended",
 		"plugin:unicorn/recommended",
 		"plugin:cypress/recommended",
 
 		"plugin:@next/next/recommended",
 		"next/core-web-vitals",
-		// "prettier"
 		"plugin:prettier/recommended"
 	],
 	"env": {
