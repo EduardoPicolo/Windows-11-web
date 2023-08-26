@@ -30,6 +30,7 @@
 		"**/*.ts",
 		"**/*.tsx",
 		"next.config.js",
+		"next.config.mjs",
 		"plopfile.mjs",
 		".next/types/**/*.ts"
 	],
