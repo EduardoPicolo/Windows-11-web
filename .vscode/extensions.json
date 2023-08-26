@@ -1,0 +1,12 @@
+{
+	"recommendations": [
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode",
+		"yoavbls.pretty-ts-errors",
+		"eamodio.gitlens",
+		"usernamehw.errorlens",
+		"ghmcadams.lintlens",
+		"formulahendry.auto-close-tag",
+		"steoates.autoimport"
+	]
+}

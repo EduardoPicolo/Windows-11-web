@@ -16,6 +16,7 @@
 
 		"plugin:@next/next/recommended",
 		"next/core-web-vitals",
+		"next",
 		"plugin:prettier/recommended"
 	],
 	"env": {
@@ -30,7 +31,6 @@
 	"plugins": [
 		"@typescript-eslint",
 		"eslint-comments",
-		// "jest",
 		"promise",
 		"unicorn",
 
