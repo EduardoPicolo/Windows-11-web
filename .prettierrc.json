@@ -1,0 +1,15 @@
+{
+	"printWidth": 70,
+	"semi": true,
+	"trailingComma": "es5",
+	"singleQuote": true,
+	"jsxSingleQuote": false,
+
+	"tabWidth": 2,
+	"useTabs": true,
+
+	"bracketSpacing": true,
+	"bracketSameLine": false,
+
+	"plugins": ["prettier-plugin-jsdoc"]
+}
