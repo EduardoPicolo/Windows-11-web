@@ -1,5 +1,6 @@
 import { WindowsGrid } from '@/app/(windows)/WindowsGrid';
 import { Taskbar } from '@/components/Taskbar';
+import { defaultApps } from '@/constants/defaultApps';
 
 export default function WindowsLayout({
 	children,
@@ -9,7 +10,7 @@ export default function WindowsLayout({
 	return (
 		<WindowsGrid>
 			<main>{children}</main>
-			<Taskbar />
+			<Taskbar apps={defaultApps} />
 		</WindowsGrid>
 	);
 }

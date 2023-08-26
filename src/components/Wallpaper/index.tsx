@@ -1,18 +1,20 @@
 import Image, { type ImageProps } from 'next/image';
 
+import WindowsWallpaper from '@/public/wallpapers/1-win11.jpg';
+
 type WallpaperProps = Partial<ImageProps>;
 
 export function Wallpaper(props: WallpaperProps) {
 	return (
 		<Image
-			src="/wallpapers/1-win11.jpg"
-			alt="Windows 11 Wallpaper"
-			layout="fill"
-			objectFit="cover"
-			priority
+			src={WindowsWallpaper}
+			alt="Wallpaper"
+			placeholder="blur"
 			quality={100}
+			fill
+			sizes="100vw"
 			style={{
-				zIndex: -1,
+				objectFit: 'cover',
 			}}
 			{...props}
 		/>

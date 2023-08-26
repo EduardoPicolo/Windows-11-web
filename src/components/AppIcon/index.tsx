@@ -10,16 +10,18 @@ interface AppIconProps extends Partial<IconButtonProps> {
 }
 
 export const AppIcon = forwardRef<AppIconProps, 'button'>(
-	(props: AppIconProps) => {
+	(props: AppIconProps, ref) => {
 		const { name, ...rest } = props;
 
 		return (
-			<Tooltip label={name} openDelay={750}>
+			<Tooltip label={name} openDelay={900}>
 				<IconButton
+					ref={ref}
 					aria-label={name}
 					variant="ghost"
 					size="lg"
 					borderRadius="md"
+					colorScheme="gray"
 					{...rest}
 				/>
 			</Tooltip>

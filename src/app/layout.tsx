@@ -1,8 +1,19 @@
-import { Poppins, Roboto_Flex } from 'next/font/google';
+import { Noto_Sans, Poppins } from 'next/font/google';
 
 import { Providers } from './providers';
 
-const roboto = Roboto_Flex({
+const notosans = Noto_Sans({
+	weight: [
+		'100',
+		'200',
+		'300',
+		'400',
+		'500',
+		'600',
+		'700',
+		'800',
+		'900',
+	],
 	subsets: ['latin'],
 	display: 'swap',
 	variable: '--body-font',
@@ -37,7 +48,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang="en"
-			className={`${roboto.variable} ${poppins.variable}`}
+			className={`${notosans.variable} ${poppins.variable}`}
 		>
 			<body>
 				<Providers>{children}</Providers>
