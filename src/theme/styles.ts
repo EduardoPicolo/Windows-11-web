@@ -17,6 +17,8 @@ export const styles: Theme['styles'] = {
 					'radial-gradient(circle at center -32px,#21232c,#181a22 40%) no-repeat',
 				backgroundSize: 'contain',
 			},
+
+			overflow: 'clip',
 		},
 	}),
 };

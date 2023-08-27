@@ -108,7 +108,5 @@ export const buttonTheme = defineStyleConfig({
 		outline,
 		ghost,
 	},
-	defaultProps: {
-		variant: 'gradient',
-	},
+	defaultProps: {},
 });

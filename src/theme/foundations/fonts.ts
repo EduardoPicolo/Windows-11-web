@@ -7,4 +7,5 @@ export const fonts: Theme['fonts'] = {
 
 export const fontSizes = {
 	sm: '0.825rem',
+	md: '0.935rem',
 } as Partial<Theme['fontSizes']>;

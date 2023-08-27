@@ -19,7 +19,7 @@ export const AppIcon = forwardRef<AppIconProps, 'button'>(
 					ref={ref}
 					aria-label={name}
 					variant="ghost"
-					size="lg"
+					// size="lg"
 					borderRadius="md"
 					colorScheme="gray"
 					{...rest}

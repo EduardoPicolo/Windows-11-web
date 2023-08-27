@@ -69,6 +69,17 @@ const radio = definePartsStyle((props) => ({
 	},
 }));
 
+const ghost = definePartsStyle((props) => ({
+	container: {
+		border: 'none',
+		backgroundColor: mode('whiteAlpha.600', 'whiteAlpha.100')(props),
+		backdropFilter: 'blur(20.5px) saturate(180%)',
+	},
+	footer: {
+		background: mode('whiteAlpha.400', 'whiteAlpha.100')(props),
+	},
+}));
+
 const form = definePartsStyle((props) => ({
 	container: {
 		borderWidth: mode('0', '1px')(props),
@@ -86,8 +97,9 @@ export const cardTheme = defineMultiStyleConfig({
 		outline,
 		radio,
 		form,
+		ghost,
 	},
 	defaultProps: {
-		variant: 'elevated',
+		variant: 'ghost',
 	},
 });

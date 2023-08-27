@@ -68,7 +68,7 @@ const overrides = {
 export const theme = extendTheme(
 	overrides,
 	withDefaultColorScheme({ colorScheme: 'blue' })
+	// withDefaultProps()
 	// withDefaultSize(),
 	// withDefaultVariant(),
-	// withDefaultProps()
 );
