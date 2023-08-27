@@ -10,6 +10,7 @@ export default function WindowsLayout({
 	return (
 		<WindowsGrid>
 			<main>{children}</main>
+
 			<Taskbar apps={defaultApps} />
 		</WindowsGrid>
 	);

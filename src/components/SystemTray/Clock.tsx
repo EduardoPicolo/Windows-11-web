@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import {
-	Box,
 	type BoxProps,
 	forwardRef,
 	Text,
+	VStack,
 } from '@chakra-ui/react';
 
 type ClockProps = BoxProps;
@@ -19,17 +19,18 @@ export const Clock = forwardRef<ClockProps, 'div'>((props, ref) => {
 
 	const hours = time.getHours();
 	const minutes = time.getMinutes();
-	const ampm = hours >= 12 ? 'PM' : 'AM';
-	const formattedTime = `${hours % 12 || 12}:${minutes
+	const formattedTime = `${hours
 		.toString()
-		.padStart(2, '0')} ${ampm}`;
+		.padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 	const formattedDate = `${
 		time.getMonth() + 1
 	}/${time.getDate()}/${time.getFullYear()}`;
 
 	return (
-		<Box
+		<VStack
 			ref={ref}
+			spacing={0}
+			align="flex-end"
 			py={1}
 			px={2}
 			borderRadius="md"
@@ -39,12 +40,11 @@ export const Clock = forwardRef<ClockProps, 'div'>((props, ref) => {
 			}}
 			fontSize="sm"
 			lineHeight={1.35}
-			textAlign="right"
 			cursor="default"
 			{...props}
 		>
 			<Text>{formattedTime}</Text>
 			<Text>{formattedDate}</Text>
-		</Box>
+		</VStack>
 	);
 });

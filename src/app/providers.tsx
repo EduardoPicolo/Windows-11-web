@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 
 import { CustomToastContainer } from '@/components/ToastContainer';
+import { DragSelectProvider } from '@/contexts/Selection';
 import { theme } from '@/theme';
 
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -22,7 +23,7 @@ export function Providers({ children }: ProvidersProps) {
 		<>
 			<CacheProvider>
 				<ChakraProvider theme={theme}>
-					{children}
+					<DragSelectProvider>{children}</DragSelectProvider>
 					<CustomToastContainer />
 				</ChakraProvider>
 			</CacheProvider>

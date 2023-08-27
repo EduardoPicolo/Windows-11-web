@@ -15,8 +15,6 @@ export function QuickSettings(props: QuickSettingsProps) {
 				background: 'hoverBg',
 				boxShadow: 'thin',
 			}}
-			fontSize="sm"
-			textAlign="right"
 			cursor="default"
 			{...props}
 		>

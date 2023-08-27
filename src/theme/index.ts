@@ -18,6 +18,7 @@ import { numberInputTheme as NumberInput } from './components/numberInput';
 import { popoverTheme as Popover } from './components/popover';
 import { sidebarTheme as Sidebar } from './components/sidebar';
 import { tabsTheme as Tabs } from './components/tabs';
+import { taskbarTheme as Taskbar } from './components/taskbar';
 import { tooltipTheme as Tooltip } from './components/tooltip';
 import { breakpoints } from './foundations/breakpoints';
 import { colors } from './foundations/colors';
@@ -58,6 +59,7 @@ const overrides = {
 		Loading,
 		Tooltip,
 		NumberInput,
+		Taskbar,
 	},
 	semanticTokens,
 	config: {

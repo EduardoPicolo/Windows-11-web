@@ -37,7 +37,6 @@ export function AppsTray(props: AppsTrayProps) {
 									transition="transform 0.2s"
 								/>
 							}
-							cursor="default"
 						/>
 					</PopoverTrigger>
 					<Portal>

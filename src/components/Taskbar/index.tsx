@@ -5,8 +5,7 @@ import {
 	Grid,
 	GridItem,
 	HStack,
-	useColorModeValue,
-	useDisclosure,
+	useStyleConfig,
 } from '@chakra-ui/react';
 import { type GridProps } from '@chakra-ui/styled-system';
 
@@ -19,30 +18,14 @@ interface TaskbarProps extends GridProps {
 export function Taskbar(props: TaskbarProps) {
 	const { apps, ...rest } = props;
 
-	const { onToggle, isOpen, onOpen, onClose } = useDisclosure();
+	const styles = useStyleConfig('Taskbar');
 
-	const backgroundColor = useColorModeValue(
-		'whiteAlpha.700',
-		'blackAlpha.600'
-	);
+	console.log(styles);
 
 	return (
-		<Grid
-			w="100%"
-			templateColumns="minmax(0, 1fr) 1fr minmax(0, 1fr)"
-			alignItems="center"
-			py={1}
-			px={4}
-			backgroundColor={backgroundColor}
-			_dark={{
-				borderTop: '1px solid',
-				borderColor: 'whiteAlpha.300',
-			}}
-			backdropFilter="blur(20.5px) saturate(180%)"
-			{...rest}
-		>
+		<Grid __css={styles} {...rest}>
 			<GridItem gridColumn={2} justifySelf="center">
-				<HStack>{apps}</HStack>
+				<HStack alignItems="stretch">{apps}</HStack>
 			</GridItem>
 
 			<GridItem gridColumn={3} justifySelf="flex-end">

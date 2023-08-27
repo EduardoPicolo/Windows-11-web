@@ -1,11 +1,16 @@
 import {
-	type CSSWithMultiValues,
 	defineStyle,
 	defineStyleConfig,
-	type RecursiveCSSSelector,
 	Theme,
 } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
+
+const baseStyle = defineStyle({
+	cursor: 'default',
+	_hover: {
+		boxShadow: 'thin',
+	},
+});
 
 const xl = defineStyle({
 	fontSize: 'xl',
@@ -82,33 +87,12 @@ const outline = defineStyle((props) => {
 	}
 });
 
-const ghost = defineStyle((props) => {
-	const { colorScheme } = props;
-
-	switch (colorScheme) {
-		case 'gray': {
-			return {
-				_hover: {
-					background: 'hoverBg',
-				},
-			} as RecursiveCSSSelector<CSSWithMultiValues>;
-		}
-
-		default: {
-			return {};
-		}
-	}
-});
-
 export const buttonTheme = defineStyleConfig({
-	baseStyle: {
-		cursor: 'default',
-	},
+	baseStyle,
 	sizes: { xl },
 	variants: {
 		gradient,
 		outline,
-		ghost,
 	},
 	defaultProps: {},
 });

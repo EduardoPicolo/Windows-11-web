@@ -15,7 +15,7 @@ const { definePartsStyle, defineMultiStyleConfig } =
 
 const ghost = definePartsStyle((props) => ({
 	content: {
-		bg: mode('whiteAlpha.600', 'blackAlpha.500')(props),
+		bg: mode('whiteAlpha.600', 'blackAlpha.600')(props),
 		backdropFilter: 'blur(20.5px) saturate(180%)',
 		transform: 'auto-gpu',
 		boxShadow: 'subtle',
@@ -24,12 +24,12 @@ const ghost = definePartsStyle((props) => ({
 			borderColor: 'blackAlpha.200',
 		},
 	},
-	header: {
-		bg: mode('whiteAlpha.400', 'blackAlpha.400')(props),
-	},
-	footer: {
-		bg: mode('whiteAlpha.400', 'blackAlpha.400')(props),
-	},
+	// header: {
+	// 	bg: mode('whiteAlpha.400', 'blackAlpha.400')(props),
+	// },
+	// footer: {
+	// 	bg: mode('whiteAlpha.400', 'blackAlpha.400')(props),
+	// },
 }));
 
 export const popoverTheme = defineMultiStyleConfig({

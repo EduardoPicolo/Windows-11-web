@@ -3667,6 +3667,11 @@ dot-case@^3.0.4:
     no-case "^3.0.4"
     tslib "^2.0.3"
 
+dragselect@^2.7.4:
+  version "2.7.4"
+  resolved "https://registry.yarnpkg.com/dragselect/-/dragselect-2.7.4.tgz#54838390212d2d954909bf42aa2213df29317b4a"
+  integrity sha512-j0qFl4xvsyImlSTn9erDCCT4SSPUMssgKAYuKqhsPr8WPphLghHfjDd4WR2jLjL91fTQQlbbIJ/7T2qwD2hghQ==
+
 duplexer@~0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/duplexer/-/duplexer-0.1.2.tgz#3abe43aef3835f8ae077d136ddce0f276b0400e6"

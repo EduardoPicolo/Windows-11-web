@@ -15,7 +15,10 @@ export function Wallpaper(props: WallpaperProps) {
 			sizes="100vw"
 			style={{
 				objectFit: 'cover',
+				userSelect: 'none',
+				zIndex: -1,
 			}}
+			unselectable="on"
 			{...props}
 		/>
 	);
