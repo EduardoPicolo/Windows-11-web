@@ -8,16 +8,16 @@ import {
 import { AnimatePresence, motion } from 'framer-motion';
 import { block } from 'million/react';
 
-import { AppIcon } from '@/components/AppIcon';
 import { StartMenu } from '@/components/StartMenu';
+import { TaskbarIcon } from '@/components/TaskbarIcon';
 import { ThemeImage } from '@/components/ThemeImage';
 import StartIconDark from '@/public/icons/Start_Dark.png';
 import StartIconLight from '@/public/icons/Start_Light.png';
 
-type StartMenuShortcutProps = Partial<IconButtonProps>;
+type StartMenuButtonProps = Partial<IconButtonProps>;
 
-export const StartMenuShortcut = block(
-	(props: StartMenuShortcutProps) => {
+export const StartMenuButton = block(
+	(props: StartMenuButtonProps) => {
 		const { isOpen, onClose, onToggle } = useDisclosure();
 
 		const ref = useRef<HTMLButtonElement>(null);
@@ -34,7 +34,7 @@ export const StartMenuShortcut = block(
 
 		return (
 			<>
-				<AppIcon
+				<TaskbarIcon
 					ref={ref}
 					name="Start"
 					icon={
