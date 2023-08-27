@@ -6,6 +6,6 @@ export const fonts: Theme['fonts'] = {
 } as Theme['fonts'];
 
 export const fontSizes = {
-	sm: '0.825rem',
+	sm: '0.8rem',
 	md: '0.935rem',
 } as Partial<Theme['fontSizes']>;

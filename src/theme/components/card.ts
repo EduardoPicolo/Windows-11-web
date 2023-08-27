@@ -7,9 +7,7 @@ const { definePartsStyle, defineMultiStyleConfig } =
 
 const baseStyle = definePartsStyle({
 	// define the part you're going to style
-	container: {
-		backdropFilter: 'blur(20.5px) saturate(180%)',
-	},
+	container: {},
 	header: {},
 	body: {},
 	footer: {},
@@ -71,12 +69,14 @@ const radio = definePartsStyle((props) => ({
 
 const ghost = definePartsStyle((props) => ({
 	container: {
-		border: 'none',
-		backgroundColor: mode('whiteAlpha.600', 'whiteAlpha.100')(props),
+		backgroundColor: mode('whiteAlpha.600', 'blackAlpha.700')(props),
 		backdropFilter: 'blur(20.5px) saturate(180%)',
+		border: '1px solid whiteAlpha.300',
+		borderColor: 'whiteAlpha.400',
 	},
 	footer: {
 		background: mode('whiteAlpha.400', 'whiteAlpha.100')(props),
+		borderBottomRadius: 'xl',
 	},
 }));
 

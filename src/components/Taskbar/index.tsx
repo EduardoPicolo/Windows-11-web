@@ -10,6 +10,8 @@ import {
 } from '@chakra-ui/react';
 import { type GridProps } from '@chakra-ui/styled-system';
 
+import { SystemTray } from '@/components/SystemTray';
+
 interface TaskbarProps extends GridProps {
 	apps: ReactElement[];
 }
@@ -21,7 +23,7 @@ export function Taskbar(props: TaskbarProps) {
 
 	const backgroundColor = useColorModeValue(
 		'whiteAlpha.700',
-		'blackAlpha.400'
+		'blackAlpha.600'
 	);
 
 	return (
@@ -32,6 +34,10 @@ export function Taskbar(props: TaskbarProps) {
 			py={1}
 			px={4}
 			backgroundColor={backgroundColor}
+			_dark={{
+				borderTop: '1px solid',
+				borderColor: 'whiteAlpha.300',
+			}}
 			backdropFilter="blur(20.5px) saturate(180%)"
 			{...rest}
 		>
@@ -40,7 +46,7 @@ export function Taskbar(props: TaskbarProps) {
 			</GridItem>
 
 			<GridItem gridColumn={3} justifySelf="flex-end">
-				{/* <SystemTray /> */}
+				<SystemTray />
 			</GridItem>
 		</Grid>
 	);

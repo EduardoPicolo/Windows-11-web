@@ -8,13 +8,20 @@ import { mode } from '@chakra-ui/theme-tools';
 const { definePartsStyle, defineMultiStyleConfig } =
 	createMultiStyleConfigHelpers(inputAnatomy.keys);
 
-// const baseStyle = definePartsStyle({
-// 	// define the part you're going to style
-// 	field: {
-// 		fontFamily: 'mono', // change the font family
-// 		color: 'teal.500', // change the input text color
-// 	},
-// });
+const baseStyle = definePartsStyle((props) => ({
+	// define the part you're going to style
+	field: {
+		borderRadius: 'full',
+		_placeholder: {
+			color: mode('inherit', 'whiteAlpha.900')(props),
+		},
+		_focus: {
+			_placeholder: {
+				color: mode('inherit', 'whiteAlpha.500')(props),
+			},
+		},
+	},
+}));
 
 const variantOutline = definePartsStyle((props) => ({
 	field: {
@@ -47,7 +54,7 @@ const variants = {
 };
 
 export const inputTheme = defineMultiStyleConfig({
-	// baseStyle,
+	baseStyle,
 	variants,
 	defaultProps: {
 		variant: 'filled',

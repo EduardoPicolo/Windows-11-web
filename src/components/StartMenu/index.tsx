@@ -6,6 +6,7 @@ import {
 	CardFooter,
 	CardHeader,
 	type CardProps,
+	chakra,
 	Divider,
 	HStack,
 	Icon,
@@ -18,15 +19,27 @@ import {
 } from '@chakra-ui/react';
 import { GoSearch } from 'react-icons/go';
 import { SlArrowRight, SlPower } from 'react-icons/sl';
+import { block } from 'million/react';
 
 import { Input } from '@/components/FormFields';
+
+const SlideFadeWithStyles = chakra(SlideFade, {
+	baseStyle: {
+		position: 'absolute',
+		bottom: 'calc(56px + 1rem)',
+		background: 'transparent',
+		backdropFilter: 'blur(20.5px) saturate(180%)',
+		borderRadius: 'xl',
+		left: '10%',
+	},
+});
 
 interface StartMenuProps extends CardProps {
 	isOpen: boolean;
 	onClose: () => void;
 }
 
-export function StartMenu(props: StartMenuProps) {
+export const StartMenu = block((props: StartMenuProps) => {
 	const { isOpen, onClose, ...rest } = props;
 
 	const ref = useRef<HTMLDivElement>(null);
@@ -37,21 +50,29 @@ export function StartMenu(props: StartMenuProps) {
 	});
 
 	return (
-		<SlideFade
-			unmountOnExit
+		<SlideFadeWithStyles
 			in={isOpen}
+			unmountOnExit
 			offsetY="100px"
-			style={{
-				position: 'absolute',
-				bottom: 'calc(56px + 1rem)',
-				left: '10%',
+			// Firefox only
+			sx={{
+				'@-moz-document url-prefix()': {
+					backdropFilter: 'blur(20.5px)',
+				},
 			}}
 		>
-			<Card ref={ref} size="lg" w="90vw" maxW="700px" {...rest}>
+			<Card
+				ref={ref}
+				size="lg"
+				w="90vw"
+				maxW="700px"
+				height="700px"
+				{...rest}
+			>
 				<CardHeader>
 					<Input
 						variant="filled"
-						placeholder="Type here to search"
+						placeholder="Search for apps, settings, and documents"
 						leftElement={
 							<InputLeftElement>
 								<Icon as={GoSearch} boxSize={5} />
@@ -95,6 +116,6 @@ export function StartMenu(props: StartMenuProps) {
 					/>
 				</CardFooter>
 			</Card>
-		</SlideFade>
+		</SlideFadeWithStyles>
 	);
-}
+});

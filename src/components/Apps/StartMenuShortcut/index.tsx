@@ -23,7 +23,7 @@ export function StartMenuShortcut(props: StartMenuShortcutProps) {
 					<ThemeImage
 						srcLight={StartIconLight}
 						srcDark={StartIconDark}
-						width={26}
+						width={24}
 						alt="search"
 					/>
 				}

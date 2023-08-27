@@ -14,12 +14,11 @@ export const AppIcon = forwardRef<AppIconProps, 'button'>(
 		const { name, ...rest } = props;
 
 		return (
-			<Tooltip label={name} openDelay={900}>
+			<Tooltip label={name} openDelay={550}>
 				<IconButton
 					ref={ref}
 					aria-label={name}
 					variant="ghost"
-					// size="lg"
 					borderRadius="md"
 					colorScheme="gray"
 					{...rest}

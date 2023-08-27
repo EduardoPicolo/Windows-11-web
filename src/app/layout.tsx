@@ -1,19 +1,9 @@
-import { Noto_Sans, Poppins } from 'next/font/google';
+import { Open_Sans, Poppins } from 'next/font/google';
 
 import { Providers } from './providers';
 
-const notosans = Noto_Sans({
-	weight: [
-		'100',
-		'200',
-		'300',
-		'400',
-		'500',
-		'600',
-		'700',
-		'800',
-		'900',
-	],
+const opensans = Open_Sans({
+	weight: ['300', '400', '500', '600', '700', '800'],
 	subsets: ['latin'],
 	display: 'swap',
 	variable: '--body-font',
@@ -48,7 +38,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang="en"
-			className={`${notosans.variable} ${poppins.variable}`}
+			className={`${opensans.variable} ${poppins.variable}`}
 		>
 			<body>
 				<Providers>{children}</Providers>

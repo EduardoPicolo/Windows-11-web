@@ -15,7 +15,7 @@ const { definePartsStyle, defineMultiStyleConfig } =
 
 const ghost = definePartsStyle((props) => ({
 	content: {
-		bg: mode('whiteAlpha.300', 'blackAlpha.500')(props),
+		bg: mode('whiteAlpha.600', 'blackAlpha.500')(props),
 		backdropFilter: 'blur(20.5px) saturate(180%)',
 		transform: 'auto-gpu',
 		boxShadow: 'subtle',

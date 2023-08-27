@@ -38,6 +38,7 @@ export const Clock = forwardRef<ClockProps, 'div'>((props, ref) => {
 				boxShadow: 'thin',
 			}}
 			fontSize="sm"
+			lineHeight={1.35}
 			textAlign="right"
 			cursor="default"
 			{...props}

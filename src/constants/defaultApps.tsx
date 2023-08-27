@@ -22,7 +22,7 @@ export const defaultApps = [
 			<ThemeImage
 				srcLight={SearchIconLight}
 				srcDark={SearchIconDark}
-				width={26}
+				width={24}
 				alt="search"
 			/>
 		}
@@ -35,7 +35,7 @@ export const defaultApps = [
 			<ThemeImage
 				srcLight={TaskViewerIconLight}
 				srcDark={TaskViewerIconDark}
-				width={26}
+				width={24}
 				alt="tasks"
 			/>
 		}
@@ -43,13 +43,13 @@ export const defaultApps = [
 	/>,
 	<AppIcon
 		name="Chat"
-		icon={<Image src={ChatIcon} alt="chat" width={28} />}
+		icon={<Image src={ChatIcon} alt="chat" width={24} />}
 		key="chat"
 	/>,
 	<AppIcon
 		name="File Explorer"
 		icon={
-			<Image src={FileExplorerIcon} alt="file-explorer" width={26} />
+			<Image src={FileExplorerIcon} alt="file-explorer" width={24} />
 		}
 		key="file-explorer"
 	/>,
@@ -66,7 +66,7 @@ export const defaultApps = [
 	/>,
 	<AppIcon
 		name="Store"
-		icon={<Image src={StoreIcon} alt="store" width={26} />}
+		icon={<Image src={StoreIcon} alt="store" width={24} />}
 		key="store"
 	/>,
 ];
