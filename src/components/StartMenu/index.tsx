@@ -67,6 +67,8 @@ export const StartMenu = block((props: StartMenuProps) => {
 				w="90vw"
 				maxW="700px"
 				height="700px"
+				userSelect="none"
+				cursor="default"
 				{...rest}
 			>
 				<CardHeader>
@@ -91,7 +93,7 @@ export const StartMenu = block((props: StartMenuProps) => {
 							variant="solid"
 							size="xs"
 							colorScheme="gray"
-							fontWeight="medium"
+							fontWeight="semibold"
 							rightIcon={<Icon as={SlArrowRight} boxSize={2} />}
 							boxShadow="thin"
 						>

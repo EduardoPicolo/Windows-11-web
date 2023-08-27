@@ -29,9 +29,7 @@ const sizes = {
 };
 
 const ghostVariant = defineStyle((props) => ({
-	border: '1px solid',
-	borderColor: mode(`transparent`, `whiteAlpha.300`)(props),
-	bg: mode('whiteAlpha.600', 'whiteAlpha.100')(props),
+	bg: mode('whiteAlpha.600', 'blackAlpha.700')(props),
 	color: mode(`inherit`, `gray.300`)(props),
 	boxShadow: 'subtle',
 	backdropFilter: 'blur(20.5px) saturate(180%)',

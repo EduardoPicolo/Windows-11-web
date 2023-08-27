@@ -1,16 +1,17 @@
 import {
 	type BoxProps,
+	ButtonGroup,
 	Icon,
 	IconButton,
 	Popover,
 	PopoverBody,
-	PopoverCloseButton,
 	PopoverContent,
 	PopoverTrigger,
 	Portal,
 } from '@chakra-ui/react';
+import { BsNvidia } from 'react-icons/bs';
+import { FaDiscord, FaSpotify, FaSteam } from 'react-icons/fa';
 import { MdKeyboardArrowUp } from 'react-icons/md';
-import { SlArrowUp } from 'react-icons/sl';
 
 type AppsTrayProps = BoxProps;
 
@@ -40,11 +41,29 @@ export function AppsTray(props: AppsTrayProps) {
 						/>
 					</PopoverTrigger>
 					<Portal>
-						<PopoverContent>
-							<PopoverCloseButton />
-
+						<PopoverContent width="fit-content">
 							<PopoverBody>
-								<Icon as={SlArrowUp} boxSize={4} />
+								<ButtonGroup variant="ghost" size="sm">
+									<IconButton
+										aria-label="NVIDIA"
+										icon={<Icon boxSize={4} as={BsNvidia} />}
+										colorScheme="green"
+									/>
+									<IconButton
+										aria-label="Steam"
+										icon={<Icon boxSize={4} as={FaSteam} />}
+									/>
+									<IconButton
+										aria-label="Discord"
+										icon={<Icon boxSize={4} as={FaDiscord} />}
+										colorScheme="purple"
+									/>
+									<IconButton
+										aria-label="Spotify"
+										icon={<Icon boxSize={4} as={FaSpotify} />}
+										colorScheme="green"
+									/>
+								</ButtonGroup>
 							</PopoverBody>
 						</PopoverContent>
 					</Portal>

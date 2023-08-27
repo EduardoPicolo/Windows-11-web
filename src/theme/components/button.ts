@@ -101,7 +101,9 @@ const ghost = defineStyle((props) => {
 });
 
 export const buttonTheme = defineStyleConfig({
-	baseStyle: {},
+	baseStyle: {
+		cursor: 'default',
+	},
 	sizes: { xl },
 	variants: {
 		gradient,

@@ -18,7 +18,7 @@ export const semanticTokens = {
 		},
 		hoverBg: {
 			default: 'whiteAlpha.700',
-			_dark: 'whiteAlpha.50',
+			_dark: 'whiteAlpha.200',
 		},
 	},
 };
