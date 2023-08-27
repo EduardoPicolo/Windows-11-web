@@ -20,5 +20,8 @@
 	// export-typescript
 	"export-typescript.excludes": ["**/*.{spec.ts,spec.tsx,d.ts}"],
 	"export-typescript.includes": ["**/*.{ts,tsx}"],
-	"export-typescript.exportStar": false
+	"export-typescript.exportStar": false,
+	"[xml]": {
+		"editor.defaultFormatter": "redhat.vscode-xml"
+	}
 }
