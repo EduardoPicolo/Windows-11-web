@@ -1,13 +1,17 @@
 import Image, { type ImageProps } from 'next/image';
 
-import WindowsWallpaper from '@/public/wallpapers/1-win11.jpg';
+import { useSystem } from '@/contexts/System/index.';
 
 type WallpaperProps = Partial<ImageProps>;
 
 export function Wallpaper(props: WallpaperProps) {
+	const {
+		wallpaper: [state],
+	} = useSystem();
+
 	return (
 		<Image
-			src={WindowsWallpaper}
+			src={state}
 			alt="Wallpaper"
 			placeholder="blur"
 			quality={100}

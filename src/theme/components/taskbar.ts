@@ -10,7 +10,8 @@ export const taskbarTheme = defineStyleConfig({
 		py: 1,
 		px: 4,
 		background: mode('whiteAlpha.700', 'blackAlpha.600')(props),
-		backdropFilter: 'blur(20.5px) saturate(180%)',
+		backdropFilter:
+			'blur(20.5px) saturate(180%) brightness(0.75) contrast(0.75)',
 		zIndex: 1,
 
 		_dark: {

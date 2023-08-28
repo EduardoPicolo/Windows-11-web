@@ -14,10 +14,9 @@ const baseStyle = defineStyle({
 
 const xl = defineStyle({
 	fontSize: 'xl',
-	px: '6',
-	h: '16',
+	px: '4',
+	h: '14',
 	borderRadius: 'md',
-	boxShadow: '2xl',
 });
 
 const gradient = defineStyle((props) => {

@@ -32,7 +32,8 @@ const ghostVariant = defineStyle((props) => ({
 	bg: mode('whiteAlpha.600', 'blackAlpha.700')(props),
 	color: mode(`inherit`, `gray.300`)(props),
 	boxShadow: 'subtle',
-	backdropFilter: 'blur(20.5px) saturate(180%)',
+	backdropFilter:
+		'blur(20.5px) saturate(180%) brightness(0.75) contrast(0.75)',
 }));
 
 // define custom variants

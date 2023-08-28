@@ -1,5 +1,4 @@
 import {
-	type BoxProps,
 	ButtonGroup,
 	Icon,
 	IconButton,
@@ -13,9 +12,7 @@ import { BsNvidia } from 'react-icons/bs';
 import { FaDiscord, FaSpotify, FaSteam } from 'react-icons/fa';
 import { MdKeyboardArrowUp } from 'react-icons/md';
 
-type AppsTrayProps = BoxProps;
-
-export function AppsTray(props: AppsTrayProps) {
+export function AppsTray() {
 	return (
 		<Popover>
 			{({ isOpen }) => (

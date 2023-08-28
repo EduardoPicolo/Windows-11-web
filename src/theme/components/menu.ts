@@ -50,7 +50,8 @@ const baseStyle = definePartsStyle((props) => ({
 const ghost = definePartsStyle((props) => ({
 	list: {
 		bg: mode('whiteAlpha.400', 'blackAlpha.500')(props),
-		backdropFilter: 'blur(20.5px) saturate(180%)',
+		backdropFilter:
+			'blur(20.5px) saturate(180%) brightness(0.75) contrast(0.75)',
 		transform: 'auto-gpu',
 
 		_light: {

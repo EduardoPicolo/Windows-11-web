@@ -10,6 +10,7 @@ import {
 
 import { CustomToastContainer } from '@/components/ToastContainer';
 import { DragSelectProvider } from '@/contexts/Selection';
+import { SystemProvider } from '@/contexts/System/index.';
 import { WindowsProvider } from '@/contexts/Windows';
 import { theme } from '@/theme';
 
@@ -24,9 +25,11 @@ export function Providers({ children }: ProvidersProps) {
 		<>
 			<CacheProvider>
 				<ChakraProvider theme={theme}>
-					<WindowsProvider>
-						<DragSelectProvider>{children}</DragSelectProvider>
-					</WindowsProvider>
+					<SystemProvider>
+						<WindowsProvider>
+							<DragSelectProvider>{children}</DragSelectProvider>
+						</WindowsProvider>
+					</SystemProvider>
 					<CustomToastContainer />
 				</ChakraProvider>
 			</CacheProvider>
