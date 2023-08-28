@@ -17,7 +17,7 @@ const baseStyle = definePartsStyle({
 
 const ghost = definePartsStyle((props) => ({
 	container: {
-		backgroundColor: mode('whiteAlpha.600', 'blackAlpha.700')(props),
+		backgroundColor: mode('whiteAlpha.500', 'blackAlpha.700')(props),
 		border: '1px solid whiteAlpha.300',
 		borderColor: 'whiteAlpha.300',
 		boxShadow: 'dark-lg',
@@ -40,14 +40,14 @@ const ghost = definePartsStyle((props) => ({
 		},
 	},
 	footer: {
-		bg: mode('whiteAlpha.400', 'blackAlpha.300')(props),
+		bg: mode('whiteAlpha.300', 'blackAlpha.300')(props),
 		borderBottomRadius: 'xl',
 	},
 }));
 
 const window = definePartsStyle((props) => ({
 	container: {
-		backgroundColor: mode('whiteAlpha.800', 'blackAlpha.700')(props),
+		backgroundColor: mode('whiteAlpha.700', 'blackAlpha.700')(props),
 		backdropFilter:
 			'blur(30.5px) saturate(230%) brightness(0.75) contrast(0.75) ',
 		border: '1px solid whiteAlpha.300',

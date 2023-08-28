@@ -25,7 +25,13 @@ function DragSelectProvider({
 		setDS((prevState) => {
 			if (prevState) return prevState;
 
-			return new DragSelect({});
+			return new DragSelect({
+				area: document?.getElementsByTagName('main')[0],
+				selectables: document?.getElementsByClassName?.(
+					'desktop-icon'
+				) as unknown as HTMLElement[],
+				refreshMemoryRate: 800,
+			});
 		});
 
 		return () => {

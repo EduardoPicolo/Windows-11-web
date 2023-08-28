@@ -4,6 +4,8 @@ import {
 	CenterProps,
 	forwardRef,
 	Text,
+	useColorModeValue,
+	useStyleConfig,
 } from '@chakra-ui/react';
 
 import { useWindows } from '@/contexts/Windows';
@@ -14,7 +16,14 @@ export const DesktopIcon = forwardRef<DesktopIconProps, 'div'>(
 	(props, ref) => {
 		const { app, ...rest } = props;
 
+		const styles = useStyleConfig('DesktopIcon');
+
 		const { onAddWindow } = useWindows();
+
+		const textShadow = useColorModeValue(
+			'none',
+			'1px 1px 0px #111, 1px 1px 1px #222'
+		);
 
 		const handleAddWindow = useCallback(() => {
 			onAddWindow(app);
@@ -22,40 +31,27 @@ export const DesktopIcon = forwardRef<DesktopIconProps, 'div'>(
 
 		return (
 			<Center
+				className="desktop-icon"
 				ref={ref}
-				position="relative"
-				flexDirection="column"
-				height="fit-content"
-				padding={2}
-				fontSize="sm"
-				_hover={{
-					background: 'hoverBg',
-				}}
+				__css={styles}
 				onDoubleClick={handleAddWindow}
-				sx={{
-					'&.ds-selected': {
-						_before: {
-							content: '""',
-							position: 'absolute',
-							top: 0,
-							left: 0,
-							right: 0,
-							bottom: 0,
-							borderRadius: 'md',
-							background: 'blue.500',
-							opacity: 0.33,
-							zIndex: -1,
-						},
-					},
-				}}
 				{...rest}
 			>
-				{app.icon}
+				<Center
+					w="55px"
+					position="relative"
+					userSelect="none"
+					unselectable="on"
+					pointerEvents="none"
+					draggable={false}
+				>
+					{app.icon}
+				</Center>
+
 				<Text
-					maxWidth="70px"
 					noOfLines={2}
 					textTransform="capitalize"
-					textShadow="1px 1px 0px #111, 1px 1px 1px #222"
+					textShadow={textShadow}
 				>
 					{app.fullName}
 				</Text>

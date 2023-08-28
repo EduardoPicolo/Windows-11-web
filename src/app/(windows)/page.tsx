@@ -43,7 +43,7 @@ export default function Home() {
 			padding={4}
 			textAlign="center"
 		>
-			<DesktopIcon ref={inputEl} app={EdgeApp} />
+			<DesktopIcon app={EdgeApp} />
 
 			<DesktopIcon app={EdgeApp} />
 		</Grid>

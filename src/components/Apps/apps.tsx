@@ -1,18 +1,19 @@
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import { Box } from '@chakra-ui/react';
 
 import { ThemeImage } from '@/components/ThemeImage';
 import ChatIcon from '@/public/icons/Chat.png';
-import EdgeIcon from '@/public/icons/edge.svg';
+import EdgeIcon from '@/public/icons/Edge.png';
 import FileExplorerIcon from '@/public/icons/FileExplorer.png';
-import StoreIcon from '@/public/icons/Store.png';
+import StoreDarkIcon from '@/public/icons/Store_Dark.png';
+import StoreIconLight from '@/public/icons/Store_Light.png';
 import TasksIconDark from '@/public/icons/TaskView_Dark.png';
 import TasksIconLight from '@/public/icons/TaskView_Light.png';
 
 export function MockWindow() {
 	return (
 		<Box>
-			<Image src={EdgeIcon as StaticImageData} alt="edge" />
+			<Image src={EdgeIcon} alt="edge" />
 		</Box>
 	);
 }
@@ -43,7 +44,15 @@ export const EdgeApp: App = {
 	shortName: 'Edge',
 	fullName: 'Microsoft Edge',
 	processName: 'edge',
-	icon: <Image src={EdgeIcon as StaticImageData} alt="edge" />,
+	icon: (
+		<Image
+			src={EdgeIcon}
+			alt="edge"
+			style={{
+				minWidth: '28px',
+			}}
+		/>
+	),
 	Window: MockWindow,
 };
 
@@ -59,7 +68,13 @@ export const StoreApp: App = {
 	shortName: 'Store',
 	fullName: 'Microsoft Store',
 	processName: 'store',
-	icon: <Image src={StoreIcon} alt="store" />,
+	icon: (
+		<ThemeImage
+			srcLight={StoreIconLight}
+			srcDark={StoreDarkIcon}
+			alt="store"
+		/>
+	),
 	Window: MockWindow,
 };
 

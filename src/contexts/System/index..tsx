@@ -17,7 +17,7 @@ const SystemContext = createContext<SystemContext>(
 export function SystemProvider(props: { children: React.ReactNode }) {
 	const { children } = props;
 
-	const sound = useState(0);
+	const sound = useState(30);
 	const brightness = useState(0);
 
 	const wallpaper = useState<Wallpaper>(DefaultWallpaper);

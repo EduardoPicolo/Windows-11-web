@@ -67,17 +67,8 @@ const outline = defineStyle((props) => {
 	const { colorScheme, theme } = props;
 
 	switch (colorScheme) {
-		case 'orange': {
-			return {
-				borderColor: mode('orange.500', 'orange.300')(props),
-				color: mode('orange.500', 'orange.300')(props),
-			};
-		}
-
 		case 'gray': {
-			return {
-				borderColor: mode('gray.300', 'whiteAlpha.300')(props),
-			};
+			return {};
 		}
 
 		default: {

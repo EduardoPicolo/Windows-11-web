@@ -52,6 +52,7 @@ export function StartMenuContainer({
 							type: 'keyframes',
 							ease: 'circOut',
 						}}
+						zIndex={1}
 					>
 						<StartMenu ref={menuRef} />
 					</MotionDivWithStyles>

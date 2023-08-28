@@ -20,7 +20,7 @@ import {
 export const defaultTaskbarItems: App[] = [
 	TasksApp,
 	ChatApp,
-	EdgeApp,
 	FileExplorerApp,
+	EdgeApp,
 	StoreApp,
 ];

@@ -68,12 +68,14 @@ export function WindowContainer(props: WindowContainerProps) {
 									icon={<Icon as={VscChromeMinimize} boxSize={5} />}
 									onClick={onMinimize}
 									borderRadius="none"
+									boxShadow="none"
 								/>
 								<IconButton
 									aria-label="maximize"
 									icon={<Icon as={BiSquareRounded} boxSize={4} />}
 									onClick={onMaximize}
 									borderRadius="none"
+									boxShadow="none"
 								/>
 								<IconButton
 									aria-label="close"
@@ -84,6 +86,8 @@ export function WindowContainer(props: WindowContainerProps) {
 										onClose();
 									}}
 									borderRadius="none"
+									borderTopRightRadius="md"
+									boxShadow="none"
 								/>
 							</ButtonGroup>
 						</HStack>

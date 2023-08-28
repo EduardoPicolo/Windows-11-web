@@ -15,7 +15,7 @@ const { definePartsStyle, defineMultiStyleConfig } =
 
 const ghost = definePartsStyle((props) => ({
 	content: {
-		bg: mode('whiteAlpha.600', 'blackAlpha.700')(props),
+		bg: mode('whiteAlpha.500', 'blackAlpha.700')(props),
 		transform: 'auto-gpu',
 		borderColor: mode('blackAlpha.200', 'whiteAlpha.200')(props),
 		borderRadius: 'xl',
@@ -41,7 +41,7 @@ const ghost = definePartsStyle((props) => ({
 	// 	bg: mode('whiteAlpha.400', 'blackAlpha.400')(props),
 	// },
 	footer: {
-		bg: mode('whiteAlpha.400', 'blackAlpha.300')(props),
+		bg: mode('whiteAlpha.300', 'blackAlpha.300')(props),
 		borderBottomRadius: 'xl',
 	},
 }));

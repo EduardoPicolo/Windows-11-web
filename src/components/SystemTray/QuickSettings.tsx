@@ -15,33 +15,39 @@ import {
 	SliderThumb,
 	SliderTrack,
 	Stack,
-	type StackProps,
+	useColorMode,
 } from '@chakra-ui/react';
+import { BiBluetooth } from 'react-icons/bi';
 import { HiOutlineCog6Tooth } from 'react-icons/hi2';
-import { MdOutlineHeadphones } from 'react-icons/md';
+import {
+	IoAccessibilityOutline,
+	IoAirplaneOutline,
+} from 'react-icons/io5';
+import {
+	MdOutlineDarkMode,
+	MdOutlineHeadphones,
+	MdOutlineLightMode,
+} from 'react-icons/md';
 import { PiWifiHighBold } from 'react-icons/pi';
 import { SlPencil } from 'react-icons/sl';
+import { TbAccessPoint } from 'react-icons/tb';
 
 import { QuickSettingsItem } from '@/components/SystemTray/QuickSettingsItem';
 import { SpeakerIcon } from '@/components/VolumeIcon';
 import { useSystem } from '@/contexts/System/index.';
 
-type QuickSettingsProps = StackProps;
-
-export function QuickSettings(props: QuickSettingsProps) {
+export function QuickSettings() {
 	const {
 		sound: [soundLevel, setSoundLevel],
 	} = useSystem();
 
+	const { toggleColorMode, colorMode } = useColorMode();
+
 	return (
-		<Popover
-			placement="top"
-			offset={[-80, 16]}
-			autoFocus={false}
-			returnFocusOnClose={false}
-		>
+		<Popover placement="top" offset={[-80, 16]}>
 			<PopoverTrigger>
 				<HStack
+					as="button"
 					py={1}
 					px={2}
 					borderRadius="md"
@@ -50,7 +56,6 @@ export function QuickSettings(props: QuickSettingsProps) {
 						boxShadow: 'thin',
 					}}
 					cursor="default"
-					{...props}
 				>
 					<Icon as={PiWifiHighBold} boxSize={5} />
 					<SpeakerIcon volumeLevel={soundLevel} boxSize={5} />
@@ -64,17 +69,39 @@ export function QuickSettings(props: QuickSettingsProps) {
 								templateColumns="repeat(auto-fill, minmax(95px, 1fr))"
 								gap={4}
 							>
-								<QuickSettingsItem label="Wifi" />
+								<QuickSettingsItem label="Wifi">
+									<Icon as={PiWifiHighBold} boxSize={6} />
+								</QuickSettingsItem>
 
-								<QuickSettingsItem label="Bluetooth" />
+								<QuickSettingsItem label="Bluetooth">
+									<Icon as={BiBluetooth} boxSize={6} />
+								</QuickSettingsItem>
 
-								<QuickSettingsItem label="Airplane mode" />
+								<QuickSettingsItem label="Airplane mode">
+									<Icon as={IoAirplaneOutline} boxSize={6} />
+								</QuickSettingsItem>
 
-								<QuickSettingsItem label="Night light" />
+								<QuickSettingsItem
+									label="Night light"
+									onClick={toggleColorMode}
+								>
+									<Icon
+										as={
+											colorMode === 'light'
+												? MdOutlineDarkMode
+												: MdOutlineLightMode
+										}
+										boxSize={6}
+									/>
+								</QuickSettingsItem>
 
-								<QuickSettingsItem label="Mobile hotspot" />
+								<QuickSettingsItem label="Mobile hotspot">
+									<Icon as={TbAccessPoint} boxSize={6} />
+								</QuickSettingsItem>
 
-								<QuickSettingsItem label="Accessibility" />
+								<QuickSettingsItem label="Accessibility">
+									<Icon as={IoAccessibilityOutline} boxSize={6} />
+								</QuickSettingsItem>
 							</Grid>
 
 							<HStack spacing={4}>

@@ -6,6 +6,7 @@ import {
 import { buttonTheme as Button } from './components/button';
 import { cardTheme as Card } from './components/card';
 import { checkboxTheme as Checkbox } from './components/checkbox';
+import { desktopIconTheme as DesktopIcon } from './components/desktopIcon';
 import { dividerTheme as Divider } from './components/divider';
 import { formTheme as Form } from './components/form';
 import {
@@ -60,6 +61,7 @@ const overrides = {
 		Tooltip,
 		NumberInput,
 		Taskbar,
+		DesktopIcon,
 	},
 	semanticTokens,
 	config: {

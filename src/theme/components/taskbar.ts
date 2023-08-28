@@ -7,12 +7,12 @@ export const taskbarTheme = defineStyleConfig({
 		gridTemplateColumns: 'minmax(0, 1fr) 1fr minmax(0, 1fr)',
 		width: '100%',
 		alignItems: 'center',
-		py: 1,
+		py: '0.15rem',
 		px: 4,
-		background: mode('whiteAlpha.700', 'blackAlpha.600')(props),
+		background: mode('whiteAlpha.600', 'blackAlpha.600')(props),
 		backdropFilter:
 			'blur(20.5px) saturate(180%) brightness(0.75) contrast(0.75)',
-		zIndex: 1,
+		zIndex: 2,
 
 		_dark: {
 			borderTop: '1px solid',
