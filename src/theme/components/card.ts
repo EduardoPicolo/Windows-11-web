@@ -19,7 +19,7 @@ const ghost = definePartsStyle((props) => ({
 	container: {
 		backgroundColor: mode('whiteAlpha.600', 'blackAlpha.700')(props),
 		border: '1px solid whiteAlpha.300',
-		borderColor: 'whiteAlpha.400',
+		borderColor: 'whiteAlpha.300',
 		boxShadow: 'dark-lg',
 
 		// Add noise to the background
@@ -40,7 +40,7 @@ const ghost = definePartsStyle((props) => ({
 		},
 	},
 	footer: {
-		bg: mode('whiteAlpha.400', 'blackAlpha.200')(props),
+		bg: mode('whiteAlpha.400', 'blackAlpha.300')(props),
 		borderBottomRadius: 'xl',
 	},
 }));

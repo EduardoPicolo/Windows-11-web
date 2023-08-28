@@ -42,7 +42,7 @@ export function StartMenuContainer({
 				{isOpen && (
 					<MotionDivWithStyles
 						position="absolute"
-						left={anchorEl?.offsetLeft ? anchorEl.offsetLeft - 60 : 0}
+						left={anchorEl?.offsetLeft ? anchorEl.offsetLeft - 40 : 0}
 						bottom={0}
 						initial={{ y: '75%' }}
 						animate={{ y: -66 }}

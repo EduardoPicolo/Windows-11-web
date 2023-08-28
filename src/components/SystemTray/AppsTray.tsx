@@ -14,7 +14,7 @@ import { MdKeyboardArrowUp } from 'react-icons/md';
 
 export function AppsTray() {
 	return (
-		<Popover>
+		<Popover placement="top" offset={[0, 16]}>
 			{({ isOpen }) => (
 				<>
 					<PopoverTrigger>
