@@ -5,7 +5,6 @@ import {
 	CardFooter,
 	CardHeader,
 	type CardProps,
-	Divider,
 	forwardRef,
 	HStack,
 	Icon,
@@ -66,8 +65,6 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 						</Button>
 					</HStack>
 				</CardBody>
-
-				<Divider />
 
 				<CardFooter justifyContent="space-between" px={20}>
 					<HStack>

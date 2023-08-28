@@ -38,7 +38,7 @@ export function AppsTray() {
 					</PopoverTrigger>
 					<Portal>
 						<PopoverContent width="fit-content">
-							<PopoverBody>
+							<PopoverBody borderRadius="xl">
 								<ButtonGroup variant="ghost" size="sm">
 									<IconButton
 										aria-label="NVIDIA"
