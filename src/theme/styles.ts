@@ -19,6 +19,10 @@ export const styles: Theme['styles'] = {
 			},
 
 			overflow: 'clip',
+
+			'& .ds-selectable': {
+				zIndex: '1 !important',
+			},
 		},
 	}),
 };

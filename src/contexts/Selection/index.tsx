@@ -30,7 +30,7 @@ function DragSelectProvider({
 				selectables: document?.getElementsByClassName?.(
 					'desktop-icon'
 				) as unknown as HTMLElement[],
-				refreshMemoryRate: 800,
+				refreshMemoryRate: 1000,
 			});
 		});
 
