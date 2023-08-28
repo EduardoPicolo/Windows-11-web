@@ -8,17 +8,16 @@ import {
 } from '@chakra-ui/react';
 import { type GridProps } from '@chakra-ui/styled-system';
 
-import { apps, Executable } from '@/components/Apps/apps';
 import { StartApp } from '@/components/Apps/Start';
 import { SystemTray } from '@/components/SystemTray';
 import { TaskbarIcon } from '@/components/TaskbarIcon';
 
 interface TaskbarProps extends GridProps {
-	items: Executable[];
+	apps: App[];
 }
 
 export function Taskbar(props: TaskbarProps) {
-	const { items, ...rest } = props;
+	const { apps, ...rest } = props;
 
 	const styles = useStyleConfig('Taskbar');
 
@@ -28,18 +27,9 @@ export function Taskbar(props: TaskbarProps) {
 				<HStack alignItems="stretch">
 					<StartApp />
 
-					{items?.map((item) => {
-						const app = apps[item];
-
-						return (
-							<TaskbarIcon
-								name={app.shortName}
-								icon={app.icon}
-								key={app.shortName}
-								onClick={() => console.log('clicked', app.shortName)}
-							/>
-						);
-					})}
+					{apps?.map((app) => (
+						<TaskbarIcon key={app?.processName} app={app} />
+					))}
 				</HStack>
 			</GridItem>
 

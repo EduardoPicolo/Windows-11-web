@@ -123,7 +123,9 @@
 			},
 			{
 				"selector": "variable",
-				"format": ["camelCase", "PascalCase", "UPPER_CASE"]
+				"format": ["camelCase", "PascalCase", "UPPER_CASE"],
+				"leadingUnderscore": "allow",
+				"trailingUnderscore": "allow"
 			},
 			{
 				"selector": "function",
@@ -156,7 +158,9 @@
 			{
 				"selector": "variable",
 				"modifiers": ["destructured"],
-				"format": null
+				"format": null,
+				"leadingUnderscore": "allow",
+				"trailingUnderscore": "allow"
 			},
 			{
 				"selector": "objectLiteralProperty",

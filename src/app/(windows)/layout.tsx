@@ -11,7 +11,7 @@ export default function WindowsLayout({
 		<WindowsGrid>
 			<main>{children}</main>
 
-			<Taskbar items={defaultTaskbarItems} />
+			<Taskbar apps={defaultTaskbarItems} />
 		</WindowsGrid>
 	);
 }

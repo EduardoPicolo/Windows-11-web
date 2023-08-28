@@ -1,10 +1,26 @@
 'use client';
 
-import { Executable } from '@/components/Apps/apps';
+import {
+	ChatApp,
+	EdgeApp,
+	FileExplorerApp,
+	StoreApp,
+	TasksApp,
+} from '@/components/Apps/apps';
 
-export const defaultTaskbarItems: Executable[] = [
-	'chat',
-	'edge',
-	'fileExplorer',
-	'store',
+// import { Process } from '@/components/Apps/apps';
+
+// export const defaultTaskbarItems: Process[] = [
+// 	'chat',
+// 	'edge',
+// 	'fileExplorer',
+// 	'store',
+// ];
+
+export const defaultTaskbarItems: App[] = [
+	TasksApp,
+	ChatApp,
+	EdgeApp,
+	FileExplorerApp,
+	StoreApp,
 ];

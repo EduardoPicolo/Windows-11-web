@@ -10,6 +10,7 @@ import {
 
 import { CustomToastContainer } from '@/components/ToastContainer';
 import { DragSelectProvider } from '@/contexts/Selection';
+import { WindowsProvider } from '@/contexts/Windows';
 import { theme } from '@/theme';
 
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -23,7 +24,9 @@ export function Providers({ children }: ProvidersProps) {
 		<>
 			<CacheProvider>
 				<ChakraProvider theme={theme}>
-					<DragSelectProvider>{children}</DragSelectProvider>
+					<WindowsProvider>
+						<DragSelectProvider>{children}</DragSelectProvider>
+					</WindowsProvider>
 					<CustomToastContainer />
 				</ChakraProvider>
 			</CacheProvider>

@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import {
 	Center,
 	forwardRef,
@@ -6,27 +7,43 @@ import {
 	Tooltip,
 } from '@chakra-ui/react';
 
+import { useWindows } from '@/contexts/Windows';
+
 // type TaskbarIconProps = AppIconProps;
 
 type TaskbarIconProps = Omit<IconButtonProps, 'aria-label' | 'icon'> &
 	ExecutableIconProps;
 
-export const TaskbarIcon = forwardRef<TaskbarIconProps, 'button'>(
-	(props, ref) => {
-		const { name, icon, ...rest } = props;
+function TaskbarIconInner(
+	props: TaskbarIconProps,
+	ref: React.ForwardedRef<HTMLButtonElement>
+) {
+	const { app, ...rest } = props;
 
-		return (
-			<Tooltip label={name} openDelay={600}>
-				<IconButton
-					ref={ref}
-					aria-label={name}
-					variant="ghost"
-					borderRadius="md"
-					colorScheme="gray"
-					icon={<Center w="26px">{icon}</Center>}
-					{...rest}
-				/>
-			</Tooltip>
-		);
+	const { onAddWindow } = useWindows();
+
+	const handleAddWindow = useCallback(() => {
+		onAddWindow(app);
+	}, [app, onAddWindow]);
+
+	return (
+		<Tooltip label={app?.shortName} openDelay={600}>
+			<IconButton
+				ref={ref}
+				aria-label={app?.shortName}
+				variant="ghost"
+				borderRadius="md"
+				colorScheme="gray"
+				icon={<Center w="26px">{app?.icon}</Center>}
+				onClick={handleAddWindow}
+				{...rest}
+			/>
+		</Tooltip>
+	);
+}
+
+export const TaskbarIcon = forwardRef(TaskbarIconInner) as (
+	props: TaskbarIconProps & {
+		ref?: React.ForwardedRef<HTMLButtonElement>;
 	}
-);
+) => ReturnType<typeof TaskbarIconInner>;

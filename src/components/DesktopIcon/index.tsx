@@ -1,10 +1,24 @@
-import { Center, forwardRef, Text } from '@chakra-ui/react';
+import { useCallback } from 'react';
+import {
+	Center,
+	CenterProps,
+	forwardRef,
+	Text,
+} from '@chakra-ui/react';
 
-type DesktopIconProps = ExecutableIconProps;
+import { useWindows } from '@/contexts/Windows';
+
+interface DesktopIconProps extends ExecutableIconProps, CenterProps {}
 
 export const DesktopIcon = forwardRef<DesktopIconProps, 'div'>(
 	(props, ref) => {
-		const { icon, name, onClick } = props;
+		const { app, ...rest } = props;
+
+		const { onAddWindow } = useWindows();
+
+		const handleAddWindow = useCallback(() => {
+			onAddWindow(app);
+		}, [app, onAddWindow]);
 
 		return (
 			<Center
@@ -17,7 +31,7 @@ export const DesktopIcon = forwardRef<DesktopIconProps, 'div'>(
 				_hover={{
 					background: 'hoverBg',
 				}}
-				onDoubleClick={onClick}
+				onDoubleClick={handleAddWindow}
 				sx={{
 					'&.ds-selected': {
 						_before: {
@@ -34,15 +48,16 @@ export const DesktopIcon = forwardRef<DesktopIconProps, 'div'>(
 						},
 					},
 				}}
+				{...rest}
 			>
-				{icon}
+				{app.icon}
 				<Text
 					maxWidth="70px"
 					noOfLines={2}
 					textTransform="capitalize"
 					textShadow="1px 1px 0px #111, 1px 1px 1px #222"
 				>
-					{name}
+					{app.fullName}
 				</Text>
 			</Center>
 		);

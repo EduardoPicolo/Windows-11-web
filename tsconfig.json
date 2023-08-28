@@ -29,6 +29,7 @@
 		"next-env.d.ts",
 		"**/*.ts",
 		"**/*.tsx",
+		"src/**/*.d.ts",
 		"next.config.js",
 		"next.config.mjs",
 		"plopfile.mjs",
