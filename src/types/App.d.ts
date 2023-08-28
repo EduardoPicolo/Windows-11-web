@@ -3,7 +3,7 @@ interface App {
 	fullName: string;
 	processName: import('@/components/Apps/apps').Process;
 	icon: React.ReactNode;
-	window: React.ComponentType;
+	Window: React.ComponentType | null;
 }
 
 interface ExecutableIconProps {

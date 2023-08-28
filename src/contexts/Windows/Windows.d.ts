@@ -1,7 +1,5 @@
 type Process = import('@/components/Apps/apps').Process;
 
-type WindowProps = import('@/components/Window').WindowProps;
-
 interface WindowsProviderProps {
 	children: React.ReactNode;
 }

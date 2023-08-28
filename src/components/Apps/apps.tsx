@@ -28,7 +28,7 @@ export const TasksApp: App = {
 			alt="tasks"
 		/>
 	),
-	window: MockWindow,
+	Window: MockWindow,
 };
 
 export const ChatApp: App = {
@@ -36,7 +36,7 @@ export const ChatApp: App = {
 	fullName: 'Microsoft Teams',
 	processName: 'chat',
 	icon: <Image src={ChatIcon} alt="chat" />,
-	window: MockWindow,
+	Window: MockWindow,
 };
 
 export const EdgeApp: App = {
@@ -44,7 +44,7 @@ export const EdgeApp: App = {
 	fullName: 'Microsoft Edge',
 	processName: 'edge',
 	icon: <Image src={EdgeIcon as StaticImageData} alt="edge" />,
-	window: MockWindow,
+	Window: MockWindow,
 };
 
 export const FileExplorerApp: App = {
@@ -52,7 +52,7 @@ export const FileExplorerApp: App = {
 	fullName: 'File Explorer',
 	processName: 'fileExplorer',
 	icon: <Image src={FileExplorerIcon} alt="file-explorer" />,
-	window: MockWindow,
+	Window: null,
 };
 
 export const StoreApp: App = {
@@ -60,7 +60,7 @@ export const StoreApp: App = {
 	fullName: 'Microsoft Store',
 	processName: 'store',
 	icon: <Image src={StoreIcon} alt="store" />,
-	window: MockWindow,
+	Window: MockWindow,
 };
 
 export const apps = {

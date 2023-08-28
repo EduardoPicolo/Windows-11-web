@@ -15,7 +15,7 @@ import { BiSquareRounded } from 'react-icons/bi';
 import { IoClose } from 'react-icons/io5';
 import { VscChromeMinimize } from 'react-icons/vsc';
 
-export interface WindowProps {
+export interface WindowContainerProps {
 	title: string;
 	icon: React.ReactNode;
 	children: React.ReactNode;
@@ -27,7 +27,7 @@ export interface WindowProps {
 	anchorTargetRef?: React.RefObject<HTMLButtonElement>;
 }
 
-export function Window(props: WindowProps) {
+export function WindowContainer(props: WindowContainerProps) {
 	const {
 		title,
 		icon,
@@ -50,27 +50,30 @@ export function Window(props: WindowProps) {
 			// left={isMaximized ? 0 : 'auto'}
 			// top={isMaximized ? 0 : 'auto'}
 			>
-				<Card variant="elevated" size="sm">
-					<CardHeader py={1} px={2}>
+				<Card variant="window">
+					<CardHeader>
 						<HStack justifyContent="space-between">
 							<HStack>
-								<Box w="20px">{icon}</Box>
+								<Box w="22px">{icon}</Box>
 								<Text fontSize="md">{title}</Text>
 							</HStack>
 							<ButtonGroup
 								variant="ghost"
 								colorScheme="gray"
-								size="sm"
+								size="md"
+								spacing={0}
 							>
 								<IconButton
 									aria-label="minimize"
 									icon={<Icon as={VscChromeMinimize} boxSize={5} />}
 									onClick={onMinimize}
+									borderRadius="none"
 								/>
 								<IconButton
 									aria-label="maximize"
 									icon={<Icon as={BiSquareRounded} boxSize={4} />}
 									onClick={onMaximize}
+									borderRadius="none"
 								/>
 								<IconButton
 									aria-label="close"
@@ -80,6 +83,7 @@ export function Window(props: WindowProps) {
 										console.log('calling close', onClose);
 										onClose();
 									}}
+									borderRadius="none"
 								/>
 							</ButtonGroup>
 						</HStack>

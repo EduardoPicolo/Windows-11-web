@@ -2,14 +2,16 @@
 
 import {
 	createContext,
+	isValidElement,
 	useCallback,
 	useContext,
 	useMemo,
 	useReducer,
 } from 'react';
+import { AspectRatio, Center } from '@chakra-ui/react';
 
 import { Process } from '@/components/Apps/apps';
-import { Window } from '@/components/Window';
+import { WindowContainer } from '@/components/WindowContainer';
 
 import {
 	windowReducer,
@@ -83,9 +85,9 @@ export function WindowsProvider(props: WindowsProviderProps) {
 		<WindowsContext.Provider value={value}>
 			{Object.entries(state.windows).map(([process, windows]) =>
 				Object.entries(windows).map(([id, app]) => (
-					<Window
+					<WindowContainer
 						key={id}
-						title={`${app.fullName}TESTE`}
+						title={app.fullName}
 						icon={app.icon}
 						isMaximized={app.isMaximized}
 						isMinimized={app.isMinimized}
@@ -96,8 +98,16 @@ export function WindowsProvider(props: WindowsProviderProps) {
 						onMaximize={() => console.log('maximize')}
 						onMinimize={() => console.log('minimize')}
 					>
-						<app.window />
-					</Window>
+						{isValidElement(app?.Window) ? (
+							<app.Window />
+						) : (
+							<Center w="450px" h="450px" opacity={0.4}>
+								<AspectRatio width="100%" maxWidth="50%" ratio={1}>
+									{app.icon}
+								</AspectRatio>
+							</Center>
+						)}
+					</WindowContainer>
 				))
 			)}
 			{children}

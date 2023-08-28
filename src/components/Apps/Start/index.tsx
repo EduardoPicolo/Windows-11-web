@@ -63,7 +63,6 @@ export function StartMenuContainer({
 
 const startMenuButton: App = {
 	shortName: 'Start',
-	fullName: 'Start',
 	icon: (
 		<ThemeImage
 			srcLight={StartIconLight}
@@ -71,9 +70,8 @@ const startMenuButton: App = {
 			alt="start"
 		/>
 	),
-	// @ts-expect-error -- start menu is not a window
-	window: null,
-};
+	Window: null,
+} as App;
 
 export function StartApp() {
 	const { isOpen, onClose, onToggle } = useDisclosure();
