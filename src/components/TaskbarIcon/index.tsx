@@ -33,11 +33,15 @@ function TaskbarIconInner(
 				aria-label={app?.shortName}
 				variant="ghost"
 				colorScheme="gray"
-				// size="lg"
 				size="md"
 				borderRadius="md"
 				icon={<Center w="24px">{app?.icon}</Center>}
 				onClick={handleAddWindow}
+				_light={{
+					_hover: {
+						bg: 'hoverBg',
+					},
+				}}
 				{...rest}
 			/>
 		</Tooltip>

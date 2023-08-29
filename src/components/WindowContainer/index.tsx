@@ -1,4 +1,6 @@
-import { useState } from 'react';
+'use client';
+
+import { useEffect, useRef } from 'react';
 import {
 	Box,
 	ButtonGroup,
@@ -11,6 +13,7 @@ import {
 	IconButton,
 	Text,
 } from '@chakra-ui/react';
+import { useSize } from '@chakra-ui/react-use-size';
 import { BiSquareRounded } from 'react-icons/bi';
 import { IoClose } from 'react-icons/io5';
 import { VscChromeMinimize } from 'react-icons/vsc';
@@ -46,14 +49,36 @@ export function WindowContainer(props: WindowContainerProps) {
 		...rest
 	} = props;
 
-	const [size, setSize] = useState<Props['size']>({
-		width: initialPosition?.width ?? 600,
-		height: initialPosition?.height ?? 'auto',
-	});
-	const [position, setPosition] = useState<Props['position']>({
-		x: initialPosition?.x ?? 0,
-		y: initialPosition?.y ?? 0,
-	});
+	// const [size, setSize] = useState<Props['size']>({
+	// 	width: initialPosition?.width ?? '400',
+	// 	height: initialPosition?.height ?? 'auto',
+	// });
+	// const [position, setPosition] = useState<Props['position']>({
+	// 	x: initialPosition?.x ?? 0,
+	// 	y: initialPosition?.y ?? 0,
+	// });
+
+	console.group('WindowContainer');
+	console.log('isMaximized', isMaximized);
+	console.log('isMinimized', isMinimized);
+	console.log('isFocused', isFocused);
+	console.log('initialPosition', initialPosition);
+	// console.log('size', size);
+	// console.log('position', position);
+	console.groupEnd();
+
+	const mainRef = useRef<HTMLElement | null>(
+		// document?.getElementsByTagName('main')[0]
+		null
+	);
+
+	useEffect(() => {
+		if (typeof window === 'undefined') return;
+
+		mainRef.current = document?.getElementsByTagName('main')[0];
+	}, []);
+
+	const size = useSize(mainRef);
 
 	if (isMinimized) return null;
 
@@ -66,10 +91,49 @@ export function WindowContainer(props: WindowContainerProps) {
 				zIndex: isFocused ? 2 : 1,
 			}}
 			default={initialPosition}
+			// size={
+			// 	isMaximized
+			// 		? {
+			// 				width: '100%',
+			// 				height: '100%',
+			// 		  }
+			// 		: undefined
+			// }
+			// // position={isMaximized ? { x: 0, y: 0 } : undefined}
 			size={
-				isMaximized ? { width: '100%', height: '100%' } : undefined
+				isMaximized
+					? {
+							width: size?.width ?? '100%',
+							height: size?.height ?? '100%',
+					  }
+					: undefined
 			}
-			// position={isMaximized ? { x: 0, y: 0 } : undefined}
+			position={
+				isMaximized
+					? { x: 0, y: -document.body.offsetHeight }
+					: undefined
+			}
+			// size={
+			// 	isMaximized
+			// 		? { width: '100vw', height: '100%' }
+			// 		: { width: size.width, height: size.height }
+			// }
+			// position={
+			// 	isMaximized
+			// 		? { x: 0, y: 0 }
+			// 		: { x: position.x, y: position.y }
+			// }
+			// onDragStop={(e, d) => {
+			// 	setPosition({ x: d.x, y: d.y });
+			// }}
+			// onResizeStop={(e, direction, ref, delta, newPosition) => {
+			// 	console.log('onResizeStop', newPosition);
+			// 	setPosition(newPosition);
+			// 	setSize({
+			// 		height: ref.style.height,
+			// 		width: ref.style.width,
+			// 	});
+			// }}
 			minWidth="300px"
 			minHeight="150px"
 			bounds="main"
@@ -77,6 +141,10 @@ export function WindowContainer(props: WindowContainerProps) {
 			<Card
 				variant="window"
 				opacity={isFocused ? 1 : 0.975}
+				userSelect="none"
+				unselectable="on"
+				draggable={false}
+				borderBottomRadius={isMaximized ? '0' : 'md'}
 				{...rest}
 			>
 				<CardHeader className="handle">
@@ -90,8 +158,8 @@ export function WindowContainer(props: WindowContainerProps) {
 								w="22px"
 								userSelect="none"
 								unselectable="on"
-								pointerEvents="none"
 								draggable={false}
+								pointerEvents="none"
 							>
 								{icon}
 							</Box>

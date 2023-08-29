@@ -5,12 +5,13 @@ import {
 	isValidElement,
 	useCallback,
 	useContext,
-	useEffect,
+	useLayoutEffect,
 	useMemo,
 	useRef,
 	useState,
 } from 'react';
 import { Center, Portal } from '@chakra-ui/react';
+import { useSize } from '@chakra-ui/react-use-size';
 
 import { Process } from '@/components/Apps/apps';
 import { WindowContainer } from '@/components/WindowContainer';
@@ -63,16 +64,15 @@ export function WindowsProvider(props: WindowsProviderProps) {
 	console.log('Open windows:', windows);
 	console.groupEnd();
 
-	const mainRef = useRef<HTMLElement | null>(
-		document?.getElementsByTagName('main')[0]
-	);
+	const mainRef = useRef<HTMLElement | null>(null);
+	// document?.getElementsByTagName('main')[0]
 
 	const handleSetFocusedWindow = useCallback(
 		(id: number) => () => setFocusedWindow(id),
 		[setFocusedWindow]
 	);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (typeof window === 'undefined') return;
 
 		mainRef.current = document?.getElementsByTagName('main')[0];
@@ -84,14 +84,22 @@ export function WindowsProvider(props: WindowsProviderProps) {
 		);
 	}, []);
 
+	const size = useSize(mainRef);
+
+	/**
+	 * Initial position is the center of the `main` element. The `y`
+	 * value is negative because the Portal is appended to the end of
+	 * the `body` element. The values also need to be offset by half the
+	 * width/height of the window being created.
+	 */
 	const defaultInitialPosition = useMemo(
 		() =>
-			mainRef.current
+			size
 				? {
-						x: mainRef.current.clientWidth / 2 - 300,
-						y: -mainRef.current.offsetHeight + 300,
+						x: size.width / 2 - 300,
+						y: -size.height / 2 - 300,
 						width: 600,
-						height: 'auto',
+						height: 600,
 				  }
 				: {
 						x: 100,
@@ -99,7 +107,7 @@ export function WindowsProvider(props: WindowsProviderProps) {
 						width: 600,
 						height: 'auto',
 				  },
-		[]
+		[size]
 	);
 
 	const value: WindowsContext = useMemo(
@@ -113,17 +121,17 @@ export function WindowsProvider(props: WindowsProviderProps) {
 
 	return (
 		<WindowsContext.Provider value={value}>
-			<Portal appendToParentPortal={false} containerRef={mainRef}>
+			<Portal appendToParentPortal={false}>
 				{Object.entries(windows).map(([process, processWindows]) =>
 					Object.entries(processWindows).map(([id, app]) => (
 						<WindowContainer
-							key={id}
+							key={`${process}-${id}`}
 							title={app.fullName}
 							icon={app.icon}
 							isMaximized={app.isMaximized}
 							isMinimized={app.isMinimized}
 							isFocused={focusedWindow === Number(id)}
-							onClick={handleSetFocusedWindow(Number(id))}
+							onMouseDown={handleSetFocusedWindow(Number(id))}
 							onClose={handleCloseWindow(
 								process as Process,
 								Number(id)
@@ -136,10 +144,6 @@ export function WindowsProvider(props: WindowsProviderProps) {
 								process as Process,
 								Number(id)
 							)}
-							/*  Initial position is the center of the `main` element.
-								The `y` value is negative because 0 is the bottom of the screen.
-								The values also need to be offset by half the width/height of the window.
-							*/
 							initialPosition={defaultInitialPosition}
 						>
 							{isValidElement(app?.Window) ? (

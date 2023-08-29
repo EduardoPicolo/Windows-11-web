@@ -17,7 +17,7 @@ export const semanticTokens = {
 			_dark: 'orange.400',
 		},
 		hoverBg: {
-			default: 'whiteAlpha.500',
+			default: 'whiteAlpha.600',
 			_dark: 'whiteAlpha.200',
 		},
 	},

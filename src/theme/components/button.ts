@@ -63,26 +63,26 @@ const gradient = defineStyle((props) => {
 	};
 });
 
-const outline = defineStyle((props) => {
-	const { colorScheme, theme } = props;
+// const outline = defineStyle((props) => {
+// 	const { colorScheme, theme } = props;
 
-	switch (colorScheme) {
-		case 'gray': {
-			return {};
-		}
+// 	switch (colorScheme) {
+// 		case 'gray': {
+// 			return {};
+// 		}
 
-		default: {
-			return {};
-		}
-	}
-});
+// 		default: {
+// 			return {};
+// 		}
+// 	}
+// });
 
 export const buttonTheme = defineStyleConfig({
 	baseStyle,
 	sizes: { xl },
 	variants: {
 		gradient,
-		outline,
+		// outline,
 	},
 	defaultProps: {},
 });

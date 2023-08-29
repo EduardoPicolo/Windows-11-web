@@ -3,7 +3,7 @@
 import React, {
 	createContext,
 	useContext,
-	useEffect,
+	useLayoutEffect,
 	useState,
 } from 'react';
 import DragSelect from 'dragselect';
@@ -21,7 +21,7 @@ function DragSelectProvider({
 }: ProviderProps) {
 	const [ds, setDS] = useState<DragSelect | null>(null);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		setDS((prevState) => {
 			if (prevState) return prevState;
 
@@ -42,7 +42,7 @@ function DragSelectProvider({
 		};
 	}, [ds]);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		ds?.setSettings(settings);
 	}, [ds, settings]);
 

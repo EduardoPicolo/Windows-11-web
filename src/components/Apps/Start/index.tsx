@@ -52,7 +52,7 @@ export function StartMenuContainer({
 							type: 'keyframes',
 							ease: 'circOut',
 						}}
-						zIndex={3}
+						zIndex={2}
 					>
 						<StartMenu ref={menuRef} />
 					</MotionDivWithStyles>
@@ -87,11 +87,13 @@ export function StartApp() {
 				onClick={onToggle}
 			/>
 
-			<StartMenuContainer
-				isOpen={isOpen}
-				onClose={onClose}
-				anchorEl={ref.current ?? document?.body}
-			/>
+			{ref.current && (
+				<StartMenuContainer
+					isOpen={isOpen}
+					onClose={onClose}
+					anchorEl={ref.current}
+				/>
+			)}
 		</>
 	);
 }
