@@ -6,7 +6,6 @@
 		"eamodio.gitlens",
 		"usernamehw.errorlens",
 		"ghmcadams.lintlens",
-		"formulahendry.auto-close-tag",
-		"steoates.autoimport"
+		"formulahendry.auto-close-tag"
 	]
 }

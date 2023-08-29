@@ -12,6 +12,7 @@ const baseStyle = definePartsStyle((props) => ({
 			'blur(30.5px) saturate(140%) ',
 			'blur(20.5px) brightness(0.66) contrast(0.66)'
 		)(props),
+		backgroundBlendMode: 'exclusion',
 		boxShadow: 'dark-lg',
 	},
 	header: {},
@@ -35,7 +36,7 @@ const ghost = definePartsStyle((props) => ({
 			right: 0,
 			bottom: 0,
 			zIndex: -1,
-			opacity: 0.4,
+			opacity: mode(0.6, 0.4)(props),
 			border: '1px solid',
 			borderColor: 'whiteAlpha.700',
 			borderRadius: 'xl',
@@ -90,10 +91,12 @@ const window = definePartsStyle((props) => ({
 		pr: 0,
 		py: 0,
 		backgroundColor: mode('transparent', 'blackAlpha.500')(props),
+		borderTopRadius: 'md',
 	},
 	body: {
 		p: 2,
 		backgroundColor: mode('transparent', 'blackAlpha.500')(props),
+		borderBottomRadius: 'md',
 	},
 	footer: {},
 }));
