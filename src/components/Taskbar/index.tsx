@@ -35,11 +35,11 @@ export function Taskbar(props: TaskbarProps) {
 
 					<Input
 						minW="200px"
-						height="34px"
+						height="32px"
 						placeholder="Search"
 						autoComplete="off"
 						leftElement={
-							<InputLeftElement pointerEvents="none" boxSize="34px">
+							<InputLeftElement pointerEvents="none" boxSize="32px">
 								<Box
 									boxSize="18px"
 									position="relative"

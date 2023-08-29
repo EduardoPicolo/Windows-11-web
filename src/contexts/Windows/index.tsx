@@ -5,15 +5,18 @@ import {
 	isValidElement,
 	useCallback,
 	useContext,
+	useEffect,
 	useMemo,
 	useReducer,
+	useRef,
 } from 'react';
-import { AspectRatio, Center } from '@chakra-ui/react';
+import { Center, Portal } from '@chakra-ui/react';
 
 import { Process } from '@/components/Apps/apps';
 import { WindowContainer } from '@/components/WindowContainer';
 
 import {
+	initialWindowPosition,
 	windowReducer,
 	windowsContextDefaultValues,
 } from './helpers';
@@ -72,6 +75,22 @@ export function WindowsProvider(props: WindowsProviderProps) {
 	console.log('State:', state);
 	console.groupEnd();
 
+	const mainRef = useRef<HTMLElement | null>(
+		document?.getElementsByTagName('main')[0]
+	);
+
+	useEffect(() => {
+		if (typeof window === 'undefined') return;
+
+		mainRef.current = document?.getElementsByTagName('main')[0];
+
+		console.log(
+			'mainRef',
+			mainRef.current?.offsetWidth,
+			mainRef.current?.clientWidth
+		);
+	}, []);
+
 	const value: WindowsContext = useMemo(
 		() => ({
 			windows: state.windows,
@@ -83,33 +102,54 @@ export function WindowsProvider(props: WindowsProviderProps) {
 
 	return (
 		<WindowsContext.Provider value={value}>
-			{Object.entries(state.windows).map(([process, windows]) =>
-				Object.entries(windows).map(([id, app]) => (
-					<WindowContainer
-						key={id}
-						title={app.fullName}
-						icon={app.icon}
-						isMaximized={app.isMaximized}
-						isMinimized={app.isMinimized}
-						onClose={handleCloseWindow(
-							process as Process,
-							id as unknown as number
-						)}
-						onMaximize={() => console.log('maximize')}
-						onMinimize={() => console.log('minimize')}
-					>
-						{isValidElement(app?.Window) ? (
-							<app.Window />
-						) : (
-							<Center w="450px" h="450px" opacity={0.4}>
-								<AspectRatio width="100%" maxWidth="50%" ratio={1}>
+			<Portal appendToParentPortal={false}>
+				{Object.entries(state.windows).map(([process, windows]) =>
+					Object.entries(windows).map(([id, app]) => (
+						<WindowContainer
+							key={id}
+							title={app.fullName}
+							icon={app.icon}
+							isMaximized={app.isMaximized}
+							isMinimized={app.isMinimized}
+							onClose={handleCloseWindow(
+								process as Process,
+								id as unknown as number
+							)}
+							onMaximize={() => console.log('maximize')}
+							onMinimize={() => console.log('minimize')}
+							/*  Initial position is the center of the `main` element.
+								The `y` value is negative because 0 is the bottom of the screen.
+								The values also need to be offset by half the width/height of the window.
+							*/
+							initialPosition={
+								mainRef.current
+									? {
+											x: mainRef.current.clientWidth / 2 - 400,
+											y: -mainRef.current.offsetHeight + 300,
+											width: 800,
+											height: 'auto',
+									  }
+									: initialWindowPosition
+							}
+						>
+							{isValidElement(app?.Window) ? (
+								<app.Window />
+							) : (
+								<Center
+									h="full"
+									userSelect="none"
+									unselectable="on"
+									pointerEvents="none"
+									draggable={false}
+								>
 									{app.icon}
-								</AspectRatio>
-							</Center>
-						)}
-					</WindowContainer>
-				))
-			)}
+								</Center>
+							)}
+						</WindowContainer>
+					))
+				)}
+			</Portal>
+
 			{children}
 		</WindowsContext.Provider>
 	);

@@ -20,8 +20,10 @@ const ghost = definePartsStyle((props) => ({
 		borderRadius: 'xl',
 		backgroundColor: mode('whiteAlpha.400', 'blackAlpha.500')(props),
 		boxShadow: 'dark-lg',
-		backdropFilter:
-			'blur(20.5px) saturate(180%) brightness(0.66) contrast(0.66)',
+		backdropFilter: mode(
+			'blur(30.5px) saturate(140%)',
+			'blur(20.5px) brightness(0.66) contrast(0.66)'
+		)(props),
 
 		// Add noise to the background
 		_after: {

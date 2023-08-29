@@ -20,6 +20,7 @@ export function Wallpaper(props: WallpaperProps) {
 			style={{
 				objectFit: 'cover',
 				userSelect: 'none',
+				pointerEvents: 'none',
 				zIndex: -1,
 			}}
 			unselectable="on"

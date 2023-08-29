@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useMemo, useState } from 'react';
 
-import DefaultWallpaper from '@/public/wallpapers/3-win11.jpg';
+import DefaultWallpaper from '@/public/wallpapers/1-win11.jpg';
 
 import { systemContextDefaultValues } from './helpers';
 
