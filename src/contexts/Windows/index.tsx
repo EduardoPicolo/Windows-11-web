@@ -7,19 +7,16 @@ import {
 	useContext,
 	useEffect,
 	useMemo,
-	useReducer,
 	useRef,
+	useState,
 } from 'react';
 import { Center, Portal } from '@chakra-ui/react';
 
 import { Process } from '@/components/Apps/apps';
 import { WindowContainer } from '@/components/WindowContainer';
+import { useWindowsReducer } from '@/contexts/Windows/useWindowsReducer';
 
-import {
-	initialWindowPosition,
-	windowReducer,
-	windowsContextDefaultValues,
-} from './helpers';
+import { windowsContextDefaultValues } from './helpers';
 
 const WindowsContext = createContext<WindowsContext>(
 	windowsContextDefaultValues
@@ -32,37 +29,16 @@ const WindowsContext = createContext<WindowsContext>(
 export function WindowsProvider(props: WindowsProviderProps) {
 	const { children } = props;
 
-	const [state, dispatch] = useReducer(
-		windowReducer,
-		windowsContextDefaultValues
-	);
+	const {
+		state: windows,
+		onAddWindow,
+		onCloseWindow,
+		onMaximizeWindow,
+		onMinimizeWindow,
+	} = useWindowsReducer();
 
-	const onAddWindow = useCallback(
-		(app: App, options?: AddWindowOptions) => {
-			console.log('onAddWindow', app.processName, app);
-			dispatch({
-				type: 'ADD_WINDOW',
-				payload: {
-					app,
-					options,
-				},
-			});
-		},
-		[]
-	);
-
-	const onCloseWindow = useCallback(
-		(processName: Process, id: number) => {
-			console.log('onCloseWindow', processName, id);
-			dispatch({
-				type: 'CLOSE_WINDOW',
-				payload: {
-					processName,
-					id,
-				},
-			});
-		},
-		[]
+	const [focusedWindow, setFocusedWindow] = useState<number | null>(
+		null
 	);
 
 	const handleCloseWindow = useCallback(
@@ -71,12 +47,29 @@ export function WindowsProvider(props: WindowsProviderProps) {
 		[onCloseWindow]
 	);
 
+	const handleMaximizeWindow = useCallback(
+		(processName: Process, id: number) => () =>
+			onMaximizeWindow(processName, id),
+		[onMaximizeWindow]
+	);
+
+	const handleMinimizeWindow = useCallback(
+		(processName: Process, id: number) => () =>
+			onMinimizeWindow(processName, id),
+		[onMinimizeWindow]
+	);
+
 	console.groupCollapsed('Windows Provider');
-	console.log('State:', state);
+	console.log('Open windows:', windows);
 	console.groupEnd();
 
 	const mainRef = useRef<HTMLElement | null>(
 		document?.getElementsByTagName('main')[0]
+	);
+
+	const handleSetFocusedWindow = useCallback(
+		(id: number) => () => setFocusedWindow(id),
+		[setFocusedWindow]
 	);
 
 	useEffect(() => {
@@ -91,46 +84,63 @@ export function WindowsProvider(props: WindowsProviderProps) {
 		);
 	}, []);
 
+	const defaultInitialPosition = useMemo(
+		() =>
+			mainRef.current
+				? {
+						x: mainRef.current.clientWidth / 2 - 300,
+						y: -mainRef.current.offsetHeight + 300,
+						width: 600,
+						height: 'auto',
+				  }
+				: {
+						x: 100,
+						y: -700,
+						width: 600,
+						height: 'auto',
+				  },
+		[]
+	);
+
 	const value: WindowsContext = useMemo(
 		() => ({
-			windows: state.windows,
-			onAddWindow,
-			onCloseWindow,
+			windows,
+			addWindow: onAddWindow,
+			closeWindow: onCloseWindow,
 		}),
-		[onAddWindow, onCloseWindow, state.windows]
+		[onAddWindow, onCloseWindow, windows]
 	);
 
 	return (
 		<WindowsContext.Provider value={value}>
-			<Portal appendToParentPortal={false}>
-				{Object.entries(state.windows).map(([process, windows]) =>
-					Object.entries(windows).map(([id, app]) => (
+			<Portal appendToParentPortal={false} containerRef={mainRef}>
+				{Object.entries(windows).map(([process, processWindows]) =>
+					Object.entries(processWindows).map(([id, app]) => (
 						<WindowContainer
 							key={id}
 							title={app.fullName}
 							icon={app.icon}
 							isMaximized={app.isMaximized}
 							isMinimized={app.isMinimized}
+							isFocused={focusedWindow === Number(id)}
+							onClick={handleSetFocusedWindow(Number(id))}
 							onClose={handleCloseWindow(
 								process as Process,
-								id as unknown as number
+								Number(id)
 							)}
-							onMaximize={() => console.log('maximize')}
-							onMinimize={() => console.log('minimize')}
+							onMaximize={handleMaximizeWindow(
+								process as Process,
+								Number(id)
+							)}
+							onMinimize={handleMinimizeWindow(
+								process as Process,
+								Number(id)
+							)}
 							/*  Initial position is the center of the `main` element.
 								The `y` value is negative because 0 is the bottom of the screen.
 								The values also need to be offset by half the width/height of the window.
 							*/
-							initialPosition={
-								mainRef.current
-									? {
-											x: mainRef.current.clientWidth / 2 - 400,
-											y: -mainRef.current.offsetHeight + 300,
-											width: 800,
-											height: 'auto',
-									  }
-									: initialWindowPosition
-							}
+							initialPosition={defaultInitialPosition}
 						>
 							{isValidElement(app?.Window) ? (
 								<app.Window />

@@ -15,7 +15,7 @@ export const taskbarTheme = defineStyleConfig({
 			'blur(30.5px) saturate(180%) brightness(1) contrast(1.33)',
 			'blur(20.5px) saturate(180%) brightness(1) contrast(0.8)'
 		)(props),
-		zIndex: 2,
+		zIndex: 3,
 
 		_dark: {
 			borderTop: '1px solid',

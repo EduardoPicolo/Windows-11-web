@@ -4,34 +4,34 @@ interface WindowsProviderProps {
 	children: React.ReactNode;
 }
 
+/**
+ * The shape of all running {@link Process}es. The key is the process
+ * name, and the value is a Record of the window id and the
+ * {@link WindowState}.
+ */
+type Windows = Record<Process, Record<number, App & WindowState>>;
+
+interface WindowsContext {
+	windows: Windows;
+	addWindow: (app: App, options?: AddWindowOptions) => void;
+	closeWindow: (processName: Process, id: number) => void;
+}
+
 interface WindowState {
-	isFocused: boolean;
 	isMinimized: boolean;
 	isMaximized: boolean;
 	anchorEl?: HTMLElement | null;
 }
 
-interface AddWindowOptions {
-	isFocused?: boolean;
-	isMinimized?: boolean;
-	isMaximized?: boolean;
-}
-
-interface WindowsContext {
-	windows: Record<Process, Record<number, App & WindowState>>;
-	onAddWindow: (app: App, options?: AddWindowOptions) => void;
-	onCloseWindow: (processName: Process, id: number) => void;
-}
-
-interface AddWindow {
+interface AddWindowAction {
 	type: 'ADD_WINDOW';
 	payload: {
 		app: App;
-		options?: AddWindowOptions;
+		options?: Partial<WindowState>;
 	};
 }
 
-interface CloseWindow {
+interface CloseWindowAction {
 	type: 'CLOSE_WINDOW';
 	payload: {
 		processName: Process;
@@ -39,7 +39,7 @@ interface CloseWindow {
 	};
 }
 
-interface MinimizeWindow {
+interface MinimizeWindowAction {
 	type: 'MINIMIZE_WINDOW';
 	payload: {
 		processName: Process;
@@ -47,7 +47,7 @@ interface MinimizeWindow {
 	};
 }
 
-interface MaximizeWindow {
+interface MaximizeWindowAction {
 	type: 'MAXIMIZE_WINDOW';
 	payload: {
 		processName: Process;
@@ -55,8 +55,13 @@ interface MaximizeWindow {
 	};
 }
 
-type Actions =
-	| AddWindow
-	| CloseWindow
-	| MinimizeWindow
-	| MaximizeWindow;
+type WindowsActions =
+	| AddWindowAction
+	| CloseWindowAction
+	| MinimizeWindowAction
+	| MaximizeWindowAction;
+
+type WindowsReducerActionHandler<T extends WindowsActions> = (
+	state: Windows,
+	action: T
+) => Windows;

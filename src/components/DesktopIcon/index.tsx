@@ -18,7 +18,7 @@ export const DesktopIcon = forwardRef<DesktopIconProps, 'div'>(
 
 		const styles = useStyleConfig('DesktopIcon');
 
-		const { onAddWindow } = useWindows();
+		const { addWindow } = useWindows();
 
 		const textShadow = useColorModeValue(
 			'none',
@@ -26,8 +26,8 @@ export const DesktopIcon = forwardRef<DesktopIconProps, 'div'>(
 		);
 
 		const handleAddWindow = useCallback(() => {
-			onAddWindow(app);
-		}, [app, onAddWindow]);
+			addWindow(app);
+		}, [app, addWindow]);
 
 		return (
 			<Center

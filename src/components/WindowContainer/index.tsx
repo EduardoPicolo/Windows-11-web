@@ -1,10 +1,11 @@
+import { useState } from 'react';
 import {
 	Box,
 	ButtonGroup,
 	Card,
 	CardBody,
 	CardHeader,
-	chakra,
+	CardProps,
 	HStack,
 	Icon,
 	IconButton,
@@ -15,14 +16,13 @@ import { IoClose } from 'react-icons/io5';
 import { VscChromeMinimize } from 'react-icons/vsc';
 import { type Props, Rnd } from 'react-rnd';
 
-const ChakraRnd = chakra<typeof Rnd, Props>(Rnd);
-
-export interface WindowContainerProps {
+export interface WindowContainerProps extends CardProps {
 	title: string;
 	icon: React.ReactNode;
 	children: React.ReactNode;
 	isMaximized: boolean;
 	isMinimized: boolean;
+	isFocused: boolean;
 	onMinimize: () => void;
 	onMaximize: () => void;
 	onClose: () => void;
@@ -37,28 +37,48 @@ export function WindowContainer(props: WindowContainerProps) {
 		children,
 		isMaximized,
 		isMinimized,
+		isFocused,
 		onMinimize,
 		onMaximize,
 		onClose,
 		anchorTargetRef,
 		initialPosition,
+		...rest
 	} = props;
+
+	const [size, setSize] = useState<Props['size']>({
+		width: initialPosition?.width ?? 600,
+		height: initialPosition?.height ?? 'auto',
+	});
+	const [position, setPosition] = useState<Props['position']>({
+		x: initialPosition?.x ?? 0,
+		y: initialPosition?.y ?? 0,
+	});
 
 	if (isMinimized) return null;
 
 	return (
-		<ChakraRnd
+		<Rnd
 			dragHandleClassName="handle"
 			style={{
 				// eslint-disable-next-line no-inline-styles/no-inline-styles -- style prop is needed to style Rnd
 				display: 'flex',
+				zIndex: isFocused ? 2 : 1,
 			}}
 			default={initialPosition}
+			size={
+				isMaximized ? { width: '100%', height: '100%' } : undefined
+			}
+			// position={isMaximized ? { x: 0, y: 0 } : undefined}
 			minWidth="300px"
 			minHeight="150px"
 			bounds="main"
 		>
-			<Card variant="window">
+			<Card
+				variant="window"
+				opacity={isFocused ? 1 : 0.975}
+				{...rest}
+			>
 				<CardHeader className="handle">
 					<HStack
 						justifyContent="space-between"
@@ -112,6 +132,6 @@ export function WindowContainer(props: WindowContainerProps) {
 
 				<CardBody overflow="auto">{children}</CardBody>
 			</Card>
-		</ChakraRnd>
+		</Rnd>
 	);
 }

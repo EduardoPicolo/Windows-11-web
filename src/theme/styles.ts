@@ -23,6 +23,10 @@ export const styles: Theme['styles'] = {
 			'& .ds-selectable': {
 				zIndex: '0 !important',
 			},
+
+			'& .ds-selector-area': {
+				zIndex: '0 !important',
+			},
 		},
 	}),
 };

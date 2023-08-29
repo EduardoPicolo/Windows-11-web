@@ -20,11 +20,11 @@ function TaskbarIconInner(
 ) {
 	const { app, ...rest } = props;
 
-	const { onAddWindow } = useWindows();
+	const { addWindow } = useWindows();
 
 	const handleAddWindow = useCallback(() => {
-		onAddWindow(app);
-	}, [app, onAddWindow]);
+		addWindow(app);
+	}, [app, addWindow]);
 
 	return (
 		<Tooltip label={app?.shortName} openDelay={600}>
