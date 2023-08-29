@@ -9,8 +9,8 @@ const baseStyle = definePartsStyle((props) => ({
 	// define the part you're going to style
 	container: {
 		backdropFilter: mode(
-			'blur(30.5px) saturate(140%) ',
-			'blur(20.5px) brightness(0.66) contrast(0.66)'
+			'blur(46.5px) saturate(180%)',
+			'blur(46.5px) saturate(180%) brightness(0.85) contrast(0.85)'
 		)(props),
 		backgroundBlendMode: 'exclusion',
 		boxShadow: 'dark-lg',
@@ -24,7 +24,7 @@ const ghost = definePartsStyle((props) => ({
 	container: {
 		border: '1px solid whiteAlpha.300',
 		borderColor: 'whiteAlpha.300',
-		backgroundColor: mode('whiteAlpha.400', 'blackAlpha.500')(props),
+		backgroundColor: mode('whiteAlpha.400', 'blackAlpha.600')(props),
 		boxShadow: 'dark-lg',
 
 		// Add noise to the background
@@ -36,7 +36,7 @@ const ghost = definePartsStyle((props) => ({
 			right: 0,
 			bottom: 0,
 			zIndex: -1,
-			opacity: mode(0.6, 0.4)(props),
+			opacity: mode(0.6, 0.3)(props),
 			border: '1px solid',
 			borderColor: 'whiteAlpha.700',
 			borderRadius: 'xl',
@@ -45,15 +45,13 @@ const ghost = definePartsStyle((props) => ({
 		},
 	},
 	header: {
-		backgroundColor: mode('whiteAlpha.500', 'blackAlpha.500')(props),
-		borderTopRadius: 'xl',
+		backgroundColor: mode('whiteAlpha.500', 'blackAlpha.400')(props),
 	},
 	body: {
-		backgroundColor: mode('whiteAlpha.500', 'blackAlpha.500')(props),
+		backgroundColor: mode('whiteAlpha.500', 'blackAlpha.400')(props),
 	},
 	footer: {
-		bg: mode('whiteAlpha.400', 'blackAlpha.600')(props),
-		borderBottomRadius: 'xl',
+		bg: mode('whiteAlpha.400', 'blackAlpha.500')(props),
 	},
 }));
 
@@ -64,7 +62,7 @@ const window = definePartsStyle((props) => ({
 		borderColor: 'whiteAlpha.400',
 		backgroundColor: mode('whiteAlpha.700', 'blackAlpha.500')(props),
 		backdropFilter: mode(
-			'blur(40.5px) saturate(140%)',
+			'blur(40.5px) saturate(180%)',
 			'blur(20.5px) brightness(0.66) contrast(0.66)'
 		)(props),
 		zIndex: 1,
@@ -101,12 +99,26 @@ const window = definePartsStyle((props) => ({
 	footer: {},
 }));
 
+const sizes = {
+	xl: definePartsStyle((props) => ({
+		container: {
+			borderRadius: 'xl',
+		},
+		header: { p: 10, borderTopRadius: 'xl' },
+		body: {
+			px: 16,
+		},
+		footer: { p: 4, borderBottomRadius: 'xl' },
+	})),
+};
+
 export const cardTheme = defineMultiStyleConfig({
 	baseStyle,
 	variants: {
 		ghost,
 		window,
 	},
+	sizes,
 	defaultProps: {
 		variant: 'ghost',
 	},

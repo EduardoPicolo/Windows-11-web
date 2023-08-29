@@ -34,6 +34,11 @@ export function AppsTray() {
 									transition="transform 0.2s"
 								/>
 							}
+							_light={{
+								_hover: {
+									bg: 'hoverBg',
+								},
+							}}
 						/>
 					</PopoverTrigger>
 					<Portal>

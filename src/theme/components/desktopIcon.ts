@@ -3,15 +3,15 @@ import { defineStyleConfig } from '@chakra-ui/react';
 export const desktopIconTheme = defineStyleConfig({
 	baseStyle: (props) => ({
 		position: 'relative',
-		display: 'flex',
-		flexDirection: 'column',
 		height: 'fit-content',
 		p: 2,
-		fontsize: 'sm',
+		fontSize: 'sm',
+		textAlign: 'center',
 		borderRadius: 'md',
 		_hover: {
 			background: 'hoverBg',
 		},
+
 		'&.ds-selected': {
 			_before: {
 				content: '""',

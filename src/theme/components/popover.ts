@@ -18,12 +18,12 @@ const ghost = definePartsStyle((props) => ({
 		border: '1px solid whiteAlpha.300',
 		borderColor: 'whiteAlpha.300',
 		borderRadius: 'xl',
-		backgroundColor: mode('whiteAlpha.400', 'blackAlpha.500')(props),
+		backgroundColor: mode('whiteAlpha.400', 'blackAlpha.600')(props),
 		backgroundBlendMode: 'exclusion',
 		boxShadow: 'dark-lg',
 		backdropFilter: mode(
-			'blur(30.5px) saturate(140%)',
-			'blur(20.5px) saturate(133%) brightness(0.66) contrast(0.66)'
+			'blur(46.5px) saturate(180%)',
+			'blur(46.5px) saturate(180%) brightness(0.85) contrast(0.85)'
 		)(props),
 
 		// Add noise to the background
@@ -35,7 +35,7 @@ const ghost = definePartsStyle((props) => ({
 			right: 0,
 			bottom: 0,
 			zIndex: -1,
-			opacity: mode(0.6, 0.4)(props),
+			opacity: mode(0.6, 0.3)(props),
 			border: '1px solid',
 			borderColor: 'whiteAlpha.700',
 			borderRadius: 'xl',
@@ -44,11 +44,11 @@ const ghost = definePartsStyle((props) => ({
 		},
 	},
 	header: {
-		backgroundColor: mode('whiteAlpha.500', 'blackAlpha.500')(props),
+		backgroundColor: mode('whiteAlpha.500', 'blackAlpha.400')(props),
 		borderTopRadius: 'xl',
 	},
 	body: {
-		backgroundColor: mode('whiteAlpha.500', 'blackAlpha.500')(props),
+		backgroundColor: mode('whiteAlpha.500', 'blackAlpha.400')(props),
 		borderTopRadius: 'xl',
 	},
 	footer: {

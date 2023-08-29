@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import {
-	Center,
+	Box,
+	BoxProps,
 	CenterProps,
 	forwardRef,
 	Text,
@@ -10,11 +11,13 @@ import {
 
 import { useWindows } from '@/contexts/Windows';
 
-interface DesktopIconProps extends ExecutableIconProps, CenterProps {}
+interface DesktopIconProps extends ExecutableIconProps, CenterProps {
+	iconSize?: BoxProps['boxSize'];
+}
 
 export const DesktopIcon = forwardRef<DesktopIconProps, 'div'>(
 	(props, ref) => {
-		const { app, ...rest } = props;
+		const { app, children, ...rest } = props;
 
 		const styles = useStyleConfig('DesktopIcon');
 
@@ -30,32 +33,32 @@ export const DesktopIcon = forwardRef<DesktopIconProps, 'div'>(
 		}, [app, addWindow]);
 
 		return (
-			<Center
+			<Box
 				className="desktop-icon"
 				ref={ref}
 				__css={styles}
 				onDoubleClick={handleAddWindow}
 				{...rest}
 			>
-				<Center
-					w="55px"
-					position="relative"
+				<Box
+					boxSize={props.iconSize ?? '55px'}
+					margin="0 auto"
 					userSelect="none"
 					unselectable="on"
 					pointerEvents="none"
 					draggable={false}
 				>
 					{app.icon}
-				</Center>
+				</Box>
 
 				<Text
 					noOfLines={2}
 					textTransform="capitalize"
 					textShadow={textShadow}
 				>
-					{app.fullName}
+					{children ?? app.fullName}
 				</Text>
-			</Center>
+			</Box>
 		);
 	}
 );

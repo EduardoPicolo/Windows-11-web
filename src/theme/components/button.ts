@@ -10,6 +10,7 @@ const baseStyle = defineStyle({
 	_hover: {
 		boxShadow: 'thin',
 	},
+	transition: 'all 0.2s ease-out',
 });
 
 const xl = defineStyle({
@@ -63,26 +64,24 @@ const gradient = defineStyle((props) => {
 	};
 });
 
-// const outline = defineStyle((props) => {
-// 	const { colorScheme, theme } = props;
+const solid = defineStyle((props) => {
+	const { colorScheme, colorMode, theme } = props;
 
-// 	switch (colorScheme) {
-// 		case 'gray': {
-// 			return {};
-// 		}
+	if (colorMode === 'dark') {
+		return {
+			background: `${colorScheme}.400`,
+		};
+	}
 
-// 		default: {
-// 			return {};
-// 		}
-// 	}
-// });
+	return {};
+});
 
 export const buttonTheme = defineStyleConfig({
 	baseStyle,
 	sizes: { xl },
 	variants: {
 		gradient,
-		// outline,
+		solid,
 	},
 	defaultProps: {},
 });

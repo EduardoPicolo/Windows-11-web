@@ -13,11 +13,13 @@ const baseStyle = definePartsStyle((props) => ({
 	field: {
 		borderRadius: 'full',
 		_placeholder: {
-			color: mode('inherit', 'whiteAlpha.900')(props),
+			color: mode('gray.600', 'whiteAlpha.500')(props),
+			fontWeight: 'medium',
+			fontSize: 'md',
 		},
 		_focus: {
 			_placeholder: {
-				color: mode('inherit', 'whiteAlpha.500')(props),
+				color: mode('gray.600', 'whiteAlpha.500')(props),
 			},
 		},
 	},
@@ -38,7 +40,11 @@ const variantOutline = definePartsStyle((props) => ({
 
 const variantFilled = definePartsStyle((props) => ({
 	field: {
-		background: mode('whiteAlpha.900', 'whiteAlpha.50')(props),
+		background: mode('whiteAlpha.900', 'blackAlpha.200')(props),
+		backdropFilter: mode(
+			'none',
+			'contrast(0.66) brightness(0.66)'
+		)(props),
 		border: '1px solid',
 		borderColor: mode('gray.300', 'whiteAlpha.100')(props),
 		_hover: {

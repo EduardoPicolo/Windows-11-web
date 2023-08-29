@@ -9,12 +9,14 @@ import { useBoolean } from '@chakra-ui/react';
 
 interface QuickSettingsItemProps extends ButtonProps {
 	label: string;
+	initialActiveState?: boolean;
 }
 
 export function QuickSettingsItem(props: QuickSettingsItemProps) {
-	const { label, children, ...buttonProps } = props;
+	const { label, children, initialActiveState, ...buttonProps } =
+		props;
 
-	const [isOn, setIsOn] = useBoolean(false);
+	const [isOn, setIsOn] = useBoolean(initialActiveState);
 
 	const { colorMode } = useColorMode();
 
@@ -27,6 +29,8 @@ export function QuickSettingsItem(props: QuickSettingsItemProps) {
 				colorScheme={isOn ? 'blue' : 'gray'}
 				size="xl"
 				w="full"
+				px={0}
+				borderWidth="1px"
 				onClick={setIsOn.toggle}
 				{...buttonProps}
 			>

@@ -1,5 +1,6 @@
 import {
 	ButtonGroup,
+	Divider,
 	Grid,
 	HStack,
 	Icon,
@@ -29,6 +30,7 @@ import {
 	MdOutlineLightMode,
 } from 'react-icons/md';
 import { PiWifiHighBold } from 'react-icons/pi';
+import { RiArrowRightSLine } from 'react-icons/ri';
 import { SlPencil } from 'react-icons/sl';
 import { TbAccessPoint } from 'react-icons/tb';
 
@@ -56,29 +58,39 @@ export function QuickSettings() {
 						boxShadow: 'thin',
 					}}
 					cursor="default"
+					transition="all 0.2s"
 				>
 					<Icon as={PiWifiHighBold} boxSize={5} />
 					<SpeakerIcon volumeLevel={soundLevel} boxSize={5} />
 				</HStack>
 			</PopoverTrigger>
 			<Portal>
-				<PopoverContent w="390px">
+				<PopoverContent w="400px">
 					<PopoverBody p={6}>
 						<Stack spacing={8}>
-							<Grid
-								templateColumns="repeat(auto-fill, minmax(95px, 1fr))"
-								gap={4}
-							>
-								<QuickSettingsItem label="Wifi">
-									<Icon as={PiWifiHighBold} boxSize={6} />
+							<Grid templateColumns="repeat(3, 1fr)" gap={4}>
+								<QuickSettingsItem
+									label="Wifi"
+									justifyContent="space-evenly"
+									initialActiveState
+								>
+									<Icon as={PiWifiHighBold} boxSize={5} />
+									<Divider orientation="vertical" />
+									<Icon as={RiArrowRightSLine} boxSize={5} />
 								</QuickSettingsItem>
 
-								<QuickSettingsItem label="Bluetooth">
-									<Icon as={BiBluetooth} boxSize={6} />
+								<QuickSettingsItem
+									label="Bluetooth"
+									justifyContent="space-evenly"
+									initialActiveState
+								>
+									<Icon as={BiBluetooth} boxSize={5} />
+									<Divider orientation="vertical" />
+									<Icon as={RiArrowRightSLine} boxSize={5} />
 								</QuickSettingsItem>
 
 								<QuickSettingsItem label="Airplane mode">
-									<Icon as={IoAirplaneOutline} boxSize={6} />
+									<Icon as={IoAirplaneOutline} boxSize={5} />
 								</QuickSettingsItem>
 
 								<QuickSettingsItem
@@ -91,16 +103,16 @@ export function QuickSettings() {
 												? MdOutlineDarkMode
 												: MdOutlineLightMode
 										}
-										boxSize={6}
+										boxSize={5}
 									/>
 								</QuickSettingsItem>
 
 								<QuickSettingsItem label="Mobile hotspot">
-									<Icon as={TbAccessPoint} boxSize={6} />
+									<Icon as={TbAccessPoint} boxSize={5} />
 								</QuickSettingsItem>
 
 								<QuickSettingsItem label="Accessibility">
-									<Icon as={IoAccessibilityOutline} boxSize={6} />
+									<Icon as={IoAccessibilityOutline} boxSize={5} />
 								</QuickSettingsItem>
 							</Grid>
 

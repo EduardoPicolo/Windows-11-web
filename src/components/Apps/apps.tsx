@@ -1,22 +1,17 @@
 import Image from 'next/image';
-import { Box } from '@chakra-ui/react';
 
 import { ThemeImage } from '@/components/ThemeImage';
 import ChatIcon from '@/public/icons/Chat.png';
 import EdgeIcon from '@/public/icons/Edge.png';
 import FileExplorerIcon from '@/public/icons/FileExplorer.png';
+import MailIcon from '@/public/icons/Mail.png';
+import OfficeIcon from '@/public/icons/Office365.png';
+import PhotosIcon from '@/public/icons/Photos.png';
+import SettingsIcon from '@/public/icons/Settings.png';
 import StoreDarkIcon from '@/public/icons/Store_Dark.png';
 import StoreIconLight from '@/public/icons/Store_Light.png';
 import TasksIconDark from '@/public/icons/TaskView_Dark.png';
 import TasksIconLight from '@/public/icons/TaskView_Light.png';
-
-export function MockWindow() {
-	return (
-		<Box>
-			<Image src={EdgeIcon} alt="edge" />
-		</Box>
-	);
-}
 
 export const TasksApp: App = {
 	shortName: 'Tasks',
@@ -29,7 +24,7 @@ export const TasksApp: App = {
 			alt="tasks"
 		/>
 	),
-	Window: MockWindow,
+	Window: null,
 };
 
 export const ChatApp: App = {
@@ -37,7 +32,7 @@ export const ChatApp: App = {
 	fullName: 'Microsoft Teams',
 	processName: 'chat',
 	icon: <Image src={ChatIcon} alt="chat" />,
-	Window: MockWindow,
+	Window: null,
 };
 
 export const EdgeApp: App = {
@@ -53,7 +48,7 @@ export const EdgeApp: App = {
 			}}
 		/>
 	),
-	Window: MockWindow,
+	Window: null,
 };
 
 export const FileExplorerApp: App = {
@@ -75,15 +70,50 @@ export const StoreApp: App = {
 			alt="store"
 		/>
 	),
-	Window: MockWindow,
+	Window: null,
+};
+export const OfficeApp: App = {
+	shortName: 'Office',
+	fullName: 'Microsoft 365 (Office)',
+	processName: 'office',
+	icon: <Image src={OfficeIcon} alt="office" />,
+	Window: null,
+};
+
+export const MailApp: App = {
+	shortName: 'Mail',
+	fullName: 'Mail',
+	processName: 'mail',
+	icon: <Image src={MailIcon} alt="mail" />,
+	Window: null,
+};
+
+export const PhotosApp: App = {
+	shortName: 'Photos',
+	fullName: 'Photos',
+	processName: 'photos',
+	icon: <Image src={PhotosIcon} alt="photos" />,
+	Window: null,
+};
+
+export const SettingsApp: App = {
+	shortName: 'Settings',
+	fullName: 'Settings',
+	processName: 'settings',
+	icon: <Image src={SettingsIcon} alt="settings" />,
+	Window: null,
 };
 
 export const apps = {
-	tasks: TasksApp,
-	chat: ChatApp,
 	edge: EdgeApp,
-	fileExplorer: FileExplorerApp,
+	office: OfficeApp,
+	mail: MailApp,
 	store: StoreApp,
+	photos: PhotosApp,
+	settings: SettingsApp,
+	chat: ChatApp,
+	fileExplorer: FileExplorerApp,
+	tasks: TasksApp,
 };
 
 export type Process = keyof typeof apps;

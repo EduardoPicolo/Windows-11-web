@@ -41,6 +41,7 @@ export const Clock = forwardRef<ClockProps, 'div'>((props, ref) => {
 			fontSize="sm"
 			lineHeight={1.35}
 			cursor="default"
+			transition="all 0.2s"
 			{...props}
 		>
 			<Text>{formattedTime}</Text>

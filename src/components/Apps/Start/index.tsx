@@ -42,10 +42,10 @@ export function StartMenuContainer({
 				{isOpen && (
 					<MotionDivWithStyles
 						position="absolute"
-						left={anchorEl?.offsetLeft ? anchorEl.offsetLeft - 40 : 0}
+						left={anchorEl?.offsetLeft ? anchorEl.offsetLeft - 50 : 0}
 						bottom={0}
 						initial={{ y: '75%' }}
-						animate={{ y: -66 }}
+						animate={{ y: -60 }}
 						exit={{ y: '100%' }}
 						// eslint-disable-next-line react-perf/jsx-no-new-object-as-prop -- ignore
 						transition={{

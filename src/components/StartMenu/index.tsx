@@ -6,17 +6,23 @@ import {
 	CardHeader,
 	type CardProps,
 	forwardRef,
+	Grid,
 	HStack,
 	Icon,
 	IconButton,
+	Input,
+	InputGroup,
 	InputLeftElement,
 	SkeletonCircle,
+	Stack,
 	Text,
+	useColorModeValue,
 } from '@chakra-ui/react';
-import { GoSearch } from 'react-icons/go';
+import { IoSearch } from 'react-icons/io5';
 import { SlArrowRight, SlPower } from 'react-icons/sl';
 
-import { Input } from '@/components/FormFields';
+import { apps } from '@/components/Apps/apps';
+import { DesktopIcon } from '@/components/DesktopIcon';
 
 type StartMenuProps = CardProps;
 
@@ -24,52 +30,92 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 	(props, ref) => {
 		const { ...rest } = props;
 
+		const backgroundColor = useColorModeValue(
+			'whiteAlpha.600',
+			'whiteAlpha.100'
+		);
+
 		return (
 			<Card
 				ref={ref}
-				size="lg"
+				size="xl"
 				w="90vw"
-				maxW="700px"
+				width="700px"
 				height="700px"
 				userSelect="none"
 				cursor="default"
 				{...rest}
 			>
 				<CardHeader>
-					<Input
-						variant="filled"
-						placeholder="Search for apps, settings, and documents"
-						leftElement={
-							<InputLeftElement>
-								<Icon as={GoSearch} boxSize={5} />
-							</InputLeftElement>
-						}
-					/>
+					<InputGroup size="sm">
+						<InputLeftElement ml={2} pointerEvents="none">
+							<Icon as={IoSearch} boxSize={5} />
+						</InputLeftElement>
+						<Input
+							pl={10}
+							placeholder="Search for apps, settings, and documents"
+						/>
+					</InputGroup>
 				</CardHeader>
 
 				<CardBody>
-					<HStack justifyContent="space-between">
-						<Text fontSize="md" fontWeight="semibold">
-							Pinned
-						</Text>
+					<Stack spacing={4}>
+						<HStack justifyContent="space-between">
+							<Text fontSize="md" fontWeight="semibold">
+								Pinned
+							</Text>
 
-						<Button
-							variant="solid"
-							size="xs"
-							colorScheme="gray"
-							fontWeight="semibold"
-							rightIcon={<Icon as={SlArrowRight} boxSize={2} />}
-							boxShadow="thin"
+							<Button
+								variant="solid"
+								size="xs"
+								colorScheme="gray"
+								background={backgroundColor}
+								fontWeight="medium"
+								rightIcon={
+									<Icon as={SlArrowRight} boxSize={2} ml={1} />
+								}
+								boxShadow="thin"
+							>
+								All apps
+							</Button>
+						</HStack>
+
+						<Grid
+							gridTemplateColumns="repeat(6, 1fr)"
+							gridTemplateRows="repeat(3, 1fr)"
+							gap={0}
+							rowGap={4}
+							justifyItems="center"
+							ml={-4}
 						>
-							All apps
-						</Button>
-					</HStack>
+							{Object.values(apps).map((app) => (
+								<DesktopIcon
+									app={app}
+									key={app.shortName}
+									iconSize="40px"
+								/>
+							))}
+							{Object.values(apps).map((app) => (
+								<DesktopIcon
+									app={app}
+									key={app.shortName}
+									iconSize="40px"
+								/>
+							))}
+						</Grid>
+
+						<Text fontSize="md" fontWeight="semibold">
+							Recommended
+						</Text>
+					</Stack>
 				</CardBody>
 
 				<CardFooter justifyContent="space-between" px={20}>
 					<HStack>
-						<SkeletonCircle boxSize={10} />
-						<Text>Eduardo Picolo</Text>
+						<SkeletonCircle boxSize={9} />
+						<Text fontSize="md" fontWeight="semibold">
+							Eduardo Pícolo
+						</Text>
 					</HStack>
 
 					<IconButton
