@@ -1,4 +1,3 @@
-import { useLayoutEffect } from 'react';
 import {
 	Box,
 	Menu,
@@ -18,26 +17,26 @@ export type ContextMenuProps = MenuProps & {
 export function ContextMenu(props: ContextMenuProps) {
 	const { position, children, isOpen, onClose, ...rest } = props;
 
-	useLayoutEffect(() => {
-		/** Close menu on click outside of menu. */
-		const handleClick = () => {
-			onClose?.();
-		};
+	// useLayoutEffect(() => {
+	// 	/** Close menu on click outside of menu. */
+	// 	const handleClick = () => {
+	// 		onClose?.();
+	// 	};
 
-		document.addEventListener('click', handleClick);
+	// 	document.addEventListener('click', handleClick);
 
-		return () => {
-			document.removeEventListener('click', handleClick);
-		};
-	}, []);
+	// 	return () => {
+	// 		document.removeEventListener('click', handleClick);
+	// 	};
+	// }, []);
 
 	return (
 		<Portal appendToParentPortal={false}>
 			<Box position="absolute" left={position.x} top={position.y}>
 				<Menu
 					isOpen={isOpen}
+					onClose={onClose}
 					/** Don't close menu on aux click */
-					closeOnBlur={false}
 					{...rest}
 				>
 					{(internalProps) =>

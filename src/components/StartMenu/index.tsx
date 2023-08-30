@@ -109,18 +109,27 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 									onDoubleClick={undefined}
 								/>
 							))}
-							{Object.values(apps).map((app) => (
-								<DesktopIcon
-									app={app}
-									key={app.shortName}
-									iconSize="40px"
-								/>
-							))}
 						</Grid>
 
-						<Text fontSize="md" fontWeight="semibold">
-							Recommended
-						</Text>
+						<HStack justifyContent="space-between">
+							<Text fontSize="md" fontWeight="semibold">
+								Recommended
+							</Text>
+
+							<Button
+								variant="solid"
+								size="xs"
+								colorScheme="gray"
+								background={backgroundColor}
+								fontWeight="medium"
+								rightIcon={
+									<Icon as={SlArrowRight} boxSize={2} ml={1} />
+								}
+								boxShadow="thin"
+							>
+								More
+							</Button>
+						</HStack>
 					</Stack>
 				</CardBody>
 

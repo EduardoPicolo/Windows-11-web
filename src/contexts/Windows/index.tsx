@@ -2,7 +2,6 @@
 
 import {
 	createContext,
-	isValidElement,
 	useCallback,
 	useContext,
 	useLayoutEffect,
@@ -146,7 +145,7 @@ export function WindowsProvider(props: WindowsProviderProps) {
 							)}
 							initialPosition={defaultInitialPosition}
 						>
-							{isValidElement(app?.Window) ? (
+							{app?.Window ? (
 								<app.Window />
 							) : (
 								<Center

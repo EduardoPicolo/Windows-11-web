@@ -52,7 +52,7 @@ const ghost = definePartsStyle((props) => ({
 		border: 'none',
 		backgroundColor: mode('whiteAlpha.400', 'blackAlpha.600')(props),
 		backgroundBlendMode: 'exclusion',
-		boxShadow: 'subtle',
+		boxShadow: 'dark-lg',
 		backdropFilter: mode(
 			'blur(46.5px) saturate(180%)',
 			'blur(46.5px) saturate(180%) brightness(1.2) contrast(1.2)'
