@@ -1,4 +1,5 @@
 import { Open_Sans, Poppins } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 
 import { Providers } from './providers';
 
@@ -42,6 +43,7 @@ export default function RootLayout({
 		>
 			<body>
 				<Providers>{children}</Providers>
+				<Analytics />
 			</body>
 		</html>
 	);
