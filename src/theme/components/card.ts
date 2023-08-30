@@ -92,7 +92,7 @@ const window = definePartsStyle((props) => ({
 		borderTopRadius: 'md',
 	},
 	body: {
-		p: 2,
+		p: 0,
 		backgroundColor: mode('transparent', 'blackAlpha.500')(props),
 		borderBottomRadius: 'md',
 	},

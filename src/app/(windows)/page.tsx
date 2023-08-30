@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { Box, Grid, useDisclosure } from '@chakra-ui/react';
 
-import { EdgeApp } from '@/components/Apps/apps';
+import { EdgeApp, VSCodeApp } from '@/components/Apps/apps';
 import { DesktopContextMenu } from '@/components/DesktopContextMenu';
 import { DesktopIcon } from '@/components/DesktopIcon';
 
@@ -62,15 +62,14 @@ export default function Home() {
 			/>
 
 			<Grid
-				gridTemplateColumns="repeat(auto-fill, minmax(75px, 1fr))"
-				gridTemplateRows="repeat(auto-fill, minmax(120px, 1fr));"
-				gap={4}
+				gridTemplateColumns="repeat(auto-fill, minmax(90px, 1fr))"
+				gridTemplateRows="repeat(auto-fill, minmax(110px, 1fr));"
 				h="full"
 				textAlign="center"
 			>
 				<DesktopIcon app={EdgeApp} />
 
-				<DesktopIcon app={EdgeApp} />
+				<DesktopIcon app={VSCodeApp} gridRow={2} />
 			</Grid>
 		</Box>
 	);

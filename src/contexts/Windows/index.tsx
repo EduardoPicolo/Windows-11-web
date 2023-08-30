@@ -4,13 +4,10 @@ import {
 	createContext,
 	useCallback,
 	useContext,
-	useLayoutEffect,
 	useMemo,
-	useRef,
 	useState,
 } from 'react';
 import { Center, Portal } from '@chakra-ui/react';
-import { useSize } from '@chakra-ui/react-use-size';
 
 import { Process } from '@/components/Apps/apps';
 import { WindowContainer } from '@/components/WindowContainer';
@@ -63,27 +60,10 @@ export function WindowsProvider(props: WindowsProviderProps) {
 	console.log('Open windows:', windows);
 	console.groupEnd();
 
-	const mainRef = useRef<HTMLElement | null>(null);
-	// document?.getElementsByTagName('main')[0]
-
 	const handleSetFocusedWindow = useCallback(
 		(id: number) => () => setFocusedWindow(id),
 		[setFocusedWindow]
 	);
-
-	useLayoutEffect(() => {
-		if (typeof window === 'undefined') return;
-
-		mainRef.current = document?.getElementsByTagName('main')[0];
-
-		console.log(
-			'mainRef',
-			mainRef.current?.offsetWidth,
-			mainRef.current?.clientWidth
-		);
-	}, []);
-
-	const size = useSize(mainRef);
 
 	/**
 	 * Initial position is the center of the `main` element. The `y`
@@ -91,22 +71,22 @@ export function WindowsProvider(props: WindowsProviderProps) {
 	 * the `body` element. The values also need to be offset by half the
 	 * width/height of the window being created.
 	 */
-	const defaultInitialPosition = useMemo(
-		() =>
-			size
-				? {
-						x: size.width / 2 - 300,
-						y: -size.height / 2 - 300,
-						width: 600,
-						height: 600,
-				  }
-				: {
-						x: 100,
-						y: -700,
-						width: 600,
-						height: 'auto',
-				  },
-		[size]
+	const getInitialPosition = useCallback(
+		(appPreference: App) => ({
+			width: appPreference?.initialSize?.width ?? 600,
+			height: appPreference?.initialSize?.height ?? 600,
+			x:
+				window.innerWidth / 2 -
+				(appPreference?.initialSize?.width
+					? appPreference.initialSize.width / 2
+					: 300),
+			y:
+				-(window.innerHeight / 2) -
+				(appPreference?.initialSize?.height
+					? appPreference.initialSize.height / 2
+					: 300),
+		}),
+		[]
 	);
 
 	const value: WindowsContext = useMemo(
@@ -143,7 +123,7 @@ export function WindowsProvider(props: WindowsProviderProps) {
 								process as Process,
 								Number(id)
 							)}
-							initialPosition={defaultInitialPosition}
+							initialPosition={getInitialPosition(app)}
 						>
 							{app?.Window ? (
 								<app.Window />

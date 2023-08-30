@@ -164,6 +164,10 @@ export const VSCodeApp: App = {
 	processName: 'vscode',
 	icon: <Image src={VSCodeIcon as StaticImageData} alt="vscode" />,
 	Window: VSCode,
+	initialSize: {
+		width: 1024,
+		height: 768,
+	},
 };
 
 export const WhiteboardApp: App = {

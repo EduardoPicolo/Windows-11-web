@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import {
 	Box,
 	ButtonGroup,
@@ -49,30 +49,16 @@ export function WindowContainer(props: WindowContainerProps) {
 		...rest
 	} = props;
 
-	// const [size, setSize] = useState<Props['size']>({
-	// 	width: initialPosition?.width ?? '400',
-	// 	height: initialPosition?.height ?? 'auto',
-	// });
-	// const [position, setPosition] = useState<Props['position']>({
-	// 	x: initialPosition?.x ?? 0,
-	// 	y: initialPosition?.y ?? 0,
-	// });
-
 	console.group('WindowContainer');
 	console.log('isMaximized', isMaximized);
 	console.log('isMinimized', isMinimized);
 	console.log('isFocused', isFocused);
 	console.log('initialPosition', initialPosition);
-	// console.log('size', size);
-	// console.log('position', position);
 	console.groupEnd();
 
-	const mainRef = useRef<HTMLElement | null>(
-		// document?.getElementsByTagName('main')[0]
-		null
-	);
+	const mainRef = useRef<HTMLElement | null>(null);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (typeof window === 'undefined') return;
 
 		mainRef.current = document?.getElementsByTagName('main')[0];
@@ -91,15 +77,6 @@ export function WindowContainer(props: WindowContainerProps) {
 				zIndex: isFocused ? 2 : 1,
 			}}
 			default={initialPosition}
-			// size={
-			// 	isMaximized
-			// 		? {
-			// 				width: '100%',
-			// 				height: '100%',
-			// 		  }
-			// 		: undefined
-			// }
-			// // position={isMaximized ? { x: 0, y: 0 } : undefined}
 			size={
 				isMaximized
 					? {
@@ -113,27 +90,6 @@ export function WindowContainer(props: WindowContainerProps) {
 					? { x: 0, y: -document.body.offsetHeight }
 					: undefined
 			}
-			// size={
-			// 	isMaximized
-			// 		? { width: '100vw', height: '100%' }
-			// 		: { width: size.width, height: size.height }
-			// }
-			// position={
-			// 	isMaximized
-			// 		? { x: 0, y: 0 }
-			// 		: { x: position.x, y: position.y }
-			// }
-			// onDragStop={(e, d) => {
-			// 	setPosition({ x: d.x, y: d.y });
-			// }}
-			// onResizeStop={(e, direction, ref, delta, newPosition) => {
-			// 	console.log('onResizeStop', newPosition);
-			// 	setPosition(newPosition);
-			// 	setSize({
-			// 		height: ref.style.height,
-			// 		width: ref.style.width,
-			// 	});
-			// }}
 			minWidth="300px"
 			minHeight="150px"
 			bounds="main"
@@ -168,8 +124,9 @@ export function WindowContainer(props: WindowContainerProps) {
 						<ButtonGroup
 							variant="ghost"
 							colorScheme="gray"
-							size="md"
-							spacing={0}
+							size="sm"
+							spacing={1}
+							cursor="default"
 						>
 							<IconButton
 								aria-label="minimize"
