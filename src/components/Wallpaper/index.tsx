@@ -15,6 +15,7 @@ export function Wallpaper(props: WallpaperProps) {
 			alt="Wallpaper"
 			placeholder="blur"
 			quality={100}
+			priority
 			fill
 			sizes="100vw"
 			style={{
