@@ -15,8 +15,8 @@ export default function Home() {
 	const menuDisclosure = useDisclosure();
 
 	const [menuPosition, setMenuPosition] = useState({
-		left: 0,
-		top: 0,
+		x: 0,
+		y: 0,
 	});
 
 	const handleContextMenu = useCallback<
@@ -43,16 +43,12 @@ export default function Home() {
 			}
 
 			const { clientX, clientY } = e;
-
 			const { innerWidth, innerHeight } = window;
 
-			const left =
-				clientX + 200 > innerWidth ? clientX - 200 : clientX;
+			const x = clientX + 200 > innerWidth ? clientX - 200 : clientX;
+			const y = clientY + 200 > innerHeight ? clientY - 200 : clientY;
 
-			const top =
-				clientY + 200 > innerHeight ? clientY - 200 : clientY;
-
-			setMenuPosition({ left, top });
+			setMenuPosition({ x, y });
 			menuDisclosure.onOpen();
 		},
 		[menuDisclosure]
@@ -61,10 +57,7 @@ export default function Home() {
 	return (
 		<Box h="full" p={4} onContextMenu={handleContextMenu}>
 			<DesktopContextMenu
-				position={{
-					x: menuPosition.left,
-					y: menuPosition.top,
-				}}
+				position={menuPosition}
 				{...menuDisclosure}
 			/>
 

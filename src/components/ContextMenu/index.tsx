@@ -10,8 +10,8 @@ import {
 
 export type ContextMenuProps = MenuProps & {
 	position: {
-		x: number;
-		y: number;
+		x: number | string;
+		y: number | string;
 	};
 };
 
