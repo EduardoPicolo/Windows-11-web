@@ -28,14 +28,17 @@ import {
 	ContextMenu,
 	type ContextMenuProps,
 } from '@/components/ContextMenu';
-import { SortbySubmenu } from '@/components/DesktopContextMenu/SortbySubmenu';
-import { ViewSubmenu } from '@/components/DesktopContextMenu/ViewSubmenu';
+
+import { NewSubmenu } from './NewSubmenu';
+import { SortbySubmenu } from './SortbySubmenu';
+import { ViewSubmenu } from './ViewSubmenu';
 
 const MotionDivWithStyles = motion(chakra.div);
 
 const submenusMap = {
 	view: <ViewSubmenu />,
 	sortby: <SortbySubmenu />,
+	new: <NewSubmenu />,
 };
 
 type Submenu = keyof typeof submenusMap;
@@ -127,7 +130,8 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 							<MenuDivider />
 							<MenuItem
 								icon={<AddIcon boxSize="20px" />}
-								onMouseEnter={handleOpenSubmenu('view')}
+								onMouseEnter={handleOpenSubmenu('new')}
+								bg={submenu === 'new' ? 'hoverBg' : undefined}
 							>
 								<HStack justifyContent="space-between">
 									<Text>New</Text>
