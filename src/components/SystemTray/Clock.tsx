@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import {
 	type BoxProps,
 	forwardRef,
@@ -9,31 +9,42 @@ import {
 	VStack,
 } from '@chakra-ui/react';
 
+const useNavigator =
+	typeof navigator === 'undefined' ? null : navigator;
+
 type ClockProps = BoxProps;
 
 export const Clock = forwardRef<ClockProps, 'div'>((props, ref) => {
 	const [time, setTime] = useState(new Date());
 
-	useEffect(() => {
+	const navigator = useNavigator;
+
+	useLayoutEffect(() => {
 		const timerID = setInterval(() => setTime(new Date()), 1000);
 
 		return () => clearInterval(timerID);
 	}, []);
 
-	const formattedTime = time.toLocaleTimeString(navigator?.language, {
-		hour: '2-digit',
-		minute: '2-digit',
-		hour12: false,
-	});
-	const formattedDate = time.toLocaleString(navigator?.language, {
-		year: 'numeric',
-		day: 'numeric',
-		month: 'numeric',
-	});
+	const formattedTime = time.toLocaleTimeString(
+		navigator?.language ?? 'en-US',
+		{
+			hour: '2-digit',
+			minute: '2-digit',
+			hour12: false,
+		}
+	);
+	const formattedDate = time.toLocaleString(
+		navigator?.language ?? 'en-US',
+		{
+			year: 'numeric',
+			day: 'numeric',
+			month: 'numeric',
+		}
+	);
 
 	return (
 		<Tooltip
-			label={time.toLocaleDateString(navigator?.language, {
+			label={time.toLocaleDateString(navigator?.language ?? 'en-US', {
 				weekday: 'long',
 				month: 'long',
 				day: 'numeric',
