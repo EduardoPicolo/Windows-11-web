@@ -3,6 +3,7 @@ import {
 	type BoxProps,
 	forwardRef,
 	Text,
+	Tooltip,
 	VStack,
 } from '@chakra-ui/react';
 
@@ -17,35 +18,47 @@ export const Clock = forwardRef<ClockProps, 'div'>((props, ref) => {
 		return () => clearInterval(timerID);
 	}, []);
 
-	const hours = time.getHours();
-	const minutes = time.getMinutes();
-	const formattedTime = `${hours
-		.toString()
-		.padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-	const formattedDate = `${
-		time.getMonth() + 1
-	}/${time.getDate()}/${time.getFullYear()}`;
+	const formattedTime = time.toLocaleTimeString(navigator?.language, {
+		hour: '2-digit',
+		minute: '2-digit',
+		hour12: false,
+	});
+	const formattedDate = time.toLocaleString(navigator?.language, {
+		year: 'numeric',
+		day: 'numeric',
+		month: 'numeric',
+	});
 
 	return (
-		<VStack
-			ref={ref}
-			spacing={0}
-			align="flex-end"
-			py={1}
-			px={2}
-			borderRadius="md"
-			_hover={{
-				background: 'hoverBg',
-				boxShadow: 'thin',
-			}}
-			fontSize="sm"
-			lineHeight={1.35}
-			cursor="default"
-			transition="all 0.2s"
-			{...props}
+		<Tooltip
+			label={time.toLocaleDateString(navigator?.language, {
+				weekday: 'long',
+				month: 'long',
+				day: 'numeric',
+				year: 'numeric',
+			})}
+			openDelay={1000}
 		>
-			<Text>{formattedTime}</Text>
-			<Text>{formattedDate}</Text>
-		</VStack>
+			<VStack
+				ref={ref}
+				spacing={0}
+				align="flex-end"
+				py={1}
+				px={2}
+				borderRadius="md"
+				_hover={{
+					background: 'hoverBg',
+					boxShadow: 'thin',
+				}}
+				fontSize="sm"
+				lineHeight={1.35}
+				cursor="default"
+				transition="all 0.2s"
+				{...props}
+			>
+				<Text>{formattedTime}</Text>
+				<Text>{formattedDate}</Text>
+			</VStack>
+		</Tooltip>
 	);
 });

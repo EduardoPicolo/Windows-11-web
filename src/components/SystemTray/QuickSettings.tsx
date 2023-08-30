@@ -1,6 +1,7 @@
 import {
 	ButtonGroup,
 	Divider,
+	Flex,
 	Grid,
 	HStack,
 	Icon,
@@ -16,6 +17,7 @@ import {
 	SliderThumb,
 	SliderTrack,
 	Stack,
+	Tooltip,
 	useColorMode,
 } from '@chakra-ui/react';
 import { BiBluetooth } from 'react-icons/bi';
@@ -60,8 +62,24 @@ export function QuickSettings() {
 					cursor="default"
 					transition="all 0.2s"
 				>
-					<Icon as={PiWifiHighBold} boxSize={5} />
-					<SpeakerIcon volumeLevel={soundLevel} boxSize={5} />
+					<Tooltip
+						openDelay={1000}
+						label="Internet access"
+						gutter={20}
+					>
+						<Flex>
+							<Icon as={PiWifiHighBold} boxSize={5} />
+						</Flex>
+					</Tooltip>
+					<Tooltip
+						openDelay={1000}
+						label={`Speakers (High Definition Audio Device): ${soundLevel}%`}
+						gutter={20}
+					>
+						<Flex>
+							<SpeakerIcon volumeLevel={soundLevel} boxSize={5} />
+						</Flex>
+					</Tooltip>
 				</HStack>
 			</PopoverTrigger>
 			<Portal>
