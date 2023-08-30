@@ -1,3 +1,4 @@
+import { MouseEventHandler, useCallback } from 'react';
 import {
 	Button,
 	Card,
@@ -23,12 +24,23 @@ import { SlArrowRight, SlPower } from 'react-icons/sl';
 
 import { apps } from '@/components/Apps/apps';
 import { DesktopIcon } from '@/components/DesktopIcon';
+import { useWindows } from '@/contexts/Windows';
 
 type StartMenuProps = CardProps;
 
 export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 	(props, ref) => {
 		const { ...rest } = props;
+
+		const { addWindow } = useWindows();
+
+		const handleAddWindow = useCallback(
+			(app: App): MouseEventHandler<HTMLElement> =>
+				(event) => {
+					addWindow(app);
+				},
+			[addWindow]
+		);
 
 		const backgroundColor = useColorModeValue(
 			'whiteAlpha.600',
@@ -93,6 +105,8 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 									app={app}
 									key={app.shortName}
 									iconSize="40px"
+									onClick={handleAddWindow(app)}
+									onDoubleClick={undefined}
 								/>
 							))}
 							{Object.values(apps).map((app) => (

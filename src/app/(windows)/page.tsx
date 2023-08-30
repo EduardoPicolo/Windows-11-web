@@ -5,10 +5,10 @@ import React, {
 	useCallback,
 	useState,
 } from 'react';
-import { Box, Grid, MenuItem, useDisclosure } from '@chakra-ui/react';
+import { Box, Grid, useDisclosure } from '@chakra-ui/react';
 
 import { EdgeApp } from '@/components/Apps/apps';
-import { ContextMenu } from '@/components/ContextMenu';
+import { DesktopContextMenu } from '@/components/DesktopContextMenu';
 import { DesktopIcon } from '@/components/DesktopIcon';
 
 export default function Home() {
@@ -60,15 +60,13 @@ export default function Home() {
 
 	return (
 		<Box h="full" p={4} onContextMenu={handleContextMenu}>
-			<ContextMenu
+			<DesktopContextMenu
 				position={{
 					x: menuPosition.left,
 					y: menuPosition.top,
 				}}
 				{...menuDisclosure}
-			>
-				<MenuItem>Test</MenuItem>
-			</ContextMenu>
+			/>
 
 			<Grid
 				gridTemplateColumns="repeat(auto-fill, minmax(75px, 1fr))"

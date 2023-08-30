@@ -34,8 +34,8 @@ import { RiArrowRightSLine } from 'react-icons/ri';
 import { SlPencil } from 'react-icons/sl';
 import { TbAccessPoint } from 'react-icons/tb';
 
+import { SpeakerIcon } from '@/assets/VolumeIcon';
 import { QuickSettingsItem } from '@/components/SystemTray/QuickSettingsItem';
-import { SpeakerIcon } from '@/components/VolumeIcon';
 import { useSystem } from '@/contexts/System/index.';
 
 export function QuickSettings() {

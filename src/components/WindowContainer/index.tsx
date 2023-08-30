@@ -140,7 +140,7 @@ export function WindowContainer(props: WindowContainerProps) {
 		>
 			<Card
 				variant="window"
-				opacity={isFocused ? 1 : 0.975}
+				// opacity={isFocused ? 1 : 0.975}
 				userSelect="none"
 				unselectable="on"
 				draggable={false}

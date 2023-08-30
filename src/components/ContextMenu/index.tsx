@@ -8,7 +8,7 @@ import {
 	Portal,
 } from '@chakra-ui/react';
 
-type ContextMenuProps = MenuProps & {
+export type ContextMenuProps = MenuProps & {
 	position: {
 		x: number;
 		y: number;

@@ -13,7 +13,7 @@ type Windows = Record<Process, Record<number, App & WindowState>>;
 
 interface WindowsContext {
 	windows: Windows;
-	addWindow: (app: App, options?: AddWindowOptions) => void;
+	addWindow: (app: App, options?: WindowState) => void;
 	closeWindow: (processName: Process, id: number) => void;
 }
 
