@@ -5,6 +5,7 @@ import {
 	useState,
 } from 'react';
 import {
+	chakra,
 	HStack,
 	Icon,
 	MenuDivider,
@@ -27,12 +28,24 @@ import {
 	ContextMenu,
 	type ContextMenuProps,
 } from '@/components/ContextMenu';
+import { SortbySubmenu } from '@/components/DesktopContextMenu/SortbySubmenu';
 import { ViewSubmenu } from '@/components/DesktopContextMenu/ViewSubmenu';
+
+const MotionDivWithStyles = motion(chakra.div);
+
+const submenusMap = {
+	view: <ViewSubmenu />,
+	sortby: <SortbySubmenu />,
+};
+
+type Submenu = keyof typeof submenusMap;
 
 type DesktopContextMenuProps = Omit<ContextMenuProps, 'children'>;
 
 export function DesktopContextMenu(props: DesktopContextMenuProps) {
 	const submenuDisclosure = useDisclosure();
+
+	const [submenu, setSubmenu] = useState<Submenu | null>(null);
 
 	useLayoutEffect(() => {
 		/** Close submenu on auxclick */
@@ -52,19 +65,19 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 		y: 0,
 	});
 
-	const handleOpenSubmenu = useCallback<
-		MouseEventHandler<HTMLButtonElement>
-	>(
-		(event) => {
-			submenuDisclosure.onOpen();
-			setSubmenuPosition({
-				x:
-					event.currentTarget.getBoundingClientRect().x +
-					event.currentTarget.getBoundingClientRect().width -
-					1,
-				y: event.currentTarget.getBoundingClientRect().y,
-			});
-		},
+	const handleOpenSubmenu = useCallback(
+		(menu: Submenu): MouseEventHandler<HTMLButtonElement> =>
+			(event) => {
+				setSubmenu(menu);
+				submenuDisclosure.onOpen();
+				setSubmenuPosition({
+					x:
+						event.currentTarget.getBoundingClientRect().x +
+						event.currentTarget.getBoundingClientRect().width -
+						1,
+					y: event.currentTarget.getBoundingClientRect().y,
+				});
+			},
 		[submenuDisclosure]
 	);
 
@@ -78,8 +91,8 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 						<MenuList>
 							<MenuItem
 								icon={<Icon as={BsGrid} />}
-								onMouseEnter={handleOpenSubmenu}
-								bg={submenuDisclosure.isOpen ? 'hoverBg' : undefined}
+								onMouseEnter={handleOpenSubmenu('view')}
+								bg={submenu === 'view' ? 'hoverBg' : undefined}
 							>
 								<HStack justifyContent="space-between">
 									<Text>View</Text>
@@ -93,7 +106,8 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 
 							<MenuItem
 								icon={<SortIcon />}
-								onMouseEnter={handleOpenSubmenu}
+								onMouseEnter={handleOpenSubmenu('sortby')}
+								bg={submenu === 'sortby' ? 'hoverBg' : undefined}
 							>
 								<HStack justifyContent="space-between">
 									<Text>Sort by</Text>
@@ -113,7 +127,7 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 							<MenuDivider />
 							<MenuItem
 								icon={<AddIcon boxSize="20px" />}
-								onMouseEnter={handleOpenSubmenu}
+								onMouseEnter={handleOpenSubmenu('view')}
 							>
 								<HStack justifyContent="space-between">
 									<Text>New</Text>
@@ -153,13 +167,17 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 						<Portal appendToParentPortal={false}>
 							<AnimatePresence>
 								{submenuDisclosure.isOpen && (
-									<motion.div
-										style={{
-											position: 'absolute',
-											top: submenuPosition?.y,
-											left: submenuPosition?.x,
-											zIndex: 12,
-										}}
+									<MotionDivWithStyles
+										position="absolute"
+										top={submenuPosition?.y}
+										left={submenuPosition?.x}
+										zIndex={3}
+										// style={{
+										// 	position: 'absolute',
+										// 	top: submenuPosition?.y,
+										// 	left: submenuPosition?.x,
+										// 	zIndex: 12,
+										// }}
 										initial={{ x: -20 }}
 										animate={{ x: 0 }}
 										exit={{ scale: 0.9 }}
@@ -170,8 +188,9 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 										}}
 										layout="position"
 									>
-										<ViewSubmenu />
-									</motion.div>
+										{/* <ViewSubmenu /> */}
+										{submenu ? submenusMap[submenu] : null}
+									</MotionDivWithStyles>
 								)}
 							</AnimatePresence>
 						</Portal>
