@@ -49,8 +49,7 @@ const baseStyle = definePartsStyle((props) => ({
 
 const ghost = definePartsStyle((props) => ({
 	list: {
-		border: '1px solid',
-		borderColor: mode('blackAlpha.100', 'whiteAlpha.100')(props),
+		border: 'none',
 		backgroundColor: mode('whiteAlpha.400', 'blackAlpha.600')(props),
 		backgroundBlendMode: 'exclusion',
 		boxShadow: 'subtle',
@@ -99,9 +98,9 @@ const ghost = definePartsStyle((props) => ({
 			bg: mode('blackAlpha.50', 'whiteAlpha.100')(props),
 		},
 	},
-	// divider: {
-	// 	borderColor: mode('blackAlpha.200', 'inherit')(props),
-	// },
+	divider: {
+		borderColor: mode('blackAlpha.100', 'whiteAlpha.300')(props),
+	},
 }));
 
 const sizes = {
@@ -120,6 +119,9 @@ const sizes = {
 		icon: {
 			justifyContent: 'center',
 			alignItems: 'center',
+		},
+		command: {
+			fontSize: 'xs',
 		},
 		divider: {
 			my: 1.5,

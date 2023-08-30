@@ -32,26 +32,29 @@ export function ContextMenu(props: ContextMenuProps) {
 	}, []);
 
 	return (
-		<Portal>
-			{isOpen && (
-				<Box position="absolute" left={position.x} top={position.y}>
-					<Menu isOpen closeOnBlur={false} {...rest}>
-						{(internalProps) => (
+		<Portal appendToParentPortal={false}>
+			<Box position="absolute" left={position.x} top={position.y}>
+				<Menu
+					isOpen={isOpen}
+					/** Don't close menu on aux click */
+					closeOnBlur={false}
+					{...rest}
+				>
+					{(internalProps) =>
+						children ? (
+							typeof children === 'function' ? (
+								children(internalProps)
+							) : (
+								children
+							)
+						) : (
 							<MenuList>
-								{children ? (
-									typeof children === 'function' ? (
-										children(internalProps)
-									) : (
-										children
-									)
-								) : (
-									<MenuItem isDisabled>No options</MenuItem>
-								)}
+								<MenuItem isDisabled>No options</MenuItem>
 							</MenuList>
-						)}
-					</Menu>
-				</Box>
-			)}
+						)
+					}
+				</Menu>
+			</Box>
 		</Portal>
 	);
 }
