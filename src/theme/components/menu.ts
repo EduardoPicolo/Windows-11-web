@@ -92,7 +92,7 @@ const ghost = definePartsStyle((props) => ({
 		bg: 'transparent',
 
 		_focus: {
-			bg: mode('blackAlpha.200', 'whiteAlpha.100')(props),
+			bg: mode('blackAlpha.200', 'whiteAlpha.200')(props),
 		},
 
 		_activeLink: {

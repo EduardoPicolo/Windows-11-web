@@ -1,5 +1,12 @@
-import { Icon, MenuDivider, MenuItem } from '@chakra-ui/react';
+import {
+	HStack,
+	Icon,
+	MenuDivider,
+	MenuItem,
+	Text,
+} from '@chakra-ui/react';
 import { BsBrush, BsGrid } from 'react-icons/bs';
+import { RiArrowRightSLine } from 'react-icons/ri';
 import { TbReload } from 'react-icons/tb';
 
 import { TerminalIcon } from '@/assets/ TerminalIcon';
@@ -16,11 +23,26 @@ type DesktopContextMenuProps = Omit<ContextMenuProps, 'children'>;
 export function DesktopContextMenu(props: DesktopContextMenuProps) {
 	return (
 		<ContextMenu size="sm" {...props}>
-			<MenuItem icon={<Icon as={BsGrid} />}>View</MenuItem>
-			<MenuItem icon={<SortIcon />}>Sort by</MenuItem>
+			<MenuItem icon={<Icon as={BsGrid} />}>
+				<HStack justifyContent="space-between">
+					<Text>View</Text>
+					<Icon as={RiArrowRightSLine} boxSize={4} mr={-1.5} />
+				</HStack>
+			</MenuItem>
+			<MenuItem icon={<SortIcon />}>
+				<HStack justifyContent="space-between">
+					<Text>Sort by</Text>
+					<Icon as={RiArrowRightSLine} boxSize={4} mr={-1.5} />
+				</HStack>
+			</MenuItem>
 			<MenuItem icon={<Icon as={TbReload} />}>Refresh</MenuItem>
 			<MenuDivider />
-			<MenuItem icon={<AddIcon boxSize="20px" />}>New</MenuItem>
+			<MenuItem icon={<AddIcon boxSize="20px" />}>
+				<HStack justifyContent="space-between">
+					<Text>New</Text>
+					<Icon as={RiArrowRightSLine} boxSize={4} mr={-1.5} />
+				</HStack>
+			</MenuItem>
 			<MenuDivider />
 			<MenuItem icon={<DisplaySettingsIcon boxSize="19px" />}>
 				Display Settings
