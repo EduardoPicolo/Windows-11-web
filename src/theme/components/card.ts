@@ -108,7 +108,7 @@ const sizes = {
 		body: {
 			paddingX: 20,
 		},
-		footer: { p: 4, borderBottomRadius: 'xl' },
+		footer: { paddingX: 12, paddingY: 4, borderBottomRadius: 'xl' },
 	})),
 };
 

@@ -5,18 +5,14 @@ import { mode } from '@chakra-ui/theme-tools';
 const { definePartsStyle, defineMultiStyleConfig } =
 	createMultiStyleConfigHelpers(menuAnatomy.keys);
 
-// define the base component styles
 const baseStyle = definePartsStyle((props) => ({
-	// define the part you're going to style
-	button: {
-		// this will style the MenuButton component
-	},
+	button: {},
 	list: {
-		// this will style the MenuList component
 		boxShadow: 'subtle',
+		cursor: 'default',
 	},
 	item: {
-		// this will style the MenuItem and MenuItemOption components
+		cursor: 'default',
 
 		_activeLink: {
 			position: 'relative',
@@ -34,17 +30,9 @@ const baseStyle = definePartsStyle((props) => ({
 			},
 		},
 	},
-	groupTitle: {
-		// this will style the text defined by the title prop
-		// in the MenuGroup and MenuOptionGroup components
-	},
-	command: {
-		// this will style the text defined by the command
-		// prop in the MenuItem and MenuItemOption components
-	},
-	divider: {
-		// this will style the MenuDivider component
-	},
+	groupTitle: {},
+	command: {},
+	divider: {},
 }));
 
 const ghost = definePartsStyle((props) => ({

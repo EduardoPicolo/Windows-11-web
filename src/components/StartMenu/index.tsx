@@ -14,13 +14,21 @@ import {
 	Input,
 	InputGroup,
 	InputLeftElement,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
+	Portal,
 	SkeletonCircle,
 	Stack,
 	Text,
 	useColorModeValue,
 } from '@chakra-ui/react';
 import { IoSearch } from 'react-icons/io5';
+import { MdLockOutline } from 'react-icons/md';
+import { RiUserSettingsLine } from 'react-icons/ri';
 import { SlArrowRight, SlPower } from 'react-icons/sl';
+import { VscSignOut } from 'react-icons/vsc';
 
 import { apps } from '@/components/Apps/apps';
 import { DesktopIcon } from '@/components/DesktopIcon';
@@ -94,7 +102,6 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 							gridTemplateColumns="repeat(6, 1fr)"
 							gridTemplateRows="repeat(3, 1fr)"
 							gap={0}
-							rowGap={4}
 							justifyItems="center"
 							ml={-8}
 							mr={-8}
@@ -106,7 +113,6 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 									iconSize="42px"
 									w="full"
 									h="full"
-									p={1}
 									onClick={handleAddWindow(app)}
 									onDoubleClick={undefined}
 									textShadow="none"
@@ -136,13 +142,31 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 					</Stack>
 				</CardBody>
 
-				<CardFooter justifyContent="space-between" px={20}>
-					<HStack>
-						<SkeletonCircle boxSize={9} />
-						<Text fontSize="md" fontWeight="semibold">
+				<CardFooter justifyContent="space-between">
+					<Menu placement="top" size="sm">
+						<MenuButton
+							as={Button}
+							variant="ghost"
+							colorScheme="gray"
+							py={6}
+							leftIcon={<SkeletonCircle boxSize={9} />}
+						>
 							Eduardo Pícolo
-						</Text>
-					</HStack>
+						</MenuButton>
+						<Portal>
+							<MenuList>
+								<MenuItem icon={<Icon as={RiUserSettingsLine} />}>
+									Change Account Settings
+								</MenuItem>
+								<MenuItem icon={<Icon as={MdLockOutline} />}>
+									Lock
+								</MenuItem>
+								<MenuItem icon={<Icon as={VscSignOut} />}>
+									Sign out
+								</MenuItem>
+							</MenuList>
+						</Portal>
+					</Menu>
 
 					<IconButton
 						aria-label="Power"
