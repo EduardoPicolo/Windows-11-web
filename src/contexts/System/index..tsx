@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useMemo, useState } from 'react';
+import { useBoolean } from '@chakra-ui/react';
 
 import DefaultWallpaper from '@/public/wallpapers/1-win11.jpg';
 
@@ -18,6 +19,7 @@ export function SystemProvider(props: { children: React.ReactNode }) {
 	const { children } = props;
 
 	const sound = useState(30);
+	const soundMuted = useBoolean(false);
 	const brightness = useState(0);
 
 	const wallpaper = useState<Wallpaper>(DefaultWallpaper);
@@ -30,10 +32,11 @@ export function SystemProvider(props: { children: React.ReactNode }) {
 	const value: SystemContext = useMemo(
 		() => ({
 			sound,
+			soundMuted,
 			brightness,
 			wallpaper,
 		}),
-		[brightness, sound, wallpaper]
+		[brightness, sound, soundMuted, wallpaper]
 	);
 
 	return (

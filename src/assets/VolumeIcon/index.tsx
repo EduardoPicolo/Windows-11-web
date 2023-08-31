@@ -4,10 +4,11 @@ import { FaVolumeMute } from 'react-icons/fa';
 
 interface SpeakerIconProps extends IconProps {
 	volumeLevel: number;
+	isMuted?: boolean;
 }
 
 export function SpeakerIcon(props: SpeakerIconProps) {
-	const { volumeLevel = 0, ...rest } = props;
+	const { volumeLevel = 0, isMuted, ...rest } = props;
 
 	const calculateOpacity = (
 		minOpacity: number,
@@ -35,7 +36,7 @@ export function SpeakerIcon(props: SpeakerIconProps) {
 	const secondLevelOpacity = calculateOpacity(0.33, 1, 33, 66);
 	const thirdLevelOpacity = calculateOpacity(0.33, 1, 66, 100);
 
-	if (volumeLevel === 0) {
+	if (volumeLevel === 0 || isMuted) {
 		return <Icon as={FaVolumeMute} opacity={0.33} {...rest} />;
 	}
 

@@ -2,6 +2,14 @@ type Wallpaper = import('next/image').ImageProps['src'];
 
 interface SystemContext {
 	sound: [number, React.Dispatch<React.SetStateAction<number>>];
+	soundMuted: readonly [
+		boolean,
+		{
+			on: () => void;
+			off: () => void;
+			toggle: () => void;
+		},
+	];
 	brightness: [number, React.Dispatch<React.SetStateAction<number>>];
 	wallpaper: [
 		Wallpaper,

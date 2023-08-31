@@ -43,6 +43,7 @@ import { useSystem } from '@/contexts/System/index.';
 export function QuickSettings() {
 	const {
 		sound: [soundLevel, setSoundLevel],
+		soundMuted: [isSoundMuted, { toggle: toggleSoundMuted }],
 	} = useSystem();
 
 	const { toggleColorMode, colorMode } = useColorMode();
@@ -77,7 +78,11 @@ export function QuickSettings() {
 						gutter={20}
 					>
 						<Flex>
-							<SpeakerIcon volumeLevel={soundLevel} boxSize={5} />
+							<SpeakerIcon
+								volumeLevel={soundLevel}
+								isMuted={isSoundMuted}
+								boxSize={5}
+							/>
 						</Flex>
 					</Tooltip>
 				</HStack>
@@ -143,15 +148,18 @@ export function QuickSettings() {
 									icon={
 										<SpeakerIcon
 											volumeLevel={soundLevel}
+											isMuted={isSoundMuted}
 											boxSize={6}
 										/>
 									}
+									onClick={toggleSoundMuted}
 								/>
 
 								<Slider
 									aria-label="sound-level-slider"
 									defaultValue={soundLevel}
 									onChange={setSoundLevel}
+									isDisabled={isSoundMuted}
 								>
 									<SliderTrack>
 										<SliderFilledTrack />
