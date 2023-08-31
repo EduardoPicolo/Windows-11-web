@@ -51,7 +51,6 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 			<Card
 				ref={ref}
 				size="xl"
-				w="90vw"
 				width="700px"
 				height="700px"
 				userSelect="none"
@@ -60,11 +59,11 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 			>
 				<CardHeader>
 					<InputGroup size="sm">
-						<InputLeftElement ml={2} pointerEvents="none">
+						<InputLeftElement ml={3} pointerEvents="none">
 							<Icon as={IoSearch} boxSize={5} />
 						</InputLeftElement>
 						<Input
-							pl={10}
+							pl={12}
 							placeholder="Search for apps, settings, and documents"
 						/>
 					</InputGroup>
@@ -73,7 +72,7 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 				<CardBody>
 					<Stack spacing={4}>
 						<HStack justifyContent="space-between">
-							<Text fontSize="md" fontWeight="semibold">
+							<Text fontSize="md" fontWeight="bold">
 								Pinned
 							</Text>
 
@@ -82,7 +81,6 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 								size="xs"
 								colorScheme="gray"
 								background={backgroundColor}
-								fontWeight="medium"
 								rightIcon={
 									<Icon as={SlArrowRight} boxSize={2} ml={1} />
 								}
@@ -98,21 +96,27 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 							gap={0}
 							rowGap={4}
 							justifyItems="center"
-							ml={-4}
+							ml={-8}
+							mr={-8}
 						>
 							{Object.values(apps).map((app) => (
 								<DesktopIcon
 									app={app}
 									key={app.shortName}
-									iconSize="40px"
+									iconSize="42px"
+									w="full"
+									h="full"
+									p={1}
 									onClick={handleAddWindow(app)}
 									onDoubleClick={undefined}
+									textShadow="none"
+									color="inherit"
 								/>
 							))}
 						</Grid>
 
 						<HStack justifyContent="space-between">
-							<Text fontSize="md" fontWeight="semibold">
+							<Text fontSize="md" fontWeight="bold">
 								Recommended
 							</Text>
 
@@ -121,7 +125,6 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 								size="xs"
 								colorScheme="gray"
 								background={backgroundColor}
-								fontWeight="medium"
 								rightIcon={
 									<Icon as={SlArrowRight} boxSize={2} ml={1} />
 								}

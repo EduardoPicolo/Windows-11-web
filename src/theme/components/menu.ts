@@ -87,6 +87,7 @@ const ghost = definePartsStyle((props) => ({
 		},
 	},
 	item: {
+		fontWeight: 'medium',
 		borderRadius: 'base',
 		bg: 'transparent',
 

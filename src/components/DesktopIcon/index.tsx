@@ -35,7 +35,7 @@ export const DesktopIcon = forwardRef<DesktopIconProps, 'div'>(
 				{...rest}
 			>
 				<Box
-					boxSize={props.iconSize ?? '55px'}
+					boxSize={props.iconSize ?? '60px'}
 					margin="0 auto"
 					userSelect="none"
 					unselectable="on"

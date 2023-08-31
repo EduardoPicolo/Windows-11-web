@@ -16,6 +16,7 @@ import {
 	useDisclosure,
 } from '@chakra-ui/react';
 import { BsBrush, BsGrid } from 'react-icons/bs';
+import { CgMoreR } from 'react-icons/cg';
 import { RiArrowRightSLine } from 'react-icons/ri';
 import { TbReload } from 'react-icons/tb';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -163,7 +164,19 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 								Open in Terminal
 							</MenuItem>
 							<MenuDivider />
-							<MenuItem onMouseEnter={submenuDisclosure.onClose}>
+							<MenuItem
+								icon={
+									<Icon
+										as={CgMoreR}
+										sx={{
+											'& path:nth-child(-n+3)': {
+												fill: 'blue.400',
+											},
+										}}
+									/>
+								}
+								onMouseEnter={submenuDisclosure.onClose}
+							>
 								Show more options
 							</MenuItem>
 						</MenuList>

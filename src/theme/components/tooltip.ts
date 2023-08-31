@@ -9,19 +9,19 @@ const baseStyle = {
 // define custom sizes
 const sizes = {
 	sm: defineStyle({
-		fontSize: 'sm',
+		fontSize: 'xs',
 		py: '1',
 		px: '2',
 		maxW: '320px',
 	}),
 	md: defineStyle({
-		fontSize: 'md',
+		fontSize: 'sm',
 		py: '2',
 		px: '3',
 		maxW: '320px',
 	}),
 	lg: defineStyle({
-		fontSize: 'lg',
+		fontSize: 'md',
 		py: '2',
 		px: '4',
 		maxW: '350px',
@@ -29,6 +29,7 @@ const sizes = {
 };
 
 const ghostVariant = defineStyle((props) => ({
+	fontWeight: 'semibold',
 	bg: mode('whiteAlpha.600', 'blackAlpha.700')(props),
 	color: mode(`inherit`, `gray.300`)(props),
 	boxShadow: 'subtle',

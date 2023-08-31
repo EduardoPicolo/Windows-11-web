@@ -5,20 +5,16 @@ export const desktopIconTheme = defineStyleConfig({
 		position: 'relative',
 		height: 'fit-content',
 		padding: 2,
-		color: 'black',
+		color: 'white',
 		fontSize: 'sm',
 		fontWeight: 'medium',
 		textAlign: 'center',
 		textTransform: 'capitalize',
-		textShadow: 'none',
+		textShadow: '0px 1px 2px #000, 0px 1px 2px #000',
 		borderRadius: 'md',
+		transition: 'all 0.2s',
 		_hover: {
 			background: 'hoverBg',
-		},
-
-		_dark: {
-			color: 'white',
-			textShadow: '0px 1px 2px #000, 0px 1px 2px #000',
 		},
 
 		p: {

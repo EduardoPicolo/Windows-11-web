@@ -59,14 +59,15 @@ export const Clock = forwardRef<ClockProps, 'div'>((props, ref) => {
 				py={1}
 				px={2}
 				borderRadius="md"
+				fontSize="sm"
+				fontWeight="semibold"
+				lineHeight={1.35}
+				cursor="default"
+				transition="all 0.2s"
 				_hover={{
 					background: 'hoverBg',
 					boxShadow: 'thin',
 				}}
-				fontSize="sm"
-				lineHeight={1.35}
-				cursor="default"
-				transition="all 0.2s"
 				{...props}
 			>
 				<Text>{formattedTime}</Text>

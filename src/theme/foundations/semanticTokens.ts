@@ -1,5 +1,8 @@
 export const semanticTokens = {
 	colors: {
+		'chakra-body-text': {
+			_dark: 'white',
+		},
 		primary: {
 			default: 'blue.500',
 			_dark: 'blue.300',

@@ -104,9 +104,9 @@ const sizes = {
 		container: {
 			borderRadius: 'xl',
 		},
-		header: { p: 10, borderTopRadius: 'xl' },
+		header: { padding: 10, borderTopRadius: 'xl' },
 		body: {
-			px: 16,
+			paddingX: 20,
 		},
 		footer: { p: 4, borderBottomRadius: 'xl' },
 	})),
