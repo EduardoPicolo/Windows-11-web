@@ -13,8 +13,17 @@ type Windows = Record<Process, Record<number, App & WindowState>>;
 
 interface WindowsContext {
 	windows: Windows;
+	focusedWindow: {
+		process: Process;
+		id: number;
+	} | null;
 	addWindow: (app: App, options?: WindowState) => void;
 	closeWindow: (processName: Process, id: number) => void;
+	focusWindow: (processName: Process, id: number) => void;
+	minimize: {
+		on: (processName: Process, id: number) => void;
+		off: (processName: Process, id: number) => void;
+	};
 }
 
 interface WindowState {
@@ -44,6 +53,7 @@ interface MinimizeWindowAction {
 	payload: {
 		processName: Process;
 		id: number;
+		value: boolean;
 	};
 }
 

@@ -2,6 +2,7 @@
 
 import {
 	createContext,
+	MouseEventHandler,
 	useCallback,
 	useContext,
 	useMemo,
@@ -12,6 +13,7 @@ import { Center, Portal } from '@chakra-ui/react';
 import { Process } from '@/components/Apps/apps';
 import { WindowContainer } from '@/components/WindowContainer';
 import { useWindowsReducer } from '@/contexts/Windows/useWindowsReducer';
+import { getEntries } from '@/utils/getEntries';
 
 import { windowsContextDefaultValues } from './helpers';
 
@@ -31,16 +33,18 @@ export function WindowsProvider(props: WindowsProviderProps) {
 		onAddWindow,
 		onCloseWindow,
 		onMaximizeWindow,
-		onMinimizeWindow,
+		setIsMinimized,
 	} = useWindowsReducer();
 
-	const [focusedWindow, setFocusedWindow] = useState<number | null>(
-		null
-	);
+	const [focusedWindow, setFocusedWindow] = useState<{
+		process: Process;
+		id: number;
+	} | null>(null);
 
 	const handleCloseWindow = useCallback(
-		(processName: Process, id: number) => () =>
-			onCloseWindow(processName, id),
+		(processName: Process, id: number): MouseEventHandler =>
+			() =>
+				onCloseWindow(processName, id),
 		[onCloseWindow]
 	);
 
@@ -51,18 +55,25 @@ export function WindowsProvider(props: WindowsProviderProps) {
 	);
 
 	const handleMinimizeWindow = useCallback(
-		(processName: Process, id: number) => () =>
-			onMinimizeWindow(processName, id),
-		[onMinimizeWindow]
+		(processName: Process, id: number): MouseEventHandler =>
+			() =>
+				setIsMinimized(true)(processName, id),
+		[setIsMinimized]
 	);
 
-	console.groupCollapsed('Windows Provider');
-	console.log('Open windows:', windows);
-	console.groupEnd();
+	const focusWindow = useCallback(
+		(processName: Process, id: number) => {
+			setFocusedWindow({
+				process: processName,
+				id,
+			});
+		},
+		[]
+	);
 
-	const handleSetFocusedWindow = useCallback(
-		(id: number) => () => setFocusedWindow(id),
-		[setFocusedWindow]
+	const handleFocusWindow = useCallback(
+		(process: Process, id: number) => () => focusWindow(process, id),
+		[focusWindow]
 	);
 
 	/**
@@ -92,37 +103,45 @@ export function WindowsProvider(props: WindowsProviderProps) {
 	const value: WindowsContext = useMemo(
 		() => ({
 			windows,
+			focusedWindow,
+			focusWindow,
 			addWindow: onAddWindow,
 			closeWindow: onCloseWindow,
+			minimize: {
+				on: setIsMinimized(true),
+				off: setIsMinimized(false),
+			},
 		}),
-		[onAddWindow, onCloseWindow, windows]
+		[
+			windows,
+			focusedWindow,
+			focusWindow,
+			onAddWindow,
+			onCloseWindow,
+			setIsMinimized,
+		]
 	);
+
+	console.groupCollapsed('Windows Provider');
+	console.log('Open windows:', windows);
+	console.groupEnd();
 
 	return (
 		<WindowsContext.Provider value={value}>
 			<Portal appendToParentPortal={false}>
-				{Object.entries(windows).map(([process, processWindows]) =>
-					Object.entries(processWindows).map(([id, app]) => (
+				{getEntries(windows).map(([process, processWindows]) =>
+					getEntries(processWindows).map(([id, app]) => (
 						<WindowContainer
 							key={`${process}-${id}`}
 							title={app.fullName}
 							icon={app.icon}
-							isMaximized={app.isMaximized}
 							isMinimized={app.isMinimized}
-							isFocused={focusedWindow === Number(id)}
-							onMouseDown={handleSetFocusedWindow(Number(id))}
-							onClose={handleCloseWindow(
-								process as Process,
-								Number(id)
-							)}
-							onMaximize={handleMaximizeWindow(
-								process as Process,
-								Number(id)
-							)}
-							onMinimize={handleMinimizeWindow(
-								process as Process,
-								Number(id)
-							)}
+							isMaximized={app.isMaximized}
+							isFocused={focusedWindow?.id === id}
+							onMouseDown={handleFocusWindow(process, id)}
+							onMinimize={handleMinimizeWindow(process, id)}
+							onMaximize={handleMaximizeWindow(process, id)}
+							onClose={handleCloseWindow(process, id)}
 							initialPosition={getInitialPosition(app)}
 						>
 							{app?.Window ? (

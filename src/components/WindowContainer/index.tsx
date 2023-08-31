@@ -1,13 +1,17 @@
 'use client';
 
-import { useLayoutEffect, useRef } from 'react';
+import {
+	type MouseEventHandler,
+	useLayoutEffect,
+	useRef,
+} from 'react';
 import {
 	Box,
 	ButtonGroup,
 	Card,
 	CardBody,
 	CardHeader,
-	CardProps,
+	type CardProps,
 	HStack,
 	Icon,
 	IconButton,
@@ -26,9 +30,9 @@ export interface WindowContainerProps extends CardProps {
 	isMaximized: boolean;
 	isMinimized: boolean;
 	isFocused: boolean;
-	onMinimize: () => void;
-	onMaximize: () => void;
-	onClose: () => void;
+	onMinimize: MouseEventHandler<HTMLButtonElement>;
+	onMaximize: MouseEventHandler<HTMLButtonElement>;
+	onClose: MouseEventHandler<HTMLButtonElement>;
 	initialPosition: Props['default'];
 	anchorTargetRef?: React.RefObject<HTMLButtonElement>;
 }
@@ -119,7 +123,9 @@ export function WindowContainer(props: WindowContainerProps) {
 							>
 								{icon}
 							</Box>
-							<Text fontSize="md">{title}</Text>
+							<Text fontSize="md" noOfLines={1}>
+								{title}
+							</Text>
 						</HStack>
 						<ButtonGroup
 							variant="ghost"

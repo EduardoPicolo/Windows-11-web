@@ -4,6 +4,7 @@ export const windowsContextDefaultValues: WindowsContext = {
 	windows: {} as WindowsContext['windows'],
 	addWindow: () => {},
 	closeWindow: () => {},
+	toggleMinimize: () => {},
 };
 
 export const initialWindowPosition: Props['default'] = {

@@ -19,10 +19,6 @@ export function useWindowsReducer(props?: UseWindowsReducerProps) {
 		props?.initialState ?? initialState
 	);
 
-	/**
-	 * `onAddWindow` is a function that adds a new window to the windows
-	 * state.
-	 */
 	const onAddWindow = useCallback(
 		(app: App, options?: Partial<WindowState>) => {
 			dispatch({
@@ -33,20 +29,21 @@ export function useWindowsReducer(props?: UseWindowsReducerProps) {
 				},
 			});
 		},
-		[]
+		[dispatch]
 	);
 
-	const onMinimizeWindow = useCallback(
-		(processName: Process, id: number) => {
+	const setIsMinimized = useCallback(
+		(value: boolean) => (processName: Process, id: number) => {
 			dispatch({
 				type: 'MINIMIZE_WINDOW',
 				payload: {
 					processName,
 					id,
+					value,
 				},
 			});
 		},
-		[]
+		[dispatch]
 	);
 
 	const onMaximizeWindow = useCallback(
@@ -59,7 +56,7 @@ export function useWindowsReducer(props?: UseWindowsReducerProps) {
 				},
 			});
 		},
-		[]
+		[dispatch]
 	);
 
 	const onCloseWindow = useCallback(
@@ -72,14 +69,15 @@ export function useWindowsReducer(props?: UseWindowsReducerProps) {
 				},
 			});
 		},
-		[]
+		[dispatch]
 	);
 
 	return {
 		state,
+		dispatch,
 		onAddWindow,
-		onMinimizeWindow,
 		onMaximizeWindow,
 		onCloseWindow,
+		setIsMinimized,
 	};
 }

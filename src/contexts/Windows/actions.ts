@@ -54,7 +54,7 @@ export const closeWindow: WindowsReducerActionHandler<
 export const minimizeWindow: WindowsReducerActionHandler<
 	MinimizeWindowAction
 > = (state, action) => {
-	const { processName, id } = action.payload;
+	const { processName, id, value } = action.payload;
 
 	return {
 		...state,
@@ -62,7 +62,7 @@ export const minimizeWindow: WindowsReducerActionHandler<
 			...state[processName],
 			[id]: {
 				...state[processName][id],
-				isMinimized: !state[processName][id].isMinimized,
+				isMinimized: value,
 			},
 		},
 	};

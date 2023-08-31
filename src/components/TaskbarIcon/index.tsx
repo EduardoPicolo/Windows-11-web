@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import {
 	Center,
 	forwardRef,
@@ -6,8 +5,6 @@ import {
 	IconButtonProps,
 	Tooltip,
 } from '@chakra-ui/react';
-
-import { useWindows } from '@/contexts/Windows';
 
 // type TaskbarIconProps = AppIconProps;
 
@@ -20,14 +17,8 @@ function TaskbarIconInner(
 ) {
 	const { app, ...rest } = props;
 
-	const { addWindow } = useWindows();
-
-	const handleAddWindow = useCallback(() => {
-		addWindow(app);
-	}, [app, addWindow]);
-
 	return (
-		<Tooltip label={app?.shortName} openDelay={600}>
+		<Tooltip label={app?.shortName} openDelay={1000}>
 			<IconButton
 				ref={ref}
 				aria-label={app?.shortName}
@@ -36,7 +27,6 @@ function TaskbarIconInner(
 				size="md"
 				borderRadius="md"
 				icon={<Center w="24px">{app?.icon}</Center>}
-				onClick={handleAddWindow}
 				_light={{
 					_hover: {
 						bg: 'hoverBg',
