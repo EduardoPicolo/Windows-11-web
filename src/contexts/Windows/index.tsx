@@ -138,7 +138,7 @@ export function WindowsProvider(props: WindowsProviderProps) {
 							isMinimized={app.isMinimized}
 							isMaximized={app.isMaximized}
 							isFocused={focusedWindow?.id === id}
-							onMouseDown={handleFocusWindow(process, id)}
+							onMouseDownCapture={handleFocusWindow(process, id)}
 							onMinimize={handleMinimizeWindow(process, id)}
 							onMaximize={handleMaximizeWindow(process, id)}
 							onClose={handleCloseWindow(process, id)}

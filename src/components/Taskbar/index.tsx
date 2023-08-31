@@ -11,6 +11,7 @@ import {
 	useStyleConfig,
 } from '@chakra-ui/react';
 import { type GridProps } from '@chakra-ui/styled-system';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 import { StartApp } from '@/components/Apps/Start';
 import { Input } from '@/components/FormFields';
@@ -65,6 +66,10 @@ export function Taskbar(props: TaskbarProps) {
 		[contextMenuDisclosure]
 	);
 
+	const [parent] = useAutoAnimate({
+		easing: 'ease-out',
+	});
+
 	const styles = useStyleConfig('Taskbar');
 
 	return (
@@ -77,60 +82,64 @@ export function Taskbar(props: TaskbarProps) {
 				<GridItem gridColumn={2} justifySelf="center">
 					<HStack spacing={1}>
 						<StartApp />
-
-						<Input
-							minW="200px"
-							height="32px"
-							placeholder="Search"
-							autoComplete="off"
-							leftElement={
-								<InputLeftElement pointerEvents="none" boxSize="32px">
-									<Box
-										boxSize="18px"
-										position="relative"
-										transform="scaleX(-1)"
+						<HStack spacing={1} ref={parent}>
+							<Input
+								width="200px"
+								height="32px"
+								placeholder="Search"
+								autoComplete="off"
+								leftElement={
+									<InputLeftElement
+										pointerEvents="none"
+										boxSize="32px"
 									>
-										<ThemeImage
-											srcLight={SearchIconLight}
-											srcDark={SearchIconDark}
-											alt="search"
-										/>
-									</Box>
-								</InputLeftElement>
-							}
-						/>
+										<Box
+											boxSize="18px"
+											position="relative"
+											transform="scaleX(-1)"
+										>
+											<ThemeImage
+												srcLight={SearchIconLight}
+												srcDark={SearchIconDark}
+												alt="search"
+											/>
+										</Box>
+									</InputLeftElement>
+								}
+							/>
 
-						{initialApps?.map((app) => (
-							<WindowsPreview
-								key={app?.processName}
-								process={app?.processName}
-							>
-								<TaskbarIcon
-									app={app}
-									onClick={
-										windows?.[app?.processName]
-											? undefined
-											: handleAddWindow(app)
-									}
-								/>
-							</WindowsPreview>
-						))}
-
-						{runningProcesses
-							?.filter(
-								([process]) =>
-									!initialApps?.some(
-										(app) => app?.processName === process
-									)
-							)
-							.map(([process, processWindows]) => (
-								<WindowsPreview key={process} process={process}>
+							{initialApps?.map((app) => (
+								<WindowsPreview
+									key={app?.processName}
+									process={app?.processName}
+								>
 									<TaskbarIcon
-										key={process}
-										app={getValues(processWindows)[0]}
+										app={app}
+										onClick={
+											windows?.[app?.processName]
+												? undefined
+												: handleAddWindow(app)
+										}
 									/>
 								</WindowsPreview>
 							))}
+
+							{runningProcesses
+								?.filter(
+									([process]) =>
+										!initialApps?.some(
+											(app) => app?.processName === process
+										)
+								)
+								.map(([process, processWindows]) => (
+									<WindowsPreview key={process} process={process}>
+										<TaskbarIcon
+											key={process}
+											app={getValues(processWindows)[0]}
+										/>
+									</WindowsPreview>
+								))}
+						</HStack>
 					</HStack>
 				</GridItem>
 

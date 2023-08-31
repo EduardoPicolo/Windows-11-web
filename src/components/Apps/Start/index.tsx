@@ -49,7 +49,7 @@ export function StartMenuContainer({
 						exit={{ y: '100%' }}
 						// eslint-disable-next-line react-perf/jsx-no-new-object-as-prop -- ignore
 						transition={{
-							type: 'keyframes',
+							type: 'tween',
 							ease: 'circOut',
 						}}
 						zIndex={2}

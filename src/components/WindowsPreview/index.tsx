@@ -68,7 +68,7 @@ export function WindowsPreview(props: WindowsPreviewProps) {
 	const notchColor = useColorModeValue('blue.600', 'blue.400');
 
 	return (
-		<Popover trigger="hover" openDelay={500} gutter={16} {...rest}>
+		<Popover trigger="hover" openDelay={400} gutter={16} {...rest}>
 			<PopoverTrigger>
 				<Box
 					position="relative"
