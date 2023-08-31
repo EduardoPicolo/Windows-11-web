@@ -7,7 +7,11 @@ import React, {
 } from 'react';
 import { Box, Grid, useDisclosure } from '@chakra-ui/react';
 
-import { EdgeApp, VSCodeApp } from '@/components/Apps/apps';
+import {
+	EdgeApp,
+	SpotifyApp,
+	VSCodeApp,
+} from '@/components/Apps/apps';
 import { DesktopContextMenu } from '@/components/DesktopContextMenu';
 import { DesktopIcon } from '@/components/DesktopIcon';
 
@@ -68,8 +72,8 @@ export default function Home() {
 				textAlign="center"
 			>
 				<DesktopIcon app={EdgeApp} />
-
 				<DesktopIcon app={VSCodeApp} gridRow={2} />
+				<DesktopIcon app={SpotifyApp} gridRow={3} />
 			</Grid>
 		</Box>
 	);

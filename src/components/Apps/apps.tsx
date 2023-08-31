@@ -1,5 +1,7 @@
 import Image, { StaticImageData } from 'next/image';
 
+import { Edge } from '@/components/Apps/Edge';
+import { Spotify } from '@/components/Apps/Spotify';
 import { VSCode } from '@/components/Apps/VSCode';
 import { ThemeImage } from '@/components/ThemeImage';
 import CalculatorIcon from '@/public/icons/Calculator.png';
@@ -58,7 +60,11 @@ export const EdgeApp: App = {
 			}}
 		/>
 	),
-	Window: null,
+	Window: Edge,
+	initialSize: {
+		width: 1024,
+		height: 768,
+	},
 };
 
 export const FileExplorerApp: App = {
@@ -137,7 +143,7 @@ export const SpotifyApp: App = {
 	fullName: 'Spotify',
 	processName: 'spotify',
 	icon: <Image src={SpotifyIcon as StaticImageData} alt="spotify" />,
-	Window: null,
+	Window: Spotify,
 };
 
 export const InstagramApp: App = {
