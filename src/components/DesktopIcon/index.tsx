@@ -5,7 +5,6 @@ import {
 	CenterProps,
 	forwardRef,
 	Text,
-	useColorModeValue,
 	useStyleConfig,
 } from '@chakra-ui/react';
 
@@ -22,11 +21,6 @@ export const DesktopIcon = forwardRef<DesktopIconProps, 'div'>(
 		const styles = useStyleConfig('DesktopIcon');
 
 		const { addWindow } = useWindows();
-
-		const textShadow = useColorModeValue(
-			'none',
-			'1px 1px 0px #111, 1px 1px 1px #222'
-		);
 
 		const handleAddWindow = useCallback(() => {
 			addWindow(app);
@@ -51,13 +45,7 @@ export const DesktopIcon = forwardRef<DesktopIconProps, 'div'>(
 					{app.icon}
 				</Box>
 
-				<Text
-					noOfLines={2}
-					textTransform="capitalize"
-					textShadow={textShadow}
-				>
-					{children ?? app.fullName}
-				</Text>
+				<Text noOfLines={2}>{children ?? app.fullName}</Text>
 			</Box>
 		);
 	}

@@ -4,12 +4,25 @@ export const desktopIconTheme = defineStyleConfig({
 	baseStyle: (props) => ({
 		position: 'relative',
 		height: 'fit-content',
-		p: 2,
+		padding: 2,
+		color: 'black',
 		fontSize: 'sm',
+		fontWeight: 'medium',
 		textAlign: 'center',
+		textTransform: 'capitalize',
+		textShadow: 'none',
 		borderRadius: 'md',
 		_hover: {
 			background: 'hoverBg',
+		},
+
+		_dark: {
+			color: 'white',
+			textShadow: '0px 1px 2px #000, 0px 1px 2px #000',
+		},
+
+		p: {
+			filter: 'brightness(1.2) contrast(1.1) saturate(1.2)',
 		},
 
 		'&.ds-selected': {
