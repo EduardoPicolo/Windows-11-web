@@ -11,10 +11,14 @@
 		"format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
 		"type-check": "tsc --noEmit",
 		"test": "jest --passWithNoTests",
-		"cypress:open": "start-server-and-test start http://localhost:3000 'cypress open'",
-		"cypress:headless": "start-server-and-test start http://localhost:3000 'cypress run --spec cypress/e2e/auth'",
-		"test:e2e": "if [ -f .next/BUILD_ID ]; then yarn cypress:open; else yarn build && yarn cypress:open; fi",
-		"test:e2e:headless": "if [ -f .next/BUILD_ID ]; then yarn cypress:headless; else yarn build &&  yarn cypress:headless; fi",
+		"cypress:e2e:open": "start-server-and-test 'yarn start -p 3001' http://localhost:3001 'cypress open'",
+		"cypress:e2e:headless": "start-server-and-test 'yarn start -p 3001' http://localhost:3001 'cypress run'",
+		"cypress:component:open": "start-server-and-test 'yarn start -p 3001' http://localhost:3001 'cypress open --component'",
+		"cypress:component:headless": "start-server-and-test 'yarn start -p 3001' http://localhost:3001 'cypress run --component'",
+		"test:e2e": "if [ -f .next/BUILD_ID ]; then yarn cypress:e2e:open; else yarn build && yarn cypress:e2e:open; fi",
+		"test:e2e:headless": "if [ -f .next/BUILD_ID ]; then yarn cypress:e2e:headless; else yarn build &&  yarn cypress:e2e:headless; fi",
+		"test:component": "if [ -f .next/BUILD_ID ]; then yarn cypress:component:open; else yarn build && yarn cypress:component:open; fi",
+		"test:component:headless": "if [ -f .next/BUILD_ID ]; then yarn cypress:component:headless; else yarn build &&  yarn cypress:component:headless; fi",
 		"theme": "chakra-cli tokens src/theme/index.ts",
 		"theme:watch": "chakra-cli tokens src/theme/index.ts --watch",
 		"plop": "plop",
@@ -23,7 +27,7 @@
 	"husky": {
 		"hooks": {
 			"pre-commit": "lint-staged",
-			"pre-push": "yarn test:e2e:headless; yarn type-check"
+			"pre-push": "yarn test:component:headless; yarn type-check"
 		}
 	},
 	"dependencies": {

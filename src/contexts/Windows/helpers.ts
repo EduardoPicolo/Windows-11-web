@@ -2,9 +2,14 @@ import { type Props } from 'react-rnd';
 
 export const windowsContextDefaultValues: WindowsContext = {
 	windows: {} as WindowsContext['windows'],
+	focusedWindow: null,
 	addWindow: () => {},
 	closeWindow: () => {},
-	toggleMinimize: () => {},
+	focusWindow: () => {},
+	minimize: {
+		on: () => {},
+		off: () => {},
+	},
 };
 
 export const initialWindowPosition: Props['default'] = {

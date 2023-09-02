@@ -103,6 +103,13 @@
 				"typesToIgnore": ["Route"]
 			}
 		],
+		"@typescript-eslint/no-namespace": [
+			"error",
+			{
+				"allowDeclarations": true,
+				"allowDefinitionFiles": true
+			}
+		],
 		// "@typescript-eslint/no-unsafe-assignment": "off", // Slow
 		"@typescript-eslint/unbound-method": "off",
 		"@typescript-eslint/no-misused-promises": [

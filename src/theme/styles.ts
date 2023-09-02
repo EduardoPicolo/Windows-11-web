@@ -25,7 +25,7 @@ export const styles: Theme['styles'] = {
 			},
 
 			'& .ds-selector-area': {
-				zIndex: '-1 !important',
+				zIndex: '0 !important',
 			},
 		},
 	}),
