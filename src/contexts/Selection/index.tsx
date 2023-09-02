@@ -6,7 +6,7 @@ import React, {
 	useLayoutEffect,
 	useState,
 } from 'react';
-import DragSelect from 'dragselect';
+import type DragSelect from 'dragselect';
 
 interface ProviderProps {
 	children: React.ReactNode;
@@ -22,17 +22,25 @@ function DragSelectProvider({
 	const [ds, setDS] = useState<DragSelect | null>(null);
 
 	useLayoutEffect(() => {
-		setDS((prevState) => {
-			if (prevState) return prevState;
+		const loadDs = async () => {
+			const { default: DragSelect } = await import('dragselect');
 
-			return new DragSelect({
+			const newDs = new DragSelect({
 				area: document?.getElementsByTagName('main')[0],
 				selectables: document?.getElementsByClassName?.(
 					'desktop-icon'
 				) as unknown as HTMLElement[],
 				refreshMemoryRate: 1000,
 			});
-		});
+
+			setDS((prevState) => {
+				if (prevState) return prevState;
+
+				return newDs;
+			});
+		};
+
+		void loadDs();
 
 		return () => {
 			if (ds) {

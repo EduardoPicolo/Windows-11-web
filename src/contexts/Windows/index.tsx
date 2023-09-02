@@ -129,8 +129,8 @@ export function WindowsProvider(props: WindowsProviderProps) {
 	return (
 		<WindowsContext.Provider value={value}>
 			<Portal appendToParentPortal={false}>
-				{getEntries(windows).map(([process, processWindows]) =>
-					getEntries(processWindows).map(([id, app]) => (
+				{getEntries(windows).flatMap(([process, processWindows]) =>
+					getEntries(processWindows).flatMap(([id, app]) => (
 						<WindowContainer
 							key={`${process}-${id}`}
 							title={app.fullName}
@@ -138,7 +138,7 @@ export function WindowsProvider(props: WindowsProviderProps) {
 							isMinimized={app.isMinimized}
 							isMaximized={app.isMaximized}
 							isFocused={focusedWindow?.id === id}
-							onMouseDownCapture={handleFocusWindow(process, id)}
+							onFocus={handleFocusWindow(process, id)}
 							onMinimize={handleMinimizeWindow(process, id)}
 							onMaximize={handleMaximizeWindow(process, id)}
 							onClose={handleCloseWindow(process, id)}

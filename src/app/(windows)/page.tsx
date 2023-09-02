@@ -59,7 +59,7 @@ export default function Home() {
 	);
 
 	return (
-		<Box h="full" p={4} onContextMenu={handleContextMenu}>
+		<Box h="full" onContextMenu={handleContextMenu}>
 			<DesktopContextMenu
 				position={menuPosition}
 				{...menuDisclosure}
@@ -68,6 +68,7 @@ export default function Home() {
 			<Grid
 				gridTemplateColumns="repeat(auto-fill, minmax(90px, 1fr))"
 				gridTemplateRows="repeat(auto-fill, minmax(110px, 1fr));"
+				gap={1}
 				h="full"
 				textAlign="center"
 			>

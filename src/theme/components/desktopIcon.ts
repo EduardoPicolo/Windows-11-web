@@ -12,7 +12,7 @@ export const desktopIconTheme = defineStyleConfig({
 		textTransform: 'capitalize',
 		textShadow: '0px 1px 2px #000, 0px 1px 2px #000',
 		borderRadius: 'md',
-		transition: 'all 0.2s',
+		transition: 'background 0.2s ease-in-out',
 		_hover: {
 			background: 'hoverBg',
 		},
