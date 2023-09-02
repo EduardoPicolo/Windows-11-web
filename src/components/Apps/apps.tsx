@@ -57,6 +57,7 @@ export const EdgeApp: App = {
 			alt="edge"
 			quality={100}
 			style={{
+				// eslint-disable-next-line no-inline-styles/no-inline-styles -- Icon is too small in some cases
 				minWidth: '28px',
 			}}
 		/>

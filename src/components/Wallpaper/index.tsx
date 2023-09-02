@@ -18,12 +18,14 @@ export function Wallpaper(props: WallpaperProps) {
 			priority
 			fill
 			sizes="100vw"
+			/* eslint-disable no-inline-styles/no-inline-styles -- needed */
 			style={{
 				objectFit: 'cover',
 				userSelect: 'none',
 				pointerEvents: 'none',
 				zIndex: -1,
 			}}
+			/* eslint-enable no-inline-styles/no-inline-styles */
 			unselectable="on"
 			{...props}
 		/>
