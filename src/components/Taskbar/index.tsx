@@ -82,6 +82,7 @@ export function Taskbar(props: TaskbarProps) {
 				<GridItem gridColumn={2} justifySelf="center">
 					<HStack spacing={1}>
 						<StartApp />
+
 						<HStack spacing={1} ref={parent}>
 							<Input
 								width="200px"

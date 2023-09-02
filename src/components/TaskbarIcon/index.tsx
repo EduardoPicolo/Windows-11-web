@@ -23,7 +23,6 @@ function TaskbarIconInner(
 				ref={ref}
 				aria-label={app?.shortName}
 				variant="ghost"
-				colorScheme="gray"
 				size="md"
 				borderRadius="md"
 				icon={<Center w="24px">{app?.icon}</Center>}
