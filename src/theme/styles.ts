@@ -20,13 +20,28 @@ export const styles: Theme['styles'] = {
 
 			overflow: 'clip',
 
-			'& .ds-selectable': {
-				zIndex: '0 !important',
+			'.moveable-control-box': {
+				zIndex: '1',
+
+				'& .moveable-line': {
+					background: 'transparent',
+				},
+
+				// Select the moveable control box that has a html attribute of data-able-groupable="true"
+				'&[data-able-groupable="true"]': {
+					'> .moveable-line': {
+						background: 'blue.500',
+					},
+				},
 			},
 
-			'& .ds-selector-area': {
-				zIndex: '0 !important',
+			'.selecto-selection': {
+				zIndex: '1',
 			},
+
+			// '& .ds-selector-area': {
+			// 	zIndex: '0 !important',
+			// },
 		},
 	}),
 };

@@ -14,7 +14,7 @@ export default async function WindowsLayout({
 
 	return (
 		<WindowsGrid>
-			<main>{children}</main>
+			{children}
 
 			<Taskbar initialApps={defaultTaskbarItems} />
 		</WindowsGrid>

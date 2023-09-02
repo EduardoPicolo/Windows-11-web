@@ -117,6 +117,11 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 									onDoubleClick={undefined}
 									textShadow="none"
 									color="inherit"
+									/**
+									 * Remove the `className` to avoid react-selecto
+									 * being able to select
+									 */
+									className=""
 								/>
 							))}
 						</Grid>

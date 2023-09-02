@@ -1,6 +1,6 @@
 'use client';
 
-import { type ReactNode, useLayoutEffect } from 'react';
+import { type ReactNode } from 'react';
 import { Grid, type GridProps } from '@chakra-ui/react';
 
 import { Wallpaper } from '@/components/Wallpaper';
@@ -12,31 +12,31 @@ interface WindowsGridProps extends GridProps {
 export function WindowsGrid(props: WindowsGridProps) {
 	const { children, ...rest } = props;
 
-	useLayoutEffect(() => {
-		const audio = new Audio('/sounds/WindowsStartup.wav');
+	// useLayoutEffect(() => {
+	// 	const audio = new Audio('/sounds/WindowsStartup.wav');
 
-		/**
-		 * User has bo interact with the DOM first due to browser
-		 * policies, otherwise the audio will not play.
-		 *
-		 * Workaround: add a event listener to the document `mousemove`
-		 * and play the audio on the first interaction. Then remove the
-		 * event listener.
-		 */
-		const handleFirstInteraction = async () => {
-			try {
-				await audio.play();
-				document.removeEventListener(
-					'mousemove',
-					handleFirstInteraction
-				);
-			} catch (error) {
-				console.error(error);
-			}
-		};
+	// 	/**
+	// 	 * User has bo interact with the DOM first due to browser
+	// 	 * policies, otherwise the audio will not play.
+	// 	 *
+	// 	 * Workaround: add a event listener to the document `mousemove`
+	// 	 * and play the audio on the first interaction. Then remove the
+	// 	 * event listener.
+	// 	 */
+	// 	const handleFirstInteraction = async () => {
+	// 		try {
+	// 			await audio.play();
+	// 			document.removeEventListener(
+	// 				'mousemove',
+	// 				handleFirstInteraction
+	// 			);
+	// 		} catch (error) {
+	// 			console.error(error);
+	// 		}
+	// 	};
 
-		document.addEventListener('mousemove', handleFirstInteraction);
-	}, []);
+	// 	document.addEventListener('mousemove', handleFirstInteraction);
+	// }, []);
 
 	return (
 		<Grid

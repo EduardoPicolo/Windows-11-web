@@ -3,9 +3,12 @@
 import React, {
 	type MouseEventHandler,
 	useCallback,
+	useRef,
 	useState,
 } from 'react';
-import { Box, Grid, useDisclosure } from '@chakra-ui/react';
+import { Grid, useDisclosure } from '@chakra-ui/react';
+import Moveable from 'react-moveable';
+import Selecto from 'react-selecto';
 
 import {
 	EdgeApp,
@@ -58,14 +61,106 @@ export default function Home() {
 		[menuDisclosure]
 	);
 
+	const [targets, setTargets] = useState<
+		(HTMLElement | SVGElement)[]
+	>([]);
+	const moveableRef = useRef<Moveable>(null);
+	const selectoRef = useRef<Selecto>(null);
+	const dragContainerRef = useRef(null);
+
 	return (
-		<Box h="full" onContextMenu={handleContextMenu}>
-			<DesktopContextMenu
-				position={menuPosition}
-				{...menuDisclosure}
+		<main ref={dragContainerRef}>
+			<Moveable
+				ref={moveableRef}
+				target={targets}
+				snapContainer={dragContainerRef.current}
+				draggable
+				snappable
+				bounds={{
+					left: 0,
+					top: 0,
+					right: 0,
+					bottom: 0,
+					position: 'css',
+				}}
+				origin={false}
+				/*  eslint-disable react-perf/jsx-no-new-function-as-prop -- ignore */
+				onClickGroup={(e) => {
+					selectoRef.current?.clickTarget(
+						e.inputEvent as MouseEvent | TouchEvent,
+						e.inputTarget
+					);
+				}}
+				onRender={(e) => {
+					e.target.style.cssText += e.cssText;
+				}}
+				onRenderGroup={(e) => {
+					e.events.forEach((ev) => {
+						// eslint-disable-next-line no-param-reassign -- ignore
+						ev.target.style.cssText += ev.cssText;
+					});
+				}}
+				/* eslint-enable react-perf/jsx-no-new-function-as-prop */
+			/>
+			<Selecto
+				ref={selectoRef}
+				boundContainer
+				dragContainer={dragContainerRef.current}
+				selectableTargets={['.desktop-icon']}
+				hitRate={0}
+				selectByClick
+				selectFromInside
+				continueSelect={false}
+				continueSelectWithoutDeselect
+				toggleContinueSelect="shift"
+				toggleContinueSelectWithoutDeselect={[['ctrl'], ['meta']]}
+				ratio={0}
+				/*  eslint-disable react-perf/jsx-no-new-function-as-prop -- ignore */
+				onDragStart={(event) => {
+					const target = (event.inputEvent as MouseEvent | TouchEvent)
+						.target as Element;
+
+					if (
+						moveableRef.current?.isMoveableElement(target) ||
+						targets.some((t) => t === target || t.contains(target))
+					) {
+						event.stop();
+					}
+				}}
+				onSelect={(e) => {
+					e.added.forEach((el) => {
+						el.classList.add('selected');
+					});
+					e.removed.forEach((el) => {
+						el.classList.remove('selected');
+					});
+
+					setTargets(e.selected);
+				}}
+				onSelectEnd={(event) => {
+					if (event.isDragStartEnd) {
+						(
+							event.inputEvent as MouseEvent | TouchEvent
+						).preventDefault();
+
+						void moveableRef.current
+							?.waitToChangeTarget()
+							.then(
+								() =>
+									moveableRef.current?.dragStart(
+										event.inputEvent as MouseEvent | TouchEvent
+									)
+							);
+					}
+
+					setTargets(event.selected);
+				}}
+				/* eslint-enable react-perf/jsx-no-new-function-as-prop */
 			/>
 
 			<Grid
+				onContextMenu={handleContextMenu}
+				className="elements"
 				gridTemplateColumns="repeat(auto-fill, minmax(90px, 1fr))"
 				gridTemplateRows="repeat(auto-fill, minmax(110px, 1fr));"
 				gap={1}
@@ -76,6 +171,11 @@ export default function Home() {
 				<DesktopIcon app={VSCodeApp} gridRow={2} />
 				<DesktopIcon app={SpotifyApp} gridRow={3} />
 			</Grid>
-		</Box>
+
+			<DesktopContextMenu
+				position={menuPosition}
+				{...menuDisclosure}
+			/>
+		</main>
 	);
 }

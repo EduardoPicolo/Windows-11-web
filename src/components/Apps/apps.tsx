@@ -55,6 +55,7 @@ export const EdgeApp: App = {
 		<Image
 			src={EdgeIcon}
 			alt="edge"
+			quality={100}
 			style={{
 				minWidth: '28px',
 			}}
@@ -142,7 +143,13 @@ export const SpotifyApp: App = {
 	shortName: 'Spotify',
 	fullName: 'Spotify',
 	processName: 'spotify',
-	icon: <Image src={SpotifyIcon as StaticImageData} alt="spotify" />,
+	icon: (
+		<Image
+			src={SpotifyIcon as StaticImageData}
+			quality={100}
+			alt="spotify"
+		/>
+	),
 	Window: Spotify,
 };
 
@@ -168,7 +175,13 @@ export const VSCodeApp: App = {
 	shortName: 'VSCode',
 	fullName: 'Visual Studio Code',
 	processName: 'vscode',
-	icon: <Image src={VSCodeIcon as StaticImageData} alt="vscode" />,
+	icon: (
+		<Image
+			src={VSCodeIcon as StaticImageData}
+			quality={100}
+			alt="vscode"
+		/>
+	),
 	Window: VSCode,
 	initialSize: {
 		width: 1024,
@@ -198,7 +211,13 @@ export const GithubApp: App = {
 	shortName: 'Github',
 	fullName: 'Github',
 	processName: 'github',
-	icon: <Image src={GithubIcon as StaticImageData} alt="github" />,
+	icon: (
+		<Image
+			src={GithubIcon as StaticImageData}
+			quality={100}
+			alt="github"
+		/>
+	),
 	Window: null,
 };
 

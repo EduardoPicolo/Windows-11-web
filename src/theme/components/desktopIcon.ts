@@ -12,16 +12,17 @@ export const desktopIconTheme = defineStyleConfig({
 		textTransform: 'capitalize',
 		textShadow: '0px 1px 2px #000, 0px 1px 2px #000',
 		borderRadius: 'md',
-		transition: 'background 0.2s ease-in-out',
 		_hover: {
-			background: 'hoverBg',
+			backgroundColor: 'hoverBg',
 		},
+		transition: 'background 0.2s ease-in-out',
 
+		filter: 'brightness(1.1) contrast(1.1) saturate(1.05)',
 		p: {
-			filter: 'brightness(1.2) contrast(1.1) saturate(1.2)',
+			filter: 'contrast(1.2)',
 		},
 
-		'&.ds-selected': {
+		'&.selected': {
 			_before: {
 				content: '""',
 				position: 'absolute',
@@ -30,8 +31,8 @@ export const desktopIconTheme = defineStyleConfig({
 				right: 0,
 				bottom: 0,
 				borderRadius: 'md',
-				background: 'blue.500',
-				opacity: 0.33,
+				background: 'hoverBg',
+				opacity: 0.75,
 				zIndex: -1,
 			},
 		},
