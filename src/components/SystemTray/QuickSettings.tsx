@@ -95,7 +95,7 @@ export function QuickSettings() {
 								<QuickSettingsItem
 									label="Wifi"
 									justifyContent="space-evenly"
-									initialActiveState
+									defaultChecked
 								>
 									<Icon as={PiWifiHighBold} boxSize={5} />
 									<Divider orientation="vertical" />
@@ -105,7 +105,7 @@ export function QuickSettings() {
 								<QuickSettingsItem
 									label="Bluetooth"
 									justifyContent="space-evenly"
-									initialActiveState
+									defaultChecked
 								>
 									<Icon as={BiBluetooth} boxSize={5} />
 									<Divider orientation="vertical" />
@@ -119,6 +119,7 @@ export function QuickSettings() {
 								<QuickSettingsItem
 									label="Night light"
 									onClick={toggleColorMode}
+									isChecked={colorMode === 'dark'}
 								>
 									<Icon
 										as={

@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef } from 'react';
 import {
 	Box,
 	Button,
@@ -7,16 +8,37 @@ import {
 } from '@chakra-ui/react';
 import { useBoolean } from '@chakra-ui/react';
 
-interface QuickSettingsItemProps extends ButtonProps {
+interface QuickSettingsItemProps
+	extends Omit<ButtonProps, 'value' | 'defaultValue'> {
 	label: string;
-	initialActiveState?: boolean;
+	defaultChecked?: boolean;
+	isChecked?: boolean;
 }
 
 export function QuickSettingsItem(props: QuickSettingsItemProps) {
-	const { label, children, initialActiveState, ...buttonProps } =
-		props;
+	const {
+		label,
+		children,
+		defaultChecked,
+		isChecked,
+		...buttonProps
+	} = props;
 
-	const [isOn, setIsOn] = useBoolean(initialActiveState);
+	const isControlled = useRef(isChecked !== undefined);
+
+	useLayoutEffect(() => {
+		if (isChecked !== undefined) {
+			isControlled.current = true;
+		}
+	}, [isChecked]);
+
+	const [innerState, setInnerState] = useBoolean(
+		defaultChecked ?? isChecked
+	);
+
+	const innerIsChecked = isControlled.current
+		? isChecked
+		: innerState;
 
 	const { colorMode } = useColorMode();
 
@@ -24,14 +46,18 @@ export function QuickSettingsItem(props: QuickSettingsItemProps) {
 		<Box textAlign="center">
 			<Button
 				variant={
-					isOn ? 'solid' : colorMode === 'dark' ? 'outline' : 'solid'
+					innerIsChecked
+						? 'solid'
+						: colorMode === 'dark'
+						? 'outline'
+						: 'solid'
 				}
-				colorScheme={isOn ? 'blue' : 'gray'}
+				colorScheme={innerIsChecked ? 'blue' : 'gray'}
 				size="xl"
 				w="full"
 				px={0}
-				borderWidth="1px"
-				onClick={setIsOn.toggle}
+				// borderWidth="1px"
+				onClick={setInnerState.toggle}
 				{...buttonProps}
 			>
 				{children}
