@@ -1,8 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# [Windows 11 Web](https://windows11web.vercel.app/)
 
-## Getting Started
+![Vercel](https://vercelbadge.vercel.app/api/EduardoPicolo/Windows-11-web?style=plastic) [![Main workflow](https://github.com/EduardoPicolo/Windows-11-web/actions/workflows/ci.yml/badge.svg)](https://github.com/EduardoPicolo/Windows-11-web/actions/workflows/ci.yml)
 
-First, run the development server:
+Welcome to Windows 11 Web, a clone of the Windows 11 operating system built using cutting-edge web technologies, including Next.js, Chakra UI, and React TypeScript. This project brings the Windows 11 experience to your web browser, making it accessible to everyone.
+
+
+## Overview
+
+Windows 11 Web is a Next.js project bootstrapped with ```create-next-app```. It uses the power of Next.js and Chakra UI to create a seamless and responsive user interface that closely resembles the look and feel of Windows 11.
+
+![screenshot1](/about/screenshot-1.png)
+
+![screenshot1](/about/screenshot-2.png)
+
+## Running locally
+
+### Prerequisites
+
+Before you begin, make sure you have [Node.js](https://nodejs.org/en/download/) installed on your system.
+
+---
+
+### Getting started
+
+To get started, clone this repository to your local machine:
+
+```bash
+git clone git@github.com:EduardoPicolo/Windows-11-web.git
+
+cd Windows-11-web
+```
+
+Then, install the dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
@@ -14,21 +53,5 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+*Disclaimer: This project is a clone for educational and demonstration purposes and is not affiliated with or endorsed by Microsoft. It is intended to showcase the capabilities of Next.js, Chakra UI, and React TypeScript in creating complex user interfaces.*
