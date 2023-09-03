@@ -1,5 +1,3 @@
-'use client';
-
 import { type ReactNode } from 'react';
 import { Grid, type GridProps } from '@chakra-ui/react';
 
@@ -9,7 +7,7 @@ interface WindowsGridProps extends GridProps {
 	children: ReactNode;
 }
 
-export async function WindowsGrid(props: WindowsGridProps) {
+export function WindowsGrid(props: WindowsGridProps) {
 	const { children, ...rest } = props;
 
 	// useLayoutEffect(() => {
@@ -37,11 +35,6 @@ export async function WindowsGrid(props: WindowsGridProps) {
 
 	// 	document.addEventListener('mousemove', handleFirstInteraction);
 	// }, []);
-
-	// Fake await
-	await new Promise((resolve) => {
-		setTimeout(resolve, 2000);
-	});
 
 	return (
 		<Grid

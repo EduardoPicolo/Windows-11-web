@@ -99,6 +99,7 @@ export function WindowsPreview(props: WindowsPreviewProps) {
 					<PopoverContent
 						width="fit-content"
 						backgroundColor="transparent"
+						background="transparent"
 						_after={{
 							display: 'none',
 						}}
@@ -116,10 +117,9 @@ export function WindowsPreview(props: WindowsPreviewProps) {
 										key={windowId}
 										size="sm"
 										w="200px"
-										borderRadius="xl"
 										onClick={handleFocusWindow(windowId)}
 									>
-										<CardHeader borderTopRadius="xl">
+										<CardHeader>
 											<HStack justifyContent="space-between">
 												<HStack>
 													<Box
@@ -149,7 +149,7 @@ export function WindowsPreview(props: WindowsPreviewProps) {
 												/>
 											</HStack>
 										</CardHeader>
-										<CardBody borderBottomRadius="xl">
+										<CardBody>
 											<Center w="full">
 												<Box boxSize="150px">{app?.icon}</Box>
 											</Center>

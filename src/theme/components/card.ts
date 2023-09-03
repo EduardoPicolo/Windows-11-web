@@ -7,14 +7,7 @@ const { definePartsStyle, defineMultiStyleConfig } =
 
 const baseStyle = definePartsStyle((props) => ({
 	// define the part you're going to style
-	container: {
-		backdropFilter: mode(
-			'blur(46.5px) saturate(180%)',
-			'blur(46.5px) saturate(180%) brightness(0.85) contrast(0.85)'
-		)(props),
-		backgroundBlendMode: 'exclusion',
-		boxShadow: 'xl',
-	},
+	container: {},
 	header: {},
 	body: {},
 	footer: {},
@@ -24,7 +17,13 @@ const ghost = definePartsStyle((props) => ({
 	container: {
 		border: '1px solid whiteAlpha.300',
 		borderColor: mode('blackAlpha.300', 'whiteAlpha.700')(props),
-		backgroundColor: mode('whiteAlpha.600', 'blackAlpha.600')(props),
+		backgroundColor: mode('whiteAlpha.700', 'blackAlpha.600')(props),
+		backdropFilter: mode(
+			'blur(46.5px) saturate(180%) brightness(1.1) contrast(1.1)',
+			'blur(46.5px) saturate(180%) brightness(0.85) contrast(0.85)'
+		)(props),
+		backgroundBlendMode: 'exclusion',
+		boxShadow: 'lg',
 
 		// Add noise to the background
 		_after: {
@@ -35,7 +34,7 @@ const ghost = definePartsStyle((props) => ({
 			right: 0,
 			bottom: 0,
 			zIndex: -1,
-			opacity: mode(0.5, 0.3)(props),
+			opacity: mode(0.2, 0.3)(props),
 			border: '1px solid',
 			borderColor: 'inherit',
 			borderRadius: 'inherit',
@@ -44,13 +43,15 @@ const ghost = definePartsStyle((props) => ({
 		},
 	},
 	header: {
-		backgroundColor: mode('whiteAlpha.50', 'blackAlpha.400')(props),
+		backgroundColor: mode('transparent', 'blackAlpha.400')(props),
+		borderTopRadius: 'inherit',
 	},
 	body: {
-		backgroundColor: mode('whiteAlpha.50', 'blackAlpha.400')(props),
+		backgroundColor: mode('transparent', 'blackAlpha.400')(props),
 	},
 	footer: {
 		bg: mode('whiteAlpha.300', 'blackAlpha.500')(props),
+		borderBottomRadius: 'inherit',
 	},
 }));
 
@@ -59,10 +60,11 @@ const window = definePartsStyle((props) => ({
 		width: '100%',
 		border: '1px solid whiteAlpha.300',
 		borderColor: 'whiteAlpha.400',
-		backgroundColor: mode('whiteAlpha.700', 'blackAlpha.500')(props),
+		backgroundColor: mode('whiteAlpha.700', 'blackAlpha.600')(props),
+		boxShadow: 'xl',
 		backdropFilter: mode(
-			'blur(40.5px) saturate(180%)',
-			'blur(20.5px) brightness(0.66) contrast(0.66)'
+			'blur(46.5px) saturate(180%)',
+			'blur(46.5px) brightness(0.66) contrast(0.66)'
 		)(props),
 		zIndex: 1,
 
@@ -75,7 +77,7 @@ const window = definePartsStyle((props) => ({
 			right: 0,
 			bottom: 0,
 			zIndex: -1,
-			opacity: 0.2,
+			opacity: mode(0.2, 0.3)(props),
 			border: '1px solid',
 			borderColor: 'whiteAlpha.300',
 			borderRadius: 'inherit',
@@ -87,12 +89,12 @@ const window = definePartsStyle((props) => ({
 		pl: 1.5,
 		pr: 0,
 		py: 0,
-		backgroundColor: mode('transparent', 'blackAlpha.500')(props),
+		backgroundColor: mode('transparent', 'blackAlpha.400')(props),
 		borderTopRadius: 'inherit',
 	},
 	body: {
 		p: 0,
-		backgroundColor: mode('transparent', 'blackAlpha.500')(props),
+		backgroundColor: mode('transparent', 'blackAlpha.400')(props),
 		borderBottomRadius: 'inherit',
 	},
 	footer: {},

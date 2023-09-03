@@ -18,11 +18,11 @@ const ghost = definePartsStyle((props) => ({
 		border: '1px solid whiteAlpha.300',
 		borderColor: mode('blackAlpha.300', 'whiteAlpha.700')(props),
 		borderRadius: 'xl',
-		backgroundColor: mode('whiteAlpha.600', 'blackAlpha.600')(props),
+		backgroundColor: mode('whiteAlpha.700', 'blackAlpha.600')(props),
 		backgroundBlendMode: 'exclusion',
-		boxShadow: 'xl',
+		boxShadow: 'lg',
 		backdropFilter: mode(
-			'blur(46.5px) saturate(180%)',
+			'blur(46.5px) saturate(180%) brightness(1.1) contrast(1.1)',
 			'blur(46.5px) saturate(180%) brightness(0.85) contrast(0.85)'
 		)(props),
 
@@ -35,7 +35,7 @@ const ghost = definePartsStyle((props) => ({
 			right: 0,
 			bottom: 0,
 			zIndex: -1,
-			opacity: mode(0.5, 0.3)(props),
+			opacity: mode(0.2, 0.3)(props),
 			border: '1px solid',
 			borderColor: 'inherit',
 			borderRadius: 'inherit',
@@ -44,11 +44,11 @@ const ghost = definePartsStyle((props) => ({
 		},
 	},
 	header: {
-		backgroundColor: mode('whiteAlpha.50', 'blackAlpha.400')(props),
+		backgroundColor: mode('transparent', 'blackAlpha.400')(props),
 		borderTopRadius: 'inherit',
 	},
 	body: {
-		backgroundColor: mode('whiteAlpha.50', 'blackAlpha.400')(props),
+		backgroundColor: mode('transparent', 'blackAlpha.400')(props),
 		borderTopRadius: 'inherit',
 	},
 	footer: {

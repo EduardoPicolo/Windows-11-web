@@ -109,8 +109,8 @@ export function WindowContainer(props: WindowContainerProps) {
 				variant="window"
 				filter={
 					isFocused
-						? 'brightness(1.1) contrast(1.1)'
-						: 'brightness(0.66) contrast(0.9)'
+						? 'brightness(1.05) contrast(1.1)'
+						: 'brightness(0.95) contrast(0.9)'
 				}
 				userSelect="none"
 				unselectable="on"
