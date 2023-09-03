@@ -65,7 +65,7 @@ const overrides = {
 	},
 	semanticTokens,
 	config: {
-		initialColorMode: 'light',
+		initialColorMode: 'dark',
 	},
 };
 

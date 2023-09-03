@@ -17,7 +17,7 @@ export const loadingTheme = defineStyleConfig({
 			position: 'absolute',
 			width: '100%',
 			borderRadius: '50%',
-			animation: 'pulsOut 1.5s ease-in-out infinite',
+			animation: 'pulsOut 1.8s ease-in-out infinite',
 			filter: 'drop-shadow(0 0 1rem rgba(255, 255, 255, 0.75))',
 
 			paddingBottom: '100%',
@@ -29,7 +29,7 @@ export const loadingTheme = defineStyleConfig({
 			content: '""',
 			position: 'absolute',
 			borderRadius: '50%',
-			animation: 'pulsOut 1.5s ease-in-out infinite',
+			animation: 'pulsOut 1.8s ease-in-out infinite',
 			filter: 'drop-shadow(0 0 1rem rgba(255, 255, 255, 0.75))',
 
 			width: 'calc(100% - 2rem)',

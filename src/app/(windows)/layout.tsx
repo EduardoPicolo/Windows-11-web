@@ -14,7 +14,7 @@ export default function WindowsLayout({
 }) {
 	const [ready, { on }] = useBoolean(false);
 
-	useTimeout(on, 2000);
+	useTimeout(on, 2750);
 
 	if (!ready) return <SplashScreen />;
 
