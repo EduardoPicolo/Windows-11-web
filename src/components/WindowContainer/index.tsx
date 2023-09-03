@@ -5,6 +5,7 @@ import {
 	SyntheticEvent,
 	useLayoutEffect,
 	useRef,
+	useState,
 } from 'react';
 import {
 	Box,
@@ -40,6 +41,11 @@ export interface WindowContainerProps
 	anchorTargetRef?: React.RefObject<HTMLButtonElement>;
 }
 
+const staticPosition = {
+	x: 0,
+	y: 0,
+};
+
 export function WindowContainer(props: WindowContainerProps) {
 	const {
 		title,
@@ -64,20 +70,25 @@ export function WindowContainer(props: WindowContainerProps) {
 
 	const mainRef = useRef<HTMLElement | null>(null);
 
-	useLayoutEffect(() => {
-		if (typeof window === 'undefined') return;
+	if (!mainRef.current && typeof window !== 'undefined')
+		[mainRef.current] = document.querySelectorAll('main');
 
-		mainRef.current = document?.getElementsByTagName('main')[0];
-	}, []);
+	const maxSize = useSize(mainRef);
 
-	const size = useSize(mainRef);
+	// console.group('WindowContainer');
+	// console.log('isMaximized', isMaximized);
+	// console.log('isMinimized', isMinimized);
+	// console.log('isFocused', isFocused);
+	// console.log('initialPosition', initialPosition);
+	// console.log('maxSize', maxSize);
+	// console.groupEnd();
 
-	console.group('WindowContainer');
-	console.log('isMaximized', isMaximized);
-	console.log('isMinimized', isMinimized);
-	console.log('isFocused', isFocused);
-	console.log('initialPosition', initialPosition);
-	console.groupEnd();
+	const [rndState, setState] = useState({
+		x: initialPosition?.x ?? 0,
+		y: initialPosition?.y ?? 0,
+		width: initialPosition?.width ?? 100,
+		height: initialPosition?.height ?? 100,
+	});
 
 	return (
 		<Rnd
@@ -88,22 +99,29 @@ export function WindowContainer(props: WindowContainerProps) {
 				zIndex: isFocused ? 2 : 1,
 			}}
 			default={initialPosition}
-			size={
-				isMaximized
-					? {
-							width: size?.width ?? '100%',
-							height: size?.height ?? '100%',
-					  }
-					: undefined
-			}
-			position={
-				isMaximized
-					? { x: 0, y: -document.body.offsetHeight }
-					: undefined
-			}
-			minWidth="300px"
-			minHeight="150px"
+			size={isMaximized ? maxSize : rndState}
+			position={isMaximized ? staticPosition : rndState}
 			bounds="main"
+			minWidth="140px"
+			minHeight="100px"
+			disableDragging={isMaximized}
+			/* eslint-disable react-perf/jsx-no-new-function-as-prop -- ignore */
+			onDragStop={(_e, d) => {
+				setState((prev) => ({
+					x: d.x,
+					y: d.y,
+					width: prev.width,
+					height: prev.height,
+				}));
+			}}
+			onResizeStop={(_e, _direction, ref, _delta, position) => {
+				setState({
+					width: ref.style.width,
+					height: ref.style.height,
+					...position,
+				});
+			}}
+			/* eslint-enable react-perf/jsx-no-new-function-as-prop */
 		>
 			<Card
 				variant="window"
@@ -125,13 +143,14 @@ export function WindowContainer(props: WindowContainerProps) {
 						cursor="grab"
 						_active={{ cursor: 'grabbing' }}
 					>
-						<HStack>
+						<HStack overflow="hidden">
 							<Box
 								w="22px"
 								userSelect="none"
 								unselectable="on"
 								draggable={false}
 								pointerEvents="none"
+								flexShrink={0}
 							>
 								{icon}
 							</Box>

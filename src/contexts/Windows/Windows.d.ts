@@ -62,6 +62,7 @@ interface MaximizeWindowAction {
 	payload: {
 		processName: Process;
 		id: number;
+		value: boolean;
 	};
 }
 

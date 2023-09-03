@@ -6,9 +6,10 @@ import {
 	useCallback,
 	useContext,
 	useMemo,
+	useRef,
 	useState,
 } from 'react';
-import { Center, Portal } from '@chakra-ui/react';
+import { Box, Center, Portal } from '@chakra-ui/react';
 
 import { Process } from '@/components/Apps/apps';
 import { WindowContainer } from '@/components/WindowContainer';
@@ -32,8 +33,8 @@ export function WindowsProvider(props: WindowsProviderProps) {
 		state: windows,
 		onAddWindow,
 		onCloseWindow,
-		onMaximizeWindow,
 		setIsMinimized,
+		setIsMaximazed,
 	} = useWindowsReducer();
 
 	const [focusedWindow, setFocusedWindow] = useState<{
@@ -48,10 +49,14 @@ export function WindowsProvider(props: WindowsProviderProps) {
 		[onCloseWindow]
 	);
 
-	const handleMaximizeWindow = useCallback(
-		(processName: Process, id: number) => () =>
-			onMaximizeWindow(processName, id),
-		[onMaximizeWindow]
+	const handleToggleMaximizeWindow = useCallback(
+		(processName: Process, id: number): MouseEventHandler =>
+			() =>
+				setIsMaximazed((isMaximized) => !isMaximized)(
+					processName,
+					id
+				),
+		[setIsMaximazed]
 	);
 
 	const handleMinimizeWindow = useCallback(
@@ -92,7 +97,7 @@ export function WindowsProvider(props: WindowsProviderProps) {
 					? appPreference.initialSize.width / 2
 					: 300),
 			y:
-				-(window.innerHeight / 2) -
+				window.innerHeight / 2 -
 				(appPreference?.initialSize?.height
 					? appPreference.initialSize.height / 2
 					: 300),
@@ -126,40 +131,51 @@ export function WindowsProvider(props: WindowsProviderProps) {
 	console.log('Open windows:', windows);
 	console.groupEnd();
 
+	const mainRef = useRef<HTMLElement | null>(null);
+
+	if (!mainRef.current && typeof window !== 'undefined')
+		[mainRef.current] = document.querySelectorAll('main');
+
 	return (
 		<WindowsContext.Provider value={value}>
 			<Portal appendToParentPortal={false}>
-				{getEntries(windows).flatMap(([process, processWindows]) =>
-					getEntries(processWindows).flatMap(([id, app]) => (
-						<WindowContainer
-							key={`${process}-${id}`}
-							title={app.fullName}
-							icon={app.icon}
-							isMinimized={app.isMinimized}
-							isMaximized={app.isMaximized}
-							isFocused={focusedWindow?.id === id}
-							onFocus={handleFocusWindow(process, id)}
-							onMinimize={handleMinimizeWindow(process, id)}
-							onMaximize={handleMaximizeWindow(process, id)}
-							onClose={handleCloseWindow(process, id)}
-							initialPosition={getInitialPosition(app)}
-						>
-							{app?.Window ? (
-								<app.Window />
-							) : (
-								<Center
-									h="full"
-									userSelect="none"
-									unselectable="on"
-									pointerEvents="none"
-									draggable={false}
-								>
-									{app.icon}
-								</Center>
-							)}
-						</WindowContainer>
-					))
-				)}
+				<Box
+					position="absolute"
+					top="env(safe-area-inset-top, 0)"
+					left="env(safe-area-inset-left, 0)"
+				>
+					{getEntries(windows).flatMap(([process, processWindows]) =>
+						getEntries(processWindows).flatMap(([id, app]) => (
+							<WindowContainer
+								key={`${process}-${id}`}
+								title={app.fullName}
+								icon={app.icon}
+								isMinimized={app.isMinimized}
+								isMaximized={app.isMaximized}
+								isFocused={focusedWindow?.id === id}
+								onFocus={handleFocusWindow(process, id)}
+								onMinimize={handleMinimizeWindow(process, id)}
+								onMaximize={handleToggleMaximizeWindow(process, id)}
+								onClose={handleCloseWindow(process, id)}
+								initialPosition={getInitialPosition(app)}
+							>
+								{app?.Window ? (
+									<app.Window />
+								) : (
+									<Center
+										h="full"
+										userSelect="none"
+										unselectable="on"
+										pointerEvents="none"
+										draggable={false}
+									>
+										{app.icon}
+									</Center>
+								)}
+							</WindowContainer>
+						))
+					)}
+				</Box>
 			</Portal>
 
 			{children}

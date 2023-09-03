@@ -71,7 +71,7 @@ export const minimizeWindow: WindowsReducerActionHandler<
 export const maximizeWindow: WindowsReducerActionHandler<
 	MaximizeWindowAction
 > = (state, action) => {
-	const { processName, id } = action.payload;
+	const { processName, id, value } = action.payload;
 
 	return {
 		...state,
@@ -79,7 +79,7 @@ export const maximizeWindow: WindowsReducerActionHandler<
 			...state[processName],
 			[id]: {
 				...state[processName][id],
-				isMaximized: !state[processName][id].isMaximized,
+				isMaximized: value,
 			},
 		},
 	};

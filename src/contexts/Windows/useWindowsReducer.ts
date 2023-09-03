@@ -32,6 +32,19 @@ export function useWindowsReducer(props?: UseWindowsReducerProps) {
 		[dispatch]
 	);
 
+	const onCloseWindow = useCallback(
+		(processName: Process, id: number) => {
+			dispatch({
+				type: 'CLOSE_WINDOW',
+				payload: {
+					processName,
+					id,
+				},
+			});
+		},
+		[dispatch]
+	);
+
 	const setIsMinimized = useCallback(
 		(value: boolean) => (processName: Process, id: number) => {
 			dispatch({
@@ -46,38 +59,33 @@ export function useWindowsReducer(props?: UseWindowsReducerProps) {
 		[dispatch]
 	);
 
-	const onMaximizeWindow = useCallback(
-		(processName: Process, id: number) => {
-			dispatch({
-				type: 'MAXIMIZE_WINDOW',
-				payload: {
-					processName,
-					id,
-				},
-			});
-		},
-		[dispatch]
-	);
+	const setIsMaximazed = useCallback(
+		(value: boolean | ((value: boolean) => boolean)) =>
+			(processName: Process, id: number) => {
+				let newValue = value;
 
-	const onCloseWindow = useCallback(
-		(processName: Process, id: number) => {
-			dispatch({
-				type: 'CLOSE_WINDOW',
-				payload: {
-					processName,
-					id,
-				},
-			});
-		},
-		[dispatch]
+				if (typeof value === 'function') {
+					newValue = value(state[processName][id].isMaximized);
+				}
+
+				dispatch({
+					type: 'MAXIMIZE_WINDOW',
+					payload: {
+						processName,
+						id,
+						value: newValue as boolean,
+					},
+				});
+			},
+		[state]
 	);
 
 	return {
 		state,
 		dispatch,
 		onAddWindow,
-		onMaximizeWindow,
 		onCloseWindow,
 		setIsMinimized,
+		setIsMaximazed,
 	};
 }
