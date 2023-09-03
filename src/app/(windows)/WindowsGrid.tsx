@@ -9,7 +9,7 @@ interface WindowsGridProps extends GridProps {
 	children: ReactNode;
 }
 
-export function WindowsGrid(props: WindowsGridProps) {
+export async function WindowsGrid(props: WindowsGridProps) {
 	const { children, ...rest } = props;
 
 	// useLayoutEffect(() => {
@@ -37,6 +37,11 @@ export function WindowsGrid(props: WindowsGridProps) {
 
 	// 	document.addEventListener('mousemove', handleFirstInteraction);
 	// }, []);
+
+	// Fake await
+	await new Promise((resolve) => {
+		setTimeout(resolve, 2000);
+	});
 
 	return (
 		<Grid

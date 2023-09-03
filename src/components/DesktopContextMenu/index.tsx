@@ -1,9 +1,4 @@
-import {
-	MouseEventHandler,
-	useCallback,
-	useLayoutEffect,
-	useState,
-} from 'react';
+import { FocusEventHandler, useCallback, useState } from 'react';
 import {
 	chakra,
 	HStack,
@@ -11,7 +6,6 @@ import {
 	MenuDivider,
 	MenuItem,
 	MenuList,
-	Portal,
 	Text,
 	useDisclosure,
 } from '@chakra-ui/react';
@@ -50,37 +44,20 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 	const submenuDisclosure = useDisclosure();
 
 	const [submenu, setSubmenu] = useState<Submenu | null>(null);
-
-	useLayoutEffect(() => {
-		/** Close submenu on auxclick */
-		const handleClick = () => {
-			submenuDisclosure.onClose();
-		};
-
-		document.addEventListener('auxclick', handleClick);
-
-		return () => {
-			document.removeEventListener('auxclick', handleClick);
-		};
-	}, []);
-
 	const [submenuPosition, setSubmenuPosition] = useState({
 		x: 0,
 		y: 0,
 	});
 
 	const handleOpenSubmenu = useCallback(
-		(menu: Submenu): MouseEventHandler<HTMLButtonElement> =>
+		(menu: Submenu): FocusEventHandler<HTMLButtonElement> =>
 			(event) => {
 				setSubmenu(menu);
-				submenuDisclosure.onOpen();
 				setSubmenuPosition({
-					x:
-						event.currentTarget.getBoundingClientRect().x +
-						event.currentTarget.getBoundingClientRect().width -
-						1,
-					y: event.currentTarget.getBoundingClientRect().y,
+					x: event.currentTarget.getBoundingClientRect().width + 4,
+					y: event.currentTarget.offsetTop,
 				});
+				submenuDisclosure.onOpen();
 			},
 		[submenuDisclosure]
 	);
@@ -95,8 +72,12 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 						<MenuList>
 							<MenuItem
 								icon={<Icon as={BsGrid} />}
-								onMouseEnter={handleOpenSubmenu('view')}
-								bg={submenu === 'view' ? 'hoverBg' : undefined}
+								onFocus={handleOpenSubmenu('view')}
+								bg={
+									submenuDisclosure.isOpen && submenu === 'view'
+										? 'hoverBg'
+										: undefined
+								}
 							>
 								<HStack justifyContent="space-between">
 									<Text>View</Text>
@@ -110,8 +91,12 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 
 							<MenuItem
 								icon={<SortIcon />}
-								onMouseEnter={handleOpenSubmenu('sortby')}
-								bg={submenu === 'sortby' ? 'hoverBg' : undefined}
+								onFocus={handleOpenSubmenu('sortby')}
+								bg={
+									submenuDisclosure.isOpen && submenu === 'sortby'
+										? 'hoverBg'
+										: undefined
+								}
 							>
 								<HStack justifyContent="space-between">
 									<Text>Sort by</Text>
@@ -124,15 +109,19 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 							</MenuItem>
 							<MenuItem
 								icon={<Icon as={TbReload} />}
-								onMouseEnter={submenuDisclosure.onClose}
+								onFocus={submenuDisclosure.onClose}
 							>
 								Refresh
 							</MenuItem>
 							<MenuDivider />
 							<MenuItem
 								icon={<AddIcon boxSize="20px" />}
-								onMouseEnter={handleOpenSubmenu('new')}
-								bg={submenu === 'new' ? 'hoverBg' : undefined}
+								onFocus={handleOpenSubmenu('new')}
+								bg={
+									submenuDisclosure.isOpen && submenu === 'new'
+										? 'hoverBg'
+										: undefined
+								}
 							>
 								<HStack justifyContent="space-between">
 									<Text>New</Text>
@@ -146,20 +135,20 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 							<MenuDivider />
 							<MenuItem
 								icon={<DisplaySettingsIcon boxSize="19px" />}
-								onMouseEnter={submenuDisclosure.onClose}
+								onFocus={submenuDisclosure.onClose}
 							>
 								Display Settings
 							</MenuItem>
 							<MenuItem
 								icon={<Icon as={BsBrush} />}
-								onMouseEnter={submenuDisclosure.onClose}
+								onFocus={submenuDisclosure.onClose}
 							>
 								Personalize
 							</MenuItem>
 							<MenuDivider />
 							<MenuItem
 								icon={<TerminalIcon />}
-								onMouseEnter={submenuDisclosure.onClose}
+								onFocus={submenuDisclosure.onClose}
 							>
 								Open in Terminal
 							</MenuItem>
@@ -175,42 +164,33 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 										}}
 									/>
 								}
-								onMouseEnter={submenuDisclosure.onClose}
+								onFocus={submenuDisclosure.onClose}
 							>
 								Show more options
 							</MenuItem>
 						</MenuList>
 
-						<Portal appendToParentPortal={false}>
-							<AnimatePresence>
-								{submenuDisclosure.isOpen && (
-									<MotionDivWithStyles
-										position="absolute"
-										top={submenuPosition?.y}
-										left={submenuPosition?.x}
-										zIndex={3}
-										// style={{
-										// 	position: 'absolute',
-										// 	top: submenuPosition?.y,
-										// 	left: submenuPosition?.x,
-										// 	zIndex: 12,
-										// }}
-										initial={{ x: -20 }}
-										animate={{ x: 0 }}
-										exit={{ scale: 0.9 }}
-										transition={{
-											type: 'tween',
-											ease: 'circOut',
-											duration: 0.2,
-										}}
-										layout="position"
-									>
-										{/* <ViewSubmenu /> */}
-										{submenu ? submenusMap[submenu] : null}
-									</MotionDivWithStyles>
-								)}
-							</AnimatePresence>
-						</Portal>
+						<AnimatePresence>
+							{submenuDisclosure.isOpen && (
+								<MotionDivWithStyles
+									position="absolute"
+									top={`${submenuPosition?.y}px`}
+									left={`${submenuPosition?.x}px`}
+									zIndex={3}
+									initial={{ x: -20 }}
+									animate={{ x: 0 }}
+									exit={{ scale: 0.9 }}
+									transition={{
+										type: 'tween',
+										ease: 'circOut',
+										duration: 0.2,
+									}}
+									layout="position"
+								>
+									{submenu ? submenusMap[submenu] : null}
+								</MotionDivWithStyles>
+							)}
+						</AnimatePresence>
 					</>
 				);
 			}}

@@ -1,11 +1,5 @@
-import {
-	Box,
-	Menu,
-	MenuItem,
-	MenuList,
-	MenuProps,
-	Portal,
-} from '@chakra-ui/react';
+import { useLayoutEffect, useRef } from 'react';
+import { Box, Menu, MenuProps, Portal } from '@chakra-ui/react';
 
 export type ContextMenuProps = MenuProps & {
 	position: {
@@ -15,42 +9,55 @@ export type ContextMenuProps = MenuProps & {
 };
 
 export function ContextMenu(props: ContextMenuProps) {
-	const { position, children, isOpen, onClose, ...rest } = props;
+	const { position, children, ...rest } = props;
 
-	// useLayoutEffect(() => {
-	// 	/** Close menu on click outside of menu. */
-	// 	const handleClick = () => {
-	// 		onClose?.();
-	// 	};
+	const menuRef = useRef<HTMLDivElement>(null);
 
-	// 	document.addEventListener('click', handleClick);
+	useLayoutEffect(() => {
+		/** Custom outside click handle */
+		const handleOusideClick = (event: MouseEvent) => {
+			if (
+				menuRef.current &&
+				menuRef.current.contains(event.target as Node)
+			) {
+				console.log('Clicked inside menu, not closing.');
 
-	// 	return () => {
-	// 		document.removeEventListener('click', handleClick);
-	// 	};
-	// }, []);
+				return;
+			}
+
+			rest.onClose?.();
+		};
+
+		document.addEventListener('click', handleOusideClick);
+
+		return () => {
+			document.removeEventListener('click', handleOusideClick);
+		};
+	}, []);
 
 	return (
 		<Portal appendToParentPortal={false}>
-			<Box position="absolute" left={position.x} top={position.y}>
+			<Box
+				ref={menuRef}
+				position="absolute"
+				left={position.x}
+				top={position.y}
+				w={0}
+				h={0}
+			>
 				<Menu
-					isOpen={isOpen}
-					onClose={onClose}
-					/** Don't close menu on aux click */
+					size="sm"
+					/**
+					 * Fix menu closing on auxclick. It should only reposition
+					 * itself.
+					 */
+					closeOnBlur={false}
 					{...rest}
 				>
 					{(internalProps) =>
-						children ? (
-							typeof children === 'function' ? (
-								children(internalProps)
-							) : (
-								children
-							)
-						) : (
-							<MenuList>
-								<MenuItem isDisabled>No options</MenuItem>
-							</MenuList>
-						)
+						typeof children === 'function'
+							? children(internalProps)
+							: children
 					}
 				</Menu>
 			</Box>

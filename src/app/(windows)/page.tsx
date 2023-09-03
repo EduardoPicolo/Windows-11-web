@@ -49,13 +49,17 @@ export default function Home() {
 				return;
 			}
 
-			const { clientX, clientY } = e;
-			const { innerWidth, innerHeight } = window;
+			// const { clientX, clientY } = e;
+			// const { innerWidth, innerHeight } = window;
+			// const x = clientX + 200 > innerWidth ? clientX - 200 : clientX;
+			// const y = clientY + 200 > innerHeight ? clientY - 200 : clientY;
+			// setMenuPosition({ x, y });
 
-			const x = clientX + 200 > innerWidth ? clientX - 200 : clientX;
-			const y = clientY + 200 > innerHeight ? clientY - 200 : clientY;
+			setMenuPosition({
+				x: e.clientX,
+				y: e.clientY,
+			});
 
-			setMenuPosition({ x, y });
 			menuDisclosure.onOpen();
 		},
 		[menuDisclosure]
@@ -171,6 +175,11 @@ export default function Home() {
 				<DesktopIcon app={VSCodeApp} gridRow={2} />
 				<DesktopIcon app={SpotifyApp} gridRow={3} />
 			</Grid>
+
+			{/* <DesktopContextMenu
+				position={menuPosition}
+				{...menuDisclosure}
+			/> */}
 
 			<DesktopContextMenu
 				position={menuPosition}

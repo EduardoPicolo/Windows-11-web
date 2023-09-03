@@ -12,6 +12,8 @@
 	"terminal.integrated.smoothScrolling": true,
 	"editor.cursorSmoothCaretAnimation": "on",
 
+	"eslint.execArgv": ["--max-old-space-size=4096"],
+
 	// Typescript
 	"typescript.preferences.importModuleSpecifier": "non-relative",
 	"typescript.tsdk": "node_modules/typescript/lib",
