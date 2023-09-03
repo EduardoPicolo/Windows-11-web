@@ -292,6 +292,8 @@
 			"files": [
 				"**/pages/**/*",
 				"middleware.ts",
+				"sitemap.ts",
+				"robots.ts",
 				"**/app/**/{page,loading,error,global-error,not-found,layout,template,default}.tsx",
 				"cypress.config.ts",
 				"next.config.mjs",
@@ -300,15 +302,6 @@
 			"rules": {
 				"import/no-default-export": "off",
 				"react/function-component-definition": "off"
-			}
-		},
-		{
-			"files": ["plopfile.js", "plopfile.mjs"],
-			"rules": {
-				"import/no-default-export": "off",
-				"react/function-component-definition": "off",
-				"import/no-anonymous-default-export": "off",
-				"func-names": "off"
 			}
 		},
 		{
