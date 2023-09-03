@@ -5,20 +5,14 @@ import {
 
 import { buttonTheme as Button } from './components/button';
 import { cardTheme as Card } from './components/card';
-import { checkboxTheme as Checkbox } from './components/checkbox';
 import { desktopIconTheme as DesktopIcon } from './components/desktopIcon';
-import { dividerTheme as Divider } from './components/divider';
-import { formTheme as Form } from './components/form';
 import {
 	formLabelTheme as FormLabel,
 	inputTheme as Input,
 } from './components/input';
 import { loadingTheme as Loading } from './components/loading';
 import { menuTheme as Menu } from './components/menu';
-import { numberInputTheme as NumberInput } from './components/numberInput';
 import { popoverTheme as Popover } from './components/popover';
-import { sidebarTheme as Sidebar } from './components/sidebar';
-import { tabsTheme as Tabs } from './components/tabs';
 import { taskbarTheme as Taskbar } from './components/taskbar';
 import { tooltipTheme as Tooltip } from './components/tooltip';
 import { breakpoints } from './foundations/breakpoints';
@@ -48,18 +42,12 @@ const overrides = {
 	components: {
 		Button,
 		Card,
-		Divider,
-		Tabs,
-		Form,
-		Sidebar,
 		Input,
 		FormLabel,
-		Checkbox,
 		Popover,
 		Menu,
 		Loading,
 		Tooltip,
-		NumberInput,
 		Taskbar,
 		DesktopIcon,
 	},

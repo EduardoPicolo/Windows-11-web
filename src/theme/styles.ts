@@ -37,11 +37,10 @@ export const styles: Theme['styles'] = {
 
 			'.selecto-selection': {
 				zIndex: '1',
+				background: 'rgba(0, 120, 215, 0.45)',
+				border: '1px solid',
+				borderColor: 'blue.600',
 			},
-
-			// '& .ds-selector-area': {
-			// 	zIndex: '0 !important',
-			// },
 		},
 	}),
 };
