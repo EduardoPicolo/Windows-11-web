@@ -19,7 +19,7 @@ jobs:
       # - name: Use Node.js 16.x
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.15.x
+          node-version: 18.17.x
           cache: 'yarn'
 
       - name: 🧰 Install dependencies
@@ -36,7 +36,7 @@ jobs:
       # - name: Use Node.js 16.x
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.15.x
+          node-version: 18.17.x
           cache: 'yarn'
 
       - name: 🧰 Install dependencies
@@ -53,14 +53,14 @@ jobs:
       # - name: Use Node.js 16.x
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.15.x
+          node-version: 18.17.x
           cache: 'yarn'
 
       - name: 🧰 Install dependencies
         run: yarn install
 
       - name: 🧪 Run tests
-        run: yarn test
+        run: yarn test:component:headless
 
   build:
     needs: [lint, type-check]
@@ -71,7 +71,7 @@ jobs:
       # - name: Use Node.js 16.x
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.15.x
+          node-version: 18.17.x
           cache: 'yarn'
 
       - name: Get yarn cache directory path
