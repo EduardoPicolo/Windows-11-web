@@ -31,8 +31,6 @@
 		"**/*.tsx",
 		"src/**/*.d.ts",
 		"next.config.js",
-		"next.config.js",
-		"plopfile.mjs",
 		".next/types/**/*.ts"
 	],
 	"exclude": ["node_modules"]
