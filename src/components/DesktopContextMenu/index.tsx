@@ -24,10 +24,12 @@ import { TerminalIcon } from '@/assets/ TerminalIcon';
 import { AddIcon } from '@/assets/AddIcon';
 import { DisplaySettingsIcon } from '@/assets/DisplaySettingsIcon';
 import { SortIcon } from '@/assets/SortIcon';
+import { SettingsApp } from '@/components/Apps/apps';
 import {
 	ContextMenu,
 	type ContextMenuProps,
 } from '@/components/ContextMenu';
+import { useWindows } from '@/contexts/Windows';
 
 import { NewSubmenu } from './NewSubmenu';
 import { SortbySubmenu } from './SortbySubmenu';
@@ -47,6 +49,8 @@ type DesktopContextMenuProps = Omit<ContextMenuProps, 'children'>;
 
 export function DesktopContextMenu(props: DesktopContextMenuProps) {
 	const { isOpen } = props;
+
+	const { addWindow } = useWindows();
 
 	const submenuDisclosure = useDisclosure();
 
@@ -73,6 +77,13 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 		if (!isOpen) submenuDisclosure.onClose();
 		// eslint-disable-next-line react-hooks/exhaustive-deps -- Only when isOpen changes
 	}, [isOpen]);
+
+	const handleAddWindow = useCallback(
+		(app: App) => () => {
+			addWindow(app);
+		},
+		[addWindow]
+	);
 
 	return (
 		<ContextMenu size="sm" {...props}>
@@ -131,12 +142,14 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 				<MenuItem
 					icon={<DisplaySettingsIcon boxSize="19px" />}
 					onFocus={submenuDisclosure.onClose}
+					onClick={handleAddWindow(SettingsApp)}
 				>
 					Display Settings
 				</MenuItem>
 				<MenuItem
 					icon={<Icon as={BsBrush} />}
 					onFocus={submenuDisclosure.onClose}
+					onClick={handleAddWindow(SettingsApp)}
 				>
 					Personalize
 				</MenuItem>

@@ -102,7 +102,7 @@ export function SettingsSidebar() {
 }
 
 export function Settings() {
-	const [activeIndex, setIndex] = useState(0);
+	const [activeIndex, setIndex] = useState(3);
 
 	return (
 		<Tabs

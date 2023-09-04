@@ -15,4 +15,10 @@ interface SystemContext {
 		Wallpaper,
 		React.Dispatch<React.SetStateAction<Wallpaper>>,
 	];
+	wallpaperFit: [
+		WallpaperFitStyle,
+		React.Dispatch<React.SetStateAction<WallpaperFitStyle>>,
+	];
 }
+
+type WallpaperFitStyle = 'cover' | 'contain' | 'fill' | 'scale-down';

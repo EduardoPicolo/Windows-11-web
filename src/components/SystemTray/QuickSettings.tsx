@@ -117,7 +117,7 @@ export function QuickSettings() {
 								</QuickSettingsItem>
 
 								<QuickSettingsItem
-									label="Night light"
+									label="Color mode"
 									onClick={toggleColorMode}
 									isChecked={colorMode === 'dark'}
 								>

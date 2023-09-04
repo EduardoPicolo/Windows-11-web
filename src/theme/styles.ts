@@ -17,9 +17,7 @@ export const styles: Theme['styles'] = {
 			overflow: 'hidden',
 
 			_dark: {
-				background:
-					'radial-gradient(circle at center -32px,#21232c,#181a22 40%) no-repeat',
-				backgroundSize: 'contain',
+				background: '#000',
 			},
 
 			'.moveable-control-box': {

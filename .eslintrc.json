@@ -47,7 +47,7 @@
 		"react/jsx-props-no-spreading": "off",
 		"react-perf/jsx-no-new-object-as-prop": "warn",
 		"react-perf/jsx-no-new-array-as-prop": "warn",
-		"no-inline-styles/no-inline-styles": "error",
+		"no-inline-styles/no-inline-styles": "warn",
 
 		// eslint rules
 		"eslint-comments/no-use": [

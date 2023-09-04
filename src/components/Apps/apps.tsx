@@ -131,8 +131,8 @@ export const SettingsApp: App = {
 	),
 	Window: Settings,
 	initialSize: {
-		width: 1024,
-		height: 768,
+		width: 1048,
+		height: 863,
 	},
 };
 

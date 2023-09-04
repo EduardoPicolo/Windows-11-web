@@ -7,6 +7,7 @@ type WallpaperProps = Partial<ImageProps>;
 export function Wallpaper(props: WallpaperProps) {
 	const {
 		wallpaper: [state],
+		wallpaperFit: [wallpaperFit],
 	} = useSystem();
 
 	return (
@@ -20,7 +21,7 @@ export function Wallpaper(props: WallpaperProps) {
 			sizes="100vw"
 			/* eslint-disable no-inline-styles/no-inline-styles -- needed */
 			style={{
-				objectFit: 'cover',
+				objectFit: wallpaperFit,
 				userSelect: 'none',
 				pointerEvents: 'none',
 				zIndex: -1,

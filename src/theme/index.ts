@@ -3,6 +3,7 @@ import {
 	withDefaultColorScheme,
 } from '@chakra-ui/react';
 
+import { accordionTheme as Accordion } from './components/accordion';
 import { buttonTheme as Button } from './components/button';
 import { cardTheme as Card } from './components/card';
 import { desktopIconTheme as DesktopIcon } from './components/desktopIcon';
@@ -40,6 +41,7 @@ const overrides = {
 	styles,
 
 	components: {
+		Accordion,
 		Button,
 		Card,
 		Input,
@@ -53,7 +55,7 @@ const overrides = {
 	},
 	semanticTokens,
 	config: {
-		initialColorMode: 'dark',
+		initialColorMode: 'light',
 	},
 };
 

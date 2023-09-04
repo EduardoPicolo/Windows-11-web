@@ -12,4 +12,12 @@ export const systemContextDefaultValues: SystemContext = {
 	],
 	brightness: [100, () => {}],
 	wallpaper: [WindowsWallpaper, () => {}],
+	wallpaperFit: ['cover' as WallpaperFitStyle, () => {}],
 };
+
+export const wallpaperFitOptions: WallpaperFitStyle[] = [
+	'fill',
+	'contain',
+	'cover',
+	'scale-down',
+];

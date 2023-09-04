@@ -3,7 +3,7 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 import { useBoolean } from '@chakra-ui/react';
 
-import DefaultWallpaper from '@/public/wallpapers/4-win11.jpg';
+import DefaultWallpaper from '@/public/wallpapers/6-win11.jpg';
 
 import { systemContextDefaultValues } from './helpers';
 
@@ -23,6 +23,7 @@ export function SystemProvider(props: { children: React.ReactNode }) {
 	const brightness = useState(0);
 
 	const wallpaper = useState<Wallpaper>(DefaultWallpaper);
+	const wallpaperFit = useState<WallpaperFitStyle>('cover');
 
 	console.groupCollapsed('System Provider');
 	console.log('sound', sound);
@@ -35,8 +36,9 @@ export function SystemProvider(props: { children: React.ReactNode }) {
 			soundMuted,
 			brightness,
 			wallpaper,
+			wallpaperFit,
 		}),
-		[brightness, sound, soundMuted, wallpaper]
+		[brightness, sound, soundMuted, wallpaper, wallpaperFit]
 	);
 
 	return (
