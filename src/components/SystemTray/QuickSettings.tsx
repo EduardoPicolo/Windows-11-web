@@ -49,7 +49,7 @@ export function QuickSettings() {
 	const { toggleColorMode, colorMode } = useColorMode();
 
 	return (
-		<Popover placement="top" offset={[-80, 16]}>
+		<Popover placement="top" gutter={16} offset={[-95, 16]}>
 			<PopoverTrigger>
 				<HStack
 					as="button"
@@ -150,7 +150,7 @@ export function QuickSettings() {
 										<SpeakerIcon
 											volumeLevel={soundLevel}
 											isMuted={isSoundMuted}
-											boxSize={6}
+											boxSize={5}
 										/>
 									}
 									onClick={toggleSoundMuted}
@@ -173,7 +173,7 @@ export function QuickSettings() {
 									variant="ghost"
 									colorScheme="gray"
 									size="sm"
-									icon={<Icon as={MdOutlineHeadphones} boxSize={6} />}
+									icon={<Icon as={MdOutlineHeadphones} boxSize={5} />}
 								/>
 							</HStack>
 						</Stack>
@@ -185,16 +185,17 @@ export function QuickSettings() {
 							justifyContent="right"
 							variant="ghost"
 							colorScheme="gray"
+							// size="sm"
 							spacing={3}
 						>
 							<IconButton
 								aria-label="edit"
-								icon={<Icon as={SlPencil} boxSize={5} />}
+								icon={<Icon as={SlPencil} boxSize={4} />}
 							/>
 
 							<IconButton
 								aria-label="edit"
-								icon={<Icon as={HiOutlineCog6Tooth} boxSize={6} />}
+								icon={<Icon as={HiOutlineCog6Tooth} boxSize={5} />}
 							/>
 						</ButtonGroup>
 					</PopoverFooter>

@@ -37,9 +37,9 @@ export const styles: Theme['styles'] = {
 
 			'.selecto-selection': {
 				zIndex: '1',
-				background: 'rgba(0, 120, 215, 0.45)',
+				background: 'rgba(0, 120, 215, 0.4)',
 				border: '1px solid',
-				borderColor: 'blue.600',
+				borderColor: 'blue.500',
 			},
 		},
 	}),

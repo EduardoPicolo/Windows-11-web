@@ -14,7 +14,7 @@ import { MdKeyboardArrowUp } from 'react-icons/md';
 
 export function AppsTray() {
 	return (
-		<Popover placement="top" offset={[0, 16]}>
+		<Popover placement="top" gutter={16}>
 			{({ isOpen }) => (
 				<>
 					<PopoverTrigger>
@@ -31,7 +31,7 @@ export function AppsTray() {
 									transform={
 										isOpen ? 'rotate(-180deg)' : 'rotate(0deg)'
 									}
-									transition="transform 0.2s"
+									transition="transform 0.3s ease-in-out"
 								/>
 							}
 							_light={{

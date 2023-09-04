@@ -69,7 +69,7 @@ const solid = defineStyle((props) => {
 
 	if (colorMode === 'dark') {
 		return {
-			background: `${colorScheme}.400`,
+			background: `${colorScheme}.300`,
 		};
 	}
 
