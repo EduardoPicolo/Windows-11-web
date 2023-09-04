@@ -31,6 +31,16 @@ function TaskbarIconInner(
 						bg: 'hoverBg',
 					},
 				}}
+				sx={{
+					img: {
+						transition: 'transform 0.2s ease-out',
+					},
+					'&:active': {
+						img: {
+							transform: 'scale(0.75)',
+						},
+					},
+				}}
 				{...rest}
 			/>
 		</Tooltip>

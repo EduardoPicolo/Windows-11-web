@@ -1,6 +1,7 @@
 import Image, { StaticImageData } from 'next/image';
 
 import { Edge } from '@/components/Apps/Edge';
+import { Settings } from '@/components/Apps/Settings';
 import { Spotify } from '@/components/Apps/Spotify';
 import { VSCode } from '@/components/Apps/VSCode';
 import { ThemeImage } from '@/components/ThemeImage';
@@ -119,7 +120,11 @@ export const SettingsApp: App = {
 	fullName: 'Settings',
 	processName: 'settings',
 	icon: <Image src={SettingsIcon} alt="settings" />,
-	Window: null,
+	Window: Settings,
+	initialSize: {
+		width: 1024,
+		height: 768,
+	},
 };
 
 export const XboxApp: App = {
