@@ -80,7 +80,7 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 				<CardBody>
 					<Stack spacing={4}>
 						<HStack justifyContent="space-between">
-							<Text fontSize="md" fontWeight="bold">
+							<Text fontSize="md" fontWeight="semibold">
 								Pinned
 							</Text>
 
@@ -127,7 +127,7 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 						</Grid>
 
 						<HStack justifyContent="space-between">
-							<Text fontSize="md" fontWeight="bold">
+							<Text fontSize="md" fontWeight="semibold">
 								Recommended
 							</Text>
 

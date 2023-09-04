@@ -41,11 +41,10 @@ const variantOutline = definePartsStyle((props) => ({
 const variantFilled = definePartsStyle((props) => ({
 	field: {
 		background: mode('whiteAlpha.900', 'blackAlpha.500')(props),
-		backdropFilter: mode('none', 'none')(props),
 		border: '1px solid',
-		borderColor: mode('gray.300', 'whiteAlpha.100')(props),
+		borderColor: mode('gray.300', 'whiteAlpha.300')(props),
 		_hover: {
-			background: mode('whiteAlpha.700', 'whiteAlpha.100')(props),
+			background: mode('whiteAlpha.700', 'blackAlpha.400')(props),
 			borderColor: mode('gray.400', 'whiteAlpha.200')(props),
 		},
 	},

@@ -59,7 +59,7 @@ export const Clock = forwardRef<ClockProps, 'div'>((props, ref) => {
 				py={1}
 				px={2}
 				borderRadius="md"
-				fontSize="sm"
+				fontSize="xs"
 				fontWeight="semibold"
 				lineHeight={1.35}
 				cursor="default"

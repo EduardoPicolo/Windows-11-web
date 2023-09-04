@@ -128,7 +128,7 @@ export function WindowContainer(props: WindowContainerProps) {
 				onClick={onFocus}
 				filter={
 					isFocused
-						? 'brightness(1.1) contrast(1.1)'
+						? 'brightness(1)'
 						: 'brightness(0.9) contrast(0.9) '
 				}
 				boxShadow={isFocused ? 'dark-lg' : 'base'}

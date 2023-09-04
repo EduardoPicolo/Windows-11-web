@@ -11,14 +11,16 @@ export const styles: Theme['styles'] = {
 			backgroundSize: 'cover',
 			backgroundAttachment: 'fixed',
 			minBlockSize: '100vh',
+			userSelect: 'none',
+			WebkitFontSmoothing: 'antialiased',
+			MozOsxFontSmoothing: 'grayscale',
+			overflow: 'hidden',
 
 			_dark: {
 				background:
 					'radial-gradient(circle at center -32px,#21232c,#181a22 40%) no-repeat',
 				backgroundSize: 'contain',
 			},
-
-			overflow: 'clip',
 
 			'.moveable-control-box': {
 				zIndex: '1',

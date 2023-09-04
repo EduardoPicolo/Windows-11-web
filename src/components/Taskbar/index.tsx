@@ -5,12 +5,12 @@ import {
 	Box,
 	Grid,
 	GridItem,
+	type GridProps,
 	HStack,
 	InputLeftElement,
 	useDisclosure,
 	useStyleConfig,
 } from '@chakra-ui/react';
-import { type GridProps } from '@chakra-ui/styled-system';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 import { StartApp } from '@/components/Apps/Start';

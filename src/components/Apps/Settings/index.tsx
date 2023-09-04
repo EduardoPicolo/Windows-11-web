@@ -14,13 +14,14 @@ import {
 	SkeletonCircle,
 	Tab,
 	TabList,
+	TabPanel,
+	TabPanels,
 	Tabs,
 	Text,
 	useTabsContext,
 	VStack,
 } from '@chakra-ui/react';
 import { IoSearch } from 'react-icons/io5';
-import { AnimatePresence, motion } from 'framer-motion';
 
 import { settingsItems } from '@/components/Apps/Settings/settingsItems';
 
@@ -32,16 +33,18 @@ export function SettingsSidebar() {
 	return (
 		<VStack align="stretch" spacing={8}>
 			<HStack
+				p={2}
 				_hover={{
 					bg: 'hoverBg',
 				}}
+				borderRadius="md"
 			>
-				<SkeletonCircle boxSize={16} />
+				<SkeletonCircle size="16" />
 				<Box>
 					<Heading size="sm" fontWeight="semibold">
 						Eduardo Pícolo
 					</Heading>
-					<Text fontSize="sm" fontWeight="medium">
+					<Text fontSize="xs" fontWeight="medium">
 						eduardonpicolo@hotmail.com
 					</Text>
 				</Box>
@@ -70,6 +73,7 @@ export function SettingsSidebar() {
 							leftIcon={item.icon}
 							iconSpacing={4}
 							justifyContent="flex-start"
+							fontSize="sm"
 							fontWeight="normal"
 							color="inherit"
 							bg={index === selectedIndex ? 'hoverBg' : 'transparent'}
@@ -108,34 +112,26 @@ export function Settings() {
 			variant="unstyled"
 			width="full"
 			height="full"
+			isLazy
+			lazyBehavior="unmount"
 		>
 			<Grid gridTemplateColumns="300px 1fr" w="full" p={4} gap={8}>
 				<GridItem>
 					<SettingsSidebar />
 				</GridItem>
 
-				<GridItem position="relative" overflow="clip">
-					<AnimatePresence mode="popLayout">
-						{settingsItems.map((item, index) =>
-							index === activeIndex ? (
-								<motion.div
-									key={item.label}
-									initial={{
-										x: '100%',
-										opacity: 0,
-									}}
-									animate={{ x: 0, opacity: 1 }}
-									exit={{ opacity: 0 }}
-									transition={{
-										duration: 0.3,
-										ease: 'circIn',
-									}}
-								>
-									{item.panel}
-								</motion.div>
-							) : null
-						)}
-					</AnimatePresence>
+				<GridItem
+					position="relative"
+					overflow="clip"
+					width="full"
+					maxWidth="1024px"
+					margin="0 auto"
+				>
+					<TabPanels>
+						{settingsItems.map((item) => (
+							<TabPanel key={item.label}>{item.panel}</TabPanel>
+						))}
+					</TabPanels>
 				</GridItem>
 			</Grid>
 		</Tabs>

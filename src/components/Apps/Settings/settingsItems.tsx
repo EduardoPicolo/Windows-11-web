@@ -1,6 +1,8 @@
 import Image from 'next/image';
-import { Heading, HStack } from '@chakra-ui/react';
+import { Box, Heading } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 
+import { Personalisation } from '@/components/Apps/Settings/Personalization';
 import AccessibilityIcon from '@/public/icons/Accessibility.webp';
 import AccountsIcon from '@/public/icons/Accounts.webp';
 import AppsIcon from '@/public/icons/Apps.webp';
@@ -17,7 +19,7 @@ export const settingsItems = [
 	{
 		label: 'System',
 		icon: (
-			<Image src={SystemIcon} alt="system" width={20} unoptimized />
+			<Image src={SystemIcon} alt="system" width={18} unoptimized />
 		),
 		panel: (
 			<Heading size="lg" fontWeight="semibold">
@@ -27,7 +29,7 @@ export const settingsItems = [
 	},
 	{
 		label: 'Bluetooth & devices',
-		icon: <Image src={BluetoothIcon} alt="bluetooth" width={20} />,
+		icon: <Image src={BluetoothIcon} alt="bluetooth" width={18} />,
 		panel: (
 			<Heading size="lg" fontWeight="semibold">
 				Bluetooth & devices
@@ -36,11 +38,27 @@ export const settingsItems = [
 	},
 	{
 		label: 'Network & internet',
-		icon: <Image src={WifiIcon} alt="network" width={20} />,
+		icon: <Image src={WifiIcon} alt="network" width={18} />,
 		panel: (
-			<Heading size="lg" fontWeight="semibold">
-				Network & internet
-			</Heading>
+			<Box>
+				<Heading size="lg" fontWeight="semibold" mb={8}>
+					Network & internet
+				</Heading>
+				<motion.div
+					initial={{
+						y: 100,
+						opacity: 0.3,
+					}}
+					animate={{ y: 0, opacity: 1 }}
+					exit={{ opacity: 0 }}
+					transition={{
+						duration: 0.3,
+						ease: 'circOut',
+					}}
+				>
+					<Box w="300px" height="200px" bg="blue.300" />
+				</motion.div>
+			</Box>
 		),
 	},
 	{
@@ -49,48 +67,39 @@ export const settingsItems = [
 			<Image
 				src={PersonalisationIcon}
 				alt="personalization"
-				width={20}
+				width={18}
 			/>
 		),
-		panel: (
-			<HStack>
-				<Heading size="lg" fontWeight="semibold" color="gray.500">
-					Personalization &gt;
-				</Heading>
-				<Heading size="lg" fontWeight="semibold">
-					Background
-				</Heading>
-			</HStack>
-		),
+		panel: <Personalisation />,
 	},
 	{
 		label: 'Apps',
-		icon: <Image src={AppsIcon} alt="apps" width={20} />,
+		icon: <Image src={AppsIcon} alt="apps" width={18} />,
 	},
 	{
 		label: 'Accounts',
-		icon: <Image src={AccountsIcon} alt="accounts" width={20} />,
+		icon: <Image src={AccountsIcon} alt="accounts" width={18} />,
 	},
 	{
 		label: 'Time & language',
-		icon: <Image src={TimeIcon} alt="time" width={20} />,
+		icon: <Image src={TimeIcon} alt="time" width={18} />,
 	},
 	{
 		label: 'Gaming',
-		icon: <Image src={GamingIcon} alt="gaming" width={20} />,
+		icon: <Image src={GamingIcon} alt="gaming" width={18} />,
 	},
 	{
 		label: 'Accessibility',
 		icon: (
-			<Image src={AccessibilityIcon} alt="accessibility" width={20} />
+			<Image src={AccessibilityIcon} alt="accessibility" width={18} />
 		),
 	},
 	{
 		label: 'Privacy & security',
-		icon: <Image src={PrivacyIcon} alt="privacy" width={20} />,
+		icon: <Image src={PrivacyIcon} alt="privacy" width={18} />,
 	},
 	{
 		label: 'Windows Update',
-		icon: <Image src={UpdateIcon} alt="update" width={20} />,
+		icon: <Image src={UpdateIcon} alt="update" width={18} />,
 	},
 ];

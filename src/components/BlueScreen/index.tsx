@@ -29,7 +29,7 @@ export function BlueScreen() {
 						we&apos;ll restart for you.
 					</Heading>
 
-					<Text fontSize="sm" mt={16}>
+					<Text fontSize="xs" mt={16}>
 						If you&apos;d like to know more, you can search online
 						later for this error:{' '}
 						<Text as="span" fontWeight="medium">

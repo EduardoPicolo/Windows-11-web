@@ -64,7 +64,7 @@ export function QuickSettingsItem(props: QuickSettingsItemProps) {
 			</Button>
 
 			<Text
-				fontSize="sm"
+				fontSize="xs"
 				fontWeight="semibold"
 				mt={2}
 				cursor="default"

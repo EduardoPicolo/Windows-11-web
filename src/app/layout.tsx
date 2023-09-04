@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { Poppins } from 'next/font/google';
 import localFont from 'next/font/local';
 import { Analytics } from '@vercel/analytics/react';
 
@@ -38,30 +37,6 @@ const segoe = localFont({
 	variable: '--body-font',
 });
 
-// const opensans = Open_Sans({
-// 	weight: ['300', '400', '500', '600', '700', '800'],
-// 	subsets: ['latin'],
-// 	display: 'swap',
-// 	variable: '--body-font',
-// });
-
-const poppins = Poppins({
-	weight: [
-		'100',
-		'200',
-		'300',
-		'400',
-		'500',
-		'600',
-		'700',
-		'800',
-		'900',
-	],
-	subsets: ['latin'],
-	display: 'swap',
-	variable: '--heading-font',
-});
-
 export const metadata: Metadata = {
 	metadataBase: new URL('https://windows-web.vercel.app'),
 	title: 'Windows 11 Web',
@@ -85,10 +60,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html
-			lang="en"
-			className={`${segoe.variable} ${poppins.variable}`}
-		>
+		<html lang="en" className={`${segoe.variable}`}>
 			<body>
 				<Providers>{children}</Providers>
 				<Analytics />

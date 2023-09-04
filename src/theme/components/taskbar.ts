@@ -9,11 +9,11 @@ export const taskbarTheme = defineStyleConfig({
 		alignItems: 'center',
 		py: '0.175rem',
 		px: 4,
-		background: mode('whiteAlpha.600', 'blackAlpha.800')(props),
+		background: mode('whiteAlpha.700', 'blackAlpha.600')(props),
 		backgroundBlendMode: 'exclusion',
 		backdropFilter: mode(
-			'blur(46.5px) saturate(180%) brightness(1.1) contrast(1.1)',
-			'blur(52.5px) saturate(220%) brightness(1.1) contrast(1.1)'
+			'blur(46.5px) saturate(190%) brightness(1.2)',
+			'blur(52.5px) saturate(233%) brightness(1.1) contrast(0.75)'
 		)(props),
 		zIndex: 3,
 
@@ -45,8 +45,8 @@ export const taskbarTheme = defineStyleConfig({
 			bottom: 0,
 			zIndex: -1,
 			borderRadius: 'inherit',
-			opacity: mode(0.33, 0.2)(props),
-			background: mode('whiteAlpha.300', 'gray.600')(props),
+			// opacity: mode(0.33, 0.2)(props),
+			background: mode('transparent', 'blackAlpha.500')(props),
 		},
 	}),
 	sizes: {},

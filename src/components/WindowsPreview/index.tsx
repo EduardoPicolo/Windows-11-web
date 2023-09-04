@@ -131,7 +131,7 @@ export function WindowsPreview(props: WindowsPreviewProps) {
 													>
 														{app.icon}
 													</Box>
-													<Text fontSize="sm" noOfLines={1}>
+													<Text fontSize="xs" noOfLines={1}>
 														{app.shortName}
 													</Text>
 												</HStack>
