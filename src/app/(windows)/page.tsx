@@ -10,13 +10,9 @@ import { Grid, useDisclosure } from '@chakra-ui/react';
 import Moveable from 'react-moveable';
 import Selecto from 'react-selecto';
 
-import {
-	EdgeApp,
-	SpotifyApp,
-	VSCodeApp,
-} from '@/components/Apps/apps';
 import { DesktopContextMenu } from '@/components/DesktopContextMenu';
 import { DesktopIcon } from '@/components/DesktopIcon';
+import { defaultDesktopApps } from '@/constants/defaultDesktopApps';
 
 export default function Home() {
 	const menuDisclosure = useDisclosure();
@@ -159,9 +155,13 @@ export default function Home() {
 				h="full"
 				textAlign="center"
 			>
-				<DesktopIcon app={EdgeApp} />
-				<DesktopIcon app={VSCodeApp} gridRow={2} />
-				<DesktopIcon app={SpotifyApp} gridRow={3} />
+				{defaultDesktopApps.map((app, index) => (
+					<DesktopIcon
+						key={app.processName}
+						app={app}
+						gridRow={index + 1}
+					/>
+				))}
 			</Grid>
 
 			<DesktopContextMenu

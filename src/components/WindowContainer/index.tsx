@@ -125,16 +125,17 @@ export function WindowContainer(props: WindowContainerProps) {
 		>
 			<Card
 				variant="window"
+				onClick={onFocus}
 				filter={
 					isFocused
 						? 'brightness(1.1) contrast(1.1)'
-						: 'brightness(0.8) contrast(0.8) '
+						: 'brightness(0.9) contrast(0.9) '
 				}
+				boxShadow={isFocused ? 'dark-lg' : 'base'}
+				borderBottomRadius={isMaximized ? '0' : 'md'}
 				userSelect="none"
 				unselectable="on"
 				draggable={false}
-				borderBottomRadius={isMaximized ? '0' : 'md'}
-				onClick={onFocus}
 				{...rest}
 			>
 				<CardHeader className="handle">

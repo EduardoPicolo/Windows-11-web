@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { Heading, HStack } from '@chakra-ui/react';
 
 import AccessibilityIcon from '@/public/icons/Accessibility.webp';
 import AccountsIcon from '@/public/icons/Accounts.webp';
@@ -18,14 +19,29 @@ export const settingsItems = [
 		icon: (
 			<Image src={SystemIcon} alt="system" width={20} unoptimized />
 		),
+		panel: (
+			<Heading size="lg" fontWeight="semibold">
+				System
+			</Heading>
+		),
 	},
 	{
 		label: 'Bluetooth & devices',
 		icon: <Image src={BluetoothIcon} alt="bluetooth" width={20} />,
+		panel: (
+			<Heading size="lg" fontWeight="semibold">
+				Bluetooth & devices
+			</Heading>
+		),
 	},
 	{
 		label: 'Network & internet',
 		icon: <Image src={WifiIcon} alt="network" width={20} />,
+		panel: (
+			<Heading size="lg" fontWeight="semibold">
+				Network & internet
+			</Heading>
+		),
 	},
 	{
 		label: 'Personalization',
@@ -35,6 +51,16 @@ export const settingsItems = [
 				alt="personalization"
 				width={20}
 			/>
+		),
+		panel: (
+			<HStack>
+				<Heading size="lg" fontWeight="semibold" color="gray.500">
+					Personalization &gt;
+				</Heading>
+				<Heading size="lg" fontWeight="semibold">
+					Background
+				</Heading>
+			</HStack>
 		),
 	},
 	{

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
 	Box,
 	Button,
@@ -11,15 +12,23 @@ import {
 	InputGroup,
 	InputRightElement,
 	SkeletonCircle,
-	Stack,
+	Tab,
+	TabList,
+	Tabs,
 	Text,
+	useTabsContext,
 	VStack,
 } from '@chakra-ui/react';
 import { IoSearch } from 'react-icons/io5';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { settingsItems } from '@/components/Apps/Settings/settingsItems';
 
 export function SettingsSidebar() {
+	const { selectedIndex } = useTabsContext();
+
+	console.log('selectedIndex', selectedIndex);
+
 	return (
 		<VStack align="stretch" spacing={8}>
 			<HStack
@@ -53,37 +62,82 @@ export function SettingsSidebar() {
 			</InputGroup>
 
 			<ButtonGroup variant="ghost" colorScheme="gray">
-				<Stack w="full" align="stretch" spacing={1}>
-					{settingsItems.map((item) => (
-						<Button
+				<TabList w="full" gap={1}>
+					{settingsItems.map((item, index) => (
+						<Tab
 							key={item.label}
+							as={Button}
 							leftIcon={item.icon}
 							iconSpacing={4}
 							justifyContent="flex-start"
 							fontWeight="normal"
 							color="inherit"
+							bg={index === selectedIndex ? 'hoverBg' : 'transparent'}
+							position="relative"
+							_selected={{
+								_before: {
+									content: '""',
+									position: 'absolute',
+									top: '50%',
+									left: 0,
+									transform: 'translateY(-50%)',
+									width: '3px',
+									height: '40%',
+									bg: 'primary',
+									borderRadius: 'lg',
+								},
+							}}
 						>
 							{item.label}
-						</Button>
+						</Tab>
 					))}
-				</Stack>
+				</TabList>
 			</ButtonGroup>
 		</VStack>
 	);
 }
 
 export function Settings() {
-	return (
-		<Grid gridTemplateColumns="300px 1fr" p={4} gap={8}>
-			<GridItem>
-				<SettingsSidebar />
-			</GridItem>
+	const [activeIndex, setIndex] = useState(0);
 
-			<GridItem>
-				<Heading size="lg" fontWeight="semibold">
-					Personalization &gt; Background
-				</Heading>
-			</GridItem>
-		</Grid>
+	return (
+		<Tabs
+			index={activeIndex}
+			onChange={setIndex}
+			orientation="vertical"
+			variant="unstyled"
+			width="full"
+			height="full"
+		>
+			<Grid gridTemplateColumns="300px 1fr" w="full" p={4} gap={8}>
+				<GridItem>
+					<SettingsSidebar />
+				</GridItem>
+
+				<GridItem position="relative" overflow="clip">
+					<AnimatePresence mode="popLayout">
+						{settingsItems.map((item, index) =>
+							index === activeIndex ? (
+								<motion.div
+									key={item.label}
+									initial={{
+										x: '100%',
+										opacity: 0,
+									}}
+									animate={{ x: 0, opacity: 1 }}
+									exit={{ opacity: 0 }}
+									transition={{
+										duration: 0.3,
+										ease: 'circIn',
+									}}
+								>
+									{item.panel}
+								</motion.div>
+							) : null
+						)}
+					</AnimatePresence>
+				</GridItem>
+			</Grid>
+		</Tabs>
 	);
 }

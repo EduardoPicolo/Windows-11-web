@@ -119,7 +119,16 @@ export const SettingsApp: App = {
 	shortName: 'Settings',
 	fullName: 'Settings',
 	processName: 'settings',
-	icon: <Image src={SettingsIcon} alt="settings" />,
+	icon: (
+		<Image
+			src={SettingsIcon}
+			alt="settings"
+			style={{
+				// eslint-disable-next-line no-inline-styles/no-inline-styles -- Icon is too small in some cases
+				minWidth: '28px',
+			}}
+		/>
+	),
 	Window: Settings,
 	initialSize: {
 		width: 1024,

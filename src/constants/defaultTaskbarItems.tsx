@@ -4,21 +4,13 @@ import {
 	ChatApp,
 	EdgeApp,
 	FileExplorerApp,
+	SettingsApp,
 	StoreApp,
-	TasksApp,
 } from '@/components/Apps/apps';
 
-// import { Process } from '@/components/Apps/apps';
-
-// export const defaultTaskbarItems: Process[] = [
-// 	'chat',
-// 	'edge',
-// 	'fileExplorer',
-// 	'store',
-// ];
-
 export const defaultTaskbarItems: App[] = [
-	TasksApp,
+	// TasksApp,
+	SettingsApp,
 	ChatApp,
 	FileExplorerApp,
 	EdgeApp,

@@ -87,12 +87,13 @@ const window = definePartsStyle((props) => ({
 		border: '1px solid whiteAlpha.300',
 		borderColor: 'whiteAlpha.400',
 		backgroundColor: mode('whiteAlpha.600', 'blackAlpha.800')(props),
-		boxShadow: 'xl',
+		boxShadow: 'base',
 		backdropFilter: mode(
 			'blur(46.5px) saturate(180%)',
 			'blur(52.5px) saturate(220%) contrast(1.1) brightness(1.1)'
 		)(props),
 		zIndex: 1,
+		transition: 'all 0.1s ease-in-out',
 
 		// Add noise to the background
 		_after: {
@@ -103,7 +104,7 @@ const window = definePartsStyle((props) => ({
 			right: 0,
 			bottom: 0,
 			zIndex: -1,
-			opacity: mode(0.5, 0.4)(props),
+			opacity: mode(0.5, 0.3)(props),
 			border: '1px solid',
 			borderColor: mode('blackAlpha.400', 'whiteAlpha.400')(props),
 			borderRadius: 'inherit',
