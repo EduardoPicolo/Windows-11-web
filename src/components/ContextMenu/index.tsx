@@ -1,5 +1,7 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { Box, Menu, MenuProps, Portal } from '@chakra-ui/react';
+
+import { useEventListener } from '@/hooks/useEventListener';
 
 export type ContextMenuProps = MenuProps & {
 	position: {
@@ -13,27 +15,18 @@ export function ContextMenu(props: ContextMenuProps) {
 
 	const menuRef = useRef<HTMLDivElement>(null);
 
-	useLayoutEffect(() => {
-		/** Custom outside click handle */
-		const handleOusideClick = (event: MouseEvent) => {
-			if (
-				menuRef.current &&
-				menuRef.current.contains(event.target as Node)
-			) {
-				console.log('Clicked inside menu, not closing.');
+	useEventListener('click', (event) => {
+		if (
+			menuRef.current &&
+			menuRef.current.contains(event.target as Node)
+		) {
+			console.log('Clicked inside menu, not closing.');
 
-				return;
-			}
+			return;
+		}
 
-			rest.onClose?.();
-		};
-
-		document.addEventListener('click', handleOusideClick);
-
-		return () => {
-			document.removeEventListener('click', handleOusideClick);
-		};
-	}, []);
+		rest.onClose?.();
+	});
 
 	return (
 		<Portal appendToParentPortal={false}>
@@ -42,6 +35,8 @@ export function ContextMenu(props: ContextMenuProps) {
 				position="absolute"
 				left={position.x}
 				top={position.y}
+				hidden={rest.isOpen === false}
+				display={rest.isOpen ? 'block' : 'none'}
 				w={0}
 				h={0}
 			>
@@ -52,6 +47,7 @@ export function ContextMenu(props: ContextMenuProps) {
 					 * itself.
 					 */
 					closeOnBlur={false}
+					computePositionOnMount
 					{...rest}
 				>
 					{(internalProps) =>

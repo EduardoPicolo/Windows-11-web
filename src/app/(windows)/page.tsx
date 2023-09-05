@@ -10,14 +10,29 @@ import { Grid, useDisclosure } from '@chakra-ui/react';
 import Moveable from 'react-moveable';
 import Selecto from 'react-selecto';
 
+import { AppContextMenu } from '@/components/AppContextMenu';
 import { DesktopContextMenu } from '@/components/DesktopContextMenu';
 import { DesktopIcon } from '@/components/DesktopIcon';
 import { defaultDesktopApps } from '@/constants/defaultDesktopApps';
 
 export default function Home() {
-	const menuDisclosure = useDisclosure();
+	const desktopMenuDisclosure = useDisclosure();
 
+	const appMenuDisclosure = useDisclosure();
+
+	const [selectedApp, setSelectedApp] = useState<App | null>(null);
+	const selectedAppRef = useRef<HTMLDivElement>(null);
+
+	/**
+	 * Two position states are needed because when it changes, the menu
+	 * still have to animate out and it needs to happen from the
+	 * previous position.
+	 */
 	const [menuPosition, setMenuPosition] = useState({
+		x: 0,
+		y: 0,
+	});
+	const [appMenuPosition, setAppMenuPosition] = useState({
 		x: 0,
 		y: 0,
 	});
@@ -35,6 +50,7 @@ export default function Home() {
 				(e.target as HTMLElement).tagName === 'P'
 			) {
 				console.log('Clicked desktop icon, not opening menu.');
+				desktopMenuDisclosure.onClose();
 
 				return;
 			}
@@ -44,9 +60,31 @@ export default function Home() {
 				y: e.clientY,
 			});
 
-			menuDisclosure.onOpen();
+			appMenuDisclosure.onClose();
+			desktopMenuDisclosure.onOpen();
 		},
-		[menuDisclosure]
+		[appMenuDisclosure, desktopMenuDisclosure]
+	);
+
+	const handleAppContextMenu = useCallback(
+		(app: App): MouseEventHandler<HTMLDivElement> =>
+			(e) => {
+				e.preventDefault();
+				setSelectedApp(app);
+
+				console.group('App menu');
+				console.log('App:', app);
+				console.log('Event:', e.clientX, e.clientY);
+				console.groupEnd();
+
+				setAppMenuPosition({
+					x: e.clientX,
+					y: e.clientY,
+				});
+
+				appMenuDisclosure.onOpen();
+			},
+		[appMenuDisclosure]
 	);
 
 	const [targets, setTargets] = useState<
@@ -160,14 +198,28 @@ export default function Home() {
 						key={app.processName}
 						app={app}
 						gridRow={index + 1}
+						onContextMenu={handleAppContextMenu(app)}
+						className={`desktop-icon ${
+							app === selectedApp && appMenuDisclosure.isOpen
+								? 'selected'
+								: ''
+						}`}
 					/>
 				))}
 			</Grid>
 
 			<DesktopContextMenu
 				position={menuPosition}
-				{...menuDisclosure}
+				{...desktopMenuDisclosure}
 			/>
+
+			{selectedApp ? (
+				<AppContextMenu
+					position={appMenuPosition}
+					app={selectedApp}
+					{...appMenuDisclosure}
+				/>
+			) : null}
 		</main>
 	);
 }
