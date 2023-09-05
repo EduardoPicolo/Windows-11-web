@@ -37,7 +37,7 @@ export function StartMenuContainer({
 	});
 
 	return (
-		<Portal>
+		<Portal appendToParentPortal={false}>
 			<AnimatePresence>
 				{isOpen && (
 					<MotionDivWithStyles
@@ -50,6 +50,7 @@ export function StartMenuContainer({
 						// eslint-disable-next-line react-perf/jsx-no-new-object-as-prop -- ignore
 						transition={{
 							type: 'tween',
+							duration: 0.3,
 							ease: 'circOut',
 						}}
 						zIndex={2}

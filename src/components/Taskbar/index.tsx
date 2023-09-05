@@ -1,6 +1,11 @@
 'use client';
 
-import { type MouseEventHandler, useCallback, useState } from 'react';
+import {
+	type MouseEventHandler,
+	useCallback,
+	useMemo,
+	useState,
+} from 'react';
 import {
 	Box,
 	Grid,
@@ -23,7 +28,7 @@ import { WindowsPreview } from '@/components/WindowsPreview';
 import { useWindows } from '@/contexts/Windows';
 import SearchIconDark from '@/public/icons/Search_Dark.png';
 import SearchIconLight from '@/public/icons/Search_Light.png';
-import { getEntries, getValues } from '@/utils/getEntries';
+import { getEntries, getKeys, getValues } from '@/utils/getEntries';
 
 interface TaskbarProps extends GridProps {
 	initialApps: App[];
@@ -32,9 +37,12 @@ interface TaskbarProps extends GridProps {
 export function Taskbar(props: TaskbarProps) {
 	const { initialApps, ...rest } = props;
 
-	const { windows, addWindow } = useWindows();
+	const { windows, addWindow, minimize, focusWindow } = useWindows();
 
-	const runningProcesses = getEntries(windows);
+	const runningProcesses = useMemo(
+		() => getEntries(windows),
+		[windows]
+	);
 
 	const handleAddWindow = useCallback(
 		(app: App): MouseEventHandler<HTMLButtonElement> =>
@@ -42,6 +50,18 @@ export function Taskbar(props: TaskbarProps) {
 				addWindow(app);
 			},
 		[addWindow]
+	);
+
+	const handleShowWindow = useCallback(
+		(
+			process: Process,
+			id: number
+		): MouseEventHandler<HTMLButtonElement> =>
+			(_event) => {
+				minimize.off(process, id);
+				focusWindow(process, id);
+			},
+		[focusWindow, minimize]
 	);
 
 	const contextMenuDisclosure = useDisclosure();
@@ -118,7 +138,10 @@ export function Taskbar(props: TaskbarProps) {
 										app={app}
 										onClick={
 											windows?.[app?.processName]
-												? undefined
+												? handleShowWindow(
+														app?.processName,
+														getKeys(windows?.[app?.processName])?.[0]
+												  )
 												: handleAddWindow(app)
 										}
 									/>
@@ -137,6 +160,10 @@ export function Taskbar(props: TaskbarProps) {
 										<TaskbarIcon
 											key={process}
 											app={getValues(processWindows)[0]}
+											onClick={handleShowWindow(
+												process,
+												getKeys(processWindows)[0]
+											)}
 										/>
 									</WindowsPreview>
 								))}

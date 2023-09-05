@@ -10,6 +10,7 @@ import {
 	useState,
 } from 'react';
 import { Box, Center, Portal } from '@chakra-ui/react';
+import { AnimatePresence } from 'framer-motion';
 
 import { Process } from '@/components/Apps/apps';
 import { WindowContainer } from '@/components/WindowContainer';
@@ -144,37 +145,43 @@ export function WindowsProvider(props: WindowsProviderProps) {
 					top="env(safe-area-inset-top, 0)"
 					left="env(safe-area-inset-left, 0)"
 				>
-					{getEntries(windows).flatMap(([process, processWindows]) =>
-						getEntries(processWindows).flatMap(([id, app]) => (
-							<WindowContainer
-								key={`${process}-${id}`}
-								title={app.fullName}
-								icon={app.icon}
-								isMinimized={app.isMinimized}
-								isMaximized={app.isMaximized}
-								isFocused={focusedWindow?.id === id}
-								onFocus={handleFocusWindow(process, id)}
-								onMinimize={handleMinimizeWindow(process, id)}
-								onMaximize={handleToggleMaximizeWindow(process, id)}
-								onClose={handleCloseWindow(process, id)}
-								initialPosition={getInitialPosition(app)}
-							>
-								{app?.Window ? (
-									<app.Window />
-								) : (
-									<Center
-										h="full"
-										userSelect="none"
-										unselectable="on"
-										pointerEvents="none"
-										draggable={false}
+					<AnimatePresence mode="popLayout">
+						{getEntries(windows).flatMap(
+							([process, processWindows]) =>
+								getEntries(processWindows).flatMap(([id, app]) => (
+									<WindowContainer
+										key={`${process}-${id}`}
+										title={app.fullName}
+										icon={app.icon}
+										isMinimized={app.isMinimized}
+										isMaximized={app.isMaximized}
+										isFocused={focusedWindow?.id === id}
+										onFocus={handleFocusWindow(process, id)}
+										onMinimize={handleMinimizeWindow(process, id)}
+										onMaximize={handleToggleMaximizeWindow(
+											process,
+											id
+										)}
+										onClose={handleCloseWindow(process, id)}
+										initialPosition={getInitialPosition(app)}
 									>
-										{app.icon}
-									</Center>
-								)}
-							</WindowContainer>
-						))
-					)}
+										{app?.Window ? (
+											<app.Window />
+										) : (
+											<Center
+												h="full"
+												userSelect="none"
+												unselectable="on"
+												pointerEvents="none"
+												draggable={false}
+											>
+												{app.icon}
+											</Center>
+										)}
+									</WindowContainer>
+								))
+						)}
+					</AnimatePresence>
 				</Box>
 			</Portal>
 

@@ -32,7 +32,7 @@ export function ViewSubmenu() {
 							<Text>Large icons</Text>
 						</HStack>
 
-						<Text fontSize="xs" fontWeight="light">
+						<Text fontSize="xs" fontWeight="light" opacity={0.6}>
 							Ctrl+Shift+2
 						</Text>
 					</HStack>
@@ -49,7 +49,7 @@ export function ViewSubmenu() {
 							<Text> Medium icons</Text>
 						</HStack>
 
-						<Text fontSize="xs" fontWeight="light">
+						<Text fontSize="xs" fontWeight="light" opacity={0.6}>
 							Ctrl+Shift+3
 						</Text>
 					</HStack>
@@ -66,7 +66,7 @@ export function ViewSubmenu() {
 							<Text> Small icons</Text>
 						</HStack>
 
-						<Text fontSize="xs" fontWeight="light">
+						<Text fontSize="xs" fontWeight="light" opacity={0.6}>
 							Ctrl+Shift+4
 						</Text>
 					</HStack>

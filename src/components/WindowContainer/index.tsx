@@ -24,6 +24,7 @@ import { BiSquareRounded } from 'react-icons/bi';
 import { IoClose } from 'react-icons/io5';
 import { VscChromeMinimize } from 'react-icons/vsc';
 import { type Props, Rnd } from 'react-rnd';
+import { motion } from 'framer-motion';
 
 export interface WindowContainerProps
 	extends Omit<CardProps, 'onFocus'> {
@@ -45,6 +46,8 @@ const staticPosition = {
 	x: 0,
 	y: 0,
 };
+
+const MotionCard = motion(Card);
 
 export function WindowContainer(props: WindowContainerProps) {
 	const {
@@ -90,12 +93,14 @@ export function WindowContainer(props: WindowContainerProps) {
 		height: initialPosition?.height ?? 100,
 	});
 
+	// if (isMinimized) return null;
+
 	return (
 		<Rnd
 			dragHandleClassName="handle"
 			style={{
 				// eslint-disable-next-line no-inline-styles/no-inline-styles -- style prop is needed to style Rnd
-				display: isMinimized ? 'none' : 'flex',
+				// display: isMinimized ? 'none' : 'flex',
 				zIndex: isFocused ? 2 : 1,
 			}}
 			default={initialPosition}
@@ -123,8 +128,9 @@ export function WindowContainer(props: WindowContainerProps) {
 			}}
 			/* eslint-enable react-perf/jsx-no-new-function-as-prop */
 		>
-			<Card
+			<MotionCard
 				variant="window"
+				height="100%"
 				onClick={onFocus}
 				filter={
 					isFocused
@@ -133,9 +139,41 @@ export function WindowContainer(props: WindowContainerProps) {
 				}
 				boxShadow={isFocused ? 'dark-lg' : 'base'}
 				borderBottomRadius={isMaximized ? '0' : 'md'}
-				userSelect="none"
-				unselectable="on"
-				draggable={false}
+				// hidden={isMinimized}
+				initial={{
+					opacity: 0.33,
+					scale: 0.75,
+					y: 0,
+					x: 0,
+				}}
+				animate={
+					isMinimized
+						? {
+								opacity: 0,
+								scale: 0.25,
+								y: '100%',
+						  }
+						: {
+								opacity: 1,
+								scale: 1,
+						  }
+				}
+				exit={
+					isMinimized
+						? {
+								opacity: 0,
+								scale: 0,
+						  }
+						: {
+								opacity: 0,
+								scale: 0.75,
+						  }
+				}
+				transition={{
+					type: 'tween',
+					duration: 0.2,
+					ease: 'circOut',
+				}}
 				{...rest}
 			>
 				<CardHeader className="handle">
@@ -194,7 +232,7 @@ export function WindowContainer(props: WindowContainerProps) {
 				</CardHeader>
 
 				<CardBody overflow="auto">{children}</CardBody>
-			</Card>
+			</MotionCard>
 		</Rnd>
 	);
 }

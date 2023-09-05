@@ -188,7 +188,7 @@ export default function Home() {
 				onContextMenu={handleContextMenu}
 				className="elements"
 				gridTemplateColumns="repeat(auto-fill, minmax(90px, 1fr))"
-				gridTemplateRows="repeat(auto-fill, minmax(110px, 1fr));"
+				gridAutoRows="min-content"
 				gap={1}
 				h="full"
 				textAlign="center"

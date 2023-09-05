@@ -2,6 +2,7 @@ import {
 	type MouseEventHandler,
 	type ReactNode,
 	useCallback,
+	useMemo,
 } from 'react';
 import {
 	Box,
@@ -18,7 +19,6 @@ import {
 	PopoverTrigger,
 	Portal,
 	Text,
-	useColorModeValue,
 } from '@chakra-ui/react';
 import { IoClose } from 'react-icons/io5';
 
@@ -40,6 +40,16 @@ export function WindowsPreview(props: WindowsPreviewProps) {
 		focusedWindow,
 		focusWindow,
 	} = useWindows();
+
+	const isRunning = useMemo(
+		() => Boolean(windows?.[process]),
+		[windows, process]
+	);
+
+	const allProcessWindows = useMemo(
+		() => getEntries(windows?.[process]),
+		[windows, process]
+	);
 
 	const handleFocusWindow = useCallback(
 		(windowId: number) => () => {
@@ -65,7 +75,7 @@ export function WindowsPreview(props: WindowsPreviewProps) {
 		[closeWindow]
 	);
 
-	const notchColor = useColorModeValue('blue.600', 'blue.400');
+	// const notchColor = useColorModeValue('blue.600', 'blue.400');
 
 	return (
 		<Popover trigger="hover" openDelay={400} gutter={16} {...rest}>
@@ -73,7 +83,7 @@ export function WindowsPreview(props: WindowsPreviewProps) {
 				<Box
 					position="relative"
 					_after={{
-						display: windows?.[process] ? 'block' : 'none',
+						display: isRunning ? 'block' : 'none',
 						content: '""',
 						position: 'absolute',
 						bottom: 0,
@@ -85,7 +95,7 @@ export function WindowsPreview(props: WindowsPreviewProps) {
 						borderRadius: 'full',
 						bg:
 							focusedWindow?.process === process
-								? notchColor
+								? 'primary'
 								: 'gray.400',
 						opacity: 1,
 						transition: 'all 0.2s',
@@ -95,7 +105,7 @@ export function WindowsPreview(props: WindowsPreviewProps) {
 				</Box>
 			</PopoverTrigger>
 			<Portal>
-				{windows?.[process] && (
+				{isRunning && (
 					<PopoverContent
 						width="fit-content"
 						backgroundColor="transparent"
@@ -111,52 +121,48 @@ export function WindowsPreview(props: WindowsPreviewProps) {
 						boxShadow="none"
 					>
 						<HStack spacing={1.5}>
-							{getEntries(windows?.[process])?.map(
-								([windowId, app]) => (
-									<Card
-										key={windowId}
-										size="sm"
-										w="200px"
-										onClick={handleFocusWindow(windowId)}
-									>
-										<CardHeader>
-											<HStack justifyContent="space-between">
-												<HStack>
-													<Box
-														boxSize="18px"
-														userSelect="none"
-														unselectable="on"
-														draggable={false}
-														pointerEvents="none"
-													>
-														{app.icon}
-													</Box>
-													<Text fontSize="xs" noOfLines={1}>
-														{app.shortName}
-													</Text>
-												</HStack>
-
-												<IconButton
-													aria-label="close"
-													colorScheme="red"
-													size="xs"
-													variant="ghost"
-													icon={<Icon as={IoClose} boxSize={5} />}
-													onClick={handleCloseWindow(
-														process,
-														windowId
-													)}
-												/>
+							{allProcessWindows?.map(([windowId, app]) => (
+								<Card
+									key={windowId}
+									size="sm"
+									w="200px"
+									onClick={handleFocusWindow(windowId)}
+									borderRadius="md"
+								>
+									<CardHeader>
+										<HStack justifyContent="space-between">
+											<HStack>
+												<Box
+													boxSize="18px"
+													userSelect="none"
+													unselectable="on"
+													draggable={false}
+													pointerEvents="none"
+												>
+													{app.icon}
+												</Box>
+												<Text fontSize="xs" noOfLines={1}>
+													{app.shortName}
+												</Text>
 											</HStack>
-										</CardHeader>
-										<CardBody>
-											<Center w="full">
-												<Box boxSize="150px">{app?.icon}</Box>
-											</Center>
-										</CardBody>
-									</Card>
-								)
-							)}
+
+											<IconButton
+												aria-label="close"
+												colorScheme="red"
+												size="xs"
+												variant="ghost"
+												icon={<Icon as={IoClose} boxSize={5} />}
+												onClick={handleCloseWindow(process, windowId)}
+											/>
+										</HStack>
+									</CardHeader>
+									<CardBody borderBottomRadius="inherit">
+										<Center w="full">
+											<Box boxSize="150px">{app?.icon}</Box>
+										</Center>
+									</CardBody>
+								</Card>
+							))}
 						</HStack>
 					</PopoverContent>
 				)}
