@@ -1,6 +1,7 @@
 import Image, { StaticImageData } from 'next/image';
 
 import { Edge } from '@/components/Apps/Edge';
+import { Github } from '@/components/Apps/Github';
 import { Settings } from '@/components/Apps/Settings';
 import { Spotify } from '@/components/Apps/Spotify';
 import { VSCode } from '@/components/Apps/VSCode';
@@ -233,7 +234,7 @@ export const GithubApp: App = {
 			alt="github"
 		/>
 	),
-	Window: null,
+	Window: Github,
 };
 
 export const apps = {
