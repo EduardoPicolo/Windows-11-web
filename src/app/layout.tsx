@@ -6,31 +6,15 @@ import { Providers } from './providers';
 
 const segoe = localFont({
 	src: [
-		// Text
 		{
-			path: './fonts/SegoeUI-VF/Segoe-UI-Variable-Static-Text-Light.ttf',
+			path: './fonts/SegoeUI-VF/SegoeUI-VF.woff2',
 			style: 'normal',
-			weight: '100',
+			weight: '100 900',
 		},
 		{
-			path: './fonts/SegoeUI-VF/Segoe-UI-Variable-Static-Text-Semilight.ttf',
-			style: 'normal',
-			weight: '300',
-		},
-		{
-			path: './fonts/SegoeUI-VF/SegoeUI-VF.ttf',
-			style: 'normal',
-			weight: '400 500',
-		},
-		{
-			path: './fonts/SegoeUI-VF/Segoe-UI-Variable-Static-Text-Semibold.ttf',
-			style: 'normal',
-			weight: '600',
-		},
-		{
-			path: './fonts/SegoeUI-VF/Segoe-UI-Variable-Static-Text-Bold.ttf',
-			style: 'normal',
-			weight: '700 900',
+			path: './fonts/SegoeUI-VF/SegoeUI-VF.woff2',
+			style: 'italic',
+			weight: '100 900',
 		},
 	],
 	display: 'swap',

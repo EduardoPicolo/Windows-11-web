@@ -37,8 +37,8 @@ export const Clock = forwardRef<ClockProps, 'div'>((props, ref) => {
 		navigator?.language ?? 'en-US',
 		{
 			year: 'numeric',
-			day: 'numeric',
-			month: 'numeric',
+			day: '2-digit',
+			month: '2-digit',
 		}
 	);
 
@@ -59,8 +59,8 @@ export const Clock = forwardRef<ClockProps, 'div'>((props, ref) => {
 				py={1}
 				px={2}
 				borderRadius="md"
-				fontSize="xs"
-				fontWeight="semibold"
+				fontSize="12.5px"
+				fontWeight="medium"
 				lineHeight={1.35}
 				cursor="default"
 				transition="all 0.2s"

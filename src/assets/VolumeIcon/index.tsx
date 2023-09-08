@@ -66,7 +66,7 @@ export function SpeakerIcon(props: SpeakerIconProps) {
 				strokeLinejoin="round"
 				strokeWidth="42px"
 				opacity={firstLevelOpacity}
-				transition="all 0.1s ease-in-out"
+				transition="all 0.2s ease-in-out"
 			/>
 			<chakra.path
 				d="M 366.5 368 C 385.98 334.08 398.5 303.94 398.5 256 C 398.5 208.06 386.5 178.26 366.5 144"
@@ -76,7 +76,7 @@ export function SpeakerIcon(props: SpeakerIconProps) {
 				strokeLinejoin="round"
 				strokeWidth="42px"
 				opacity={secondLevelOpacity}
-				transition="all 0.1s ease-in-out"
+				transition="all 0.2s ease-in-out"
 			/>
 			<chakra.path
 				d="M 430 416 C 460 370 478 324.57 478 256 C 478 187.43 460 143 430 96"
@@ -86,7 +86,7 @@ export function SpeakerIcon(props: SpeakerIconProps) {
 				strokeLinejoin="round"
 				strokeWidth="42px"
 				opacity={thirdLevelOpacity}
-				transition="all 0.1s ease-in-out"
+				transition="all 0.2s ease-in-out"
 			/>
 		</Icon>
 	);
