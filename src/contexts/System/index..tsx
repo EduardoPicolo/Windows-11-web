@@ -3,7 +3,7 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 import { useBoolean } from '@chakra-ui/react';
 
-import DefaultWallpaper from '@/public/wallpapers/6-win11.jpg';
+import DefaultWallpaper from '@/public/wallpapers/1-win11.jpg';
 
 import { systemContextDefaultValues } from './helpers';
 

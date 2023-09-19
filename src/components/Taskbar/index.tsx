@@ -16,7 +16,6 @@ import {
 	useDisclosure,
 	useStyleConfig,
 } from '@chakra-ui/react';
-import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 import { StartApp } from '@/components/Apps/Start';
 import { Input } from '@/components/FormFields';
@@ -86,9 +85,10 @@ export function Taskbar(props: TaskbarProps) {
 		[contextMenuDisclosure]
 	);
 
-	const [parent] = useAutoAnimate({
-		easing: 'ease-out',
-	});
+	// Broke @v0.8.0
+	// const [parent] = useAutoAnimate({
+	// 	easing: 'ease-out',
+	// });
 
 	const styles = useStyleConfig('Taskbar');
 
@@ -103,7 +103,7 @@ export function Taskbar(props: TaskbarProps) {
 					<HStack spacing={1}>
 						<StartApp />
 
-						<HStack spacing={1} ref={parent}>
+						<HStack spacing={1}>
 							<Input
 								width="200px"
 								height="32px"

@@ -18,6 +18,7 @@ import {
 	Icon,
 	IconButton,
 	Text,
+	useColorModeValue,
 } from '@chakra-ui/react';
 import { useSize } from '@chakra-ui/react-use-size';
 import { BiSquareRounded } from 'react-icons/bi';
@@ -92,6 +93,8 @@ export function WindowContainer(props: WindowContainerProps) {
 		width: initialPosition?.width ?? 100,
 		height: initialPosition?.height ?? 100,
 	});
+
+	const scrollBarColor = useColorModeValue('gray.600', 'gray.500');
 
 	// if (isMinimized) return null;
 
@@ -231,7 +234,25 @@ export function WindowContainer(props: WindowContainerProps) {
 					</HStack>
 				</CardHeader>
 
-				<CardBody overflow="auto">{children}</CardBody>
+				<CardBody
+					overflowY="scroll"
+					sx={{
+						'&::-webkit-scrollbar': {
+							width: '4px',
+						},
+						// scrollbarWidth: 'thin',
+						scrollbarColor: `${scrollBarColor} transparent`,
+						'&::-webkit-scrollbar-track': {
+							bgColor: 'transparent',
+						},
+						'&::-webkit-scrollbar-thumb': {
+							bgColor: scrollBarColor,
+							borderRadius: 'xl',
+						},
+					}}
+				>
+					{children}
+				</CardBody>
 			</MotionCard>
 		</Rnd>
 	);

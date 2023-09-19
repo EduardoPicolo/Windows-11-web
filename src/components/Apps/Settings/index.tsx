@@ -12,6 +12,8 @@ import {
 	InputGroup,
 	InputRightElement,
 	SkeletonCircle,
+	Stack,
+	type StackProps,
 	Tab,
 	TabList,
 	TabPanel,
@@ -19,19 +21,20 @@ import {
 	Tabs,
 	Text,
 	useTabsContext,
-	VStack,
 } from '@chakra-ui/react';
 import { IoSearch } from 'react-icons/io5';
 
 import { settingsItems } from '@/components/Apps/Settings/settingsItems';
 
-export function SettingsSidebar() {
+type SettingsSidebarProps = StackProps;
+
+export function SettingsSidebar(props: SettingsSidebarProps) {
 	const { selectedIndex } = useTabsContext();
 
 	console.log('selectedIndex', selectedIndex);
 
 	return (
-		<VStack align="stretch" spacing={8}>
+		<Stack spacing={8} {...props}>
 			<HStack
 				p={2}
 				_hover={{
@@ -97,7 +100,7 @@ export function SettingsSidebar() {
 					))}
 				</TabList>
 			</ButtonGroup>
-		</VStack>
+		</Stack>
 	);
 }
 
@@ -117,12 +120,12 @@ export function Settings() {
 		>
 			<Grid gridTemplateColumns="300px 1fr" w="full" p={4} gap={8}>
 				<GridItem>
-					<SettingsSidebar />
+					<SettingsSidebar position="sticky" top={4} />
 				</GridItem>
 
 				<GridItem
 					position="relative"
-					overflow="clip"
+					// overflow="clip"
 					width="full"
 					maxWidth="1024px"
 					margin="0 auto"

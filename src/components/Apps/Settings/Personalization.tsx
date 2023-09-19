@@ -10,12 +10,15 @@ import {
 	Button,
 	Card,
 	CardBody,
+	FormControl,
+	FormLabel,
 	Heading,
 	HStack,
 	Icon,
 	SkeletonText,
 	Stack,
 	StackDivider,
+	Switch,
 	Text,
 	useColorMode,
 	useStyleConfig,
@@ -24,6 +27,7 @@ import {
 } from '@chakra-ui/react';
 import { FaImage } from 'react-icons/fa';
 import { RiArrowRightSLine } from 'react-icons/ri';
+import { VscColorMode } from 'react-icons/vsc';
 import { OptionBase } from 'chakra-react-select';
 import { motion } from 'framer-motion';
 
@@ -37,6 +41,8 @@ import Wallpapers4 from '@/public/wallpapers/4-win11.jpg';
 import Wallpapers5 from '@/public/wallpapers/5-win11.jpg';
 import Wallpapers6 from '@/public/wallpapers/6-win11.jpg';
 import Wallpapers7 from '@/public/wallpapers/7-win11.jpg';
+import Wallpapers8 from '@/public/wallpapers/8-win11.png';
+import Wallpapers9 from '@/public/wallpapers/9-win11.jpg';
 
 const Wallpapers = [
 	Wallpapers1,
@@ -46,6 +52,8 @@ const Wallpapers = [
 	Wallpapers5,
 	Wallpapers6,
 	Wallpapers7,
+	Wallpapers8,
+	Wallpapers9,
 ];
 
 type WallpaperFitOption = OptionBase & {
@@ -59,7 +67,7 @@ export function Personalisation() {
 		wallpaperFit: [wallpaperFit, changeWallpaperFit],
 	} = useSystem();
 
-	const { colorMode } = useColorMode();
+	const { colorMode, toggleColorMode } = useColorMode();
 
 	const taskBarStyles = useStyleConfig('Taskbar');
 
@@ -92,13 +100,14 @@ export function Personalisation() {
 			<motion.div
 				initial={{
 					y: 100,
-					opacity: 0.3,
+					opacity: 0.33,
 				}}
 				animate={{ y: 0, opacity: 1 }}
 				exit={{ opacity: 0 }}
 				transition={{
-					duration: 0.3,
-					ease: 'circOut',
+					duration: 0.2,
+					delay: 0.1,
+					ease: 'easeOut',
 				}}
 			>
 				<Stack spacing={8}>
@@ -112,6 +121,7 @@ export function Personalisation() {
 						<Image
 							src={currentWallpaper}
 							fill
+							sizes="350px"
 							quality={100}
 							placeholder="blur"
 							// blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkCgEAAF4AWD0K18MAAAAASUVORK5CYII="
@@ -192,7 +202,8 @@ export function Personalisation() {
 														<Image
 															src={wallpaper}
 															alt="wallpaper"
-															layout="fill"
+															fill
+															sizes="100px"
 															style={{
 																objectFit: 'cover',
 																borderRadius: '0.25rem',
@@ -232,11 +243,48 @@ export function Personalisation() {
 									<HStack justifyContent="space-between">
 										<Text>Choose a photo</Text>
 
-										<Button colorScheme="whiteAlpha">
+										<Button colorScheme="gray" isDisabled>
 											Browse photos
 										</Button>
 									</HStack>
 								</Stack>
+							</AccordionPanel>
+						</AccordionItem>
+					</Accordion>
+
+					<Text fontWeight="medium">Related settings</Text>
+
+					<Accordion allowToggle>
+						<AccordionItem>
+							<AccordionButton>
+								<HStack flex={1} textAlign="left" spacing={6}>
+									<Icon as={VscColorMode} boxSize={6} />
+									<Box>
+										<Text>Color mode</Text>
+										<Text fontSize="xs">
+											Change the color mode of your desktop
+										</Text>
+									</Box>
+								</HStack>
+								<AccordionIcon />
+							</AccordionButton>
+
+							<AccordionPanel>
+								<FormControl
+									display="flex"
+									alignItems="center"
+									gap={2}
+								>
+									<FormLabel m="0">Light</FormLabel>
+									<Switch
+										defaultChecked={colorMode === 'dark'}
+										isChecked={colorMode === 'dark'}
+										size="lg"
+										id="color-mode"
+										onChange={toggleColorMode}
+									/>
+									<FormLabel m="0">Dark</FormLabel>
+								</FormControl>
 							</AccordionPanel>
 						</AccordionItem>
 					</Accordion>
