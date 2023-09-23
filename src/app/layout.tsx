@@ -22,10 +22,10 @@ const segoe = localFont({
 });
 
 export const metadata: Metadata = {
-	metadataBase: new URL('https://windows-web.vercel.app'),
-	title: 'Windows 11 Web',
+	metadataBase: new URL('https://windows-web-11.vercel.app'),
+	title: 'Windows Web 11',
 	description: `Discover the elegance of Windows 11 in your browser! Powered by Next.js and Chakra UI, this open source project replicates the stylish design and smooth user interface of the real Windows 11. Explore familiar features and play around with the settings - all in your browser.`,
-	applicationName: 'Windows 11 Web',
+	applicationName: 'Windows Web 11',
 	generator: 'Next.js',
 	creator: 'https://github.com/EduardoPicolo/Windows-11-web',
 	publisher: 'Vercel',
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
 		'react',
 		'typescript',
 		'chakra-ui',
-		'windows',
-		'windows 11',
-		'windows web',
+		'Windows',
+		'Windows 11',
+		'Windows Web',
 		'web development',
 		'UI design',
 		'clone',
@@ -45,10 +45,13 @@ export const metadata: Metadata = {
 	robots: 'index, follow',
 	openGraph: {
 		type: 'website',
-		url: 'https://windows-web.vercel.app',
-		title: 'Windows 11 Web',
-		siteName: 'Windows 11 Web',
+		url: 'https://windows-web-11.vercel.app',
+		title: 'Windows Web 11',
+		siteName: 'Windows Web 11',
 		description: `Discover the elegance of Windows 11 in your browser! Powered by Next.js and Chakra UI, this open source project replicates the stylish design and smooth user interface of the real Windows 11. Explore familiar features and play around with the settings - all in your browser.`,
+	},
+	verification: {
+		google: process.env.GOOGLE_VERIFICATION,
 	},
 };
 
