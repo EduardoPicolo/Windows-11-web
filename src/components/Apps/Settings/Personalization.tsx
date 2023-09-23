@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useCallback } from 'react';
+import { useCallback, useTransition } from 'react';
 import {
 	Accordion,
 	AccordionButton,
@@ -67,13 +67,15 @@ export function Personalisation() {
 		wallpaperFit: [wallpaperFit, changeWallpaperFit],
 	} = useSystem();
 
+	const [, startTransition] = useTransition();
+
 	const { colorMode, toggleColorMode } = useColorMode();
 
 	const taskBarStyles = useStyleConfig('Taskbar');
 
 	const handleChangeWallpaper = useCallback(
 		(wallpaper: Wallpaper) => () => {
-			changeWallpaper(wallpaper);
+			startTransition(() => changeWallpaper(wallpaper));
 		},
 		[changeWallpaper]
 	);
@@ -177,8 +179,7 @@ export function Personalisation() {
 										<Text fontSize="xs">
 											A picture background applies to you current
 											desktop. Solid color or slideshow backgrounds
-											apply to all desktops. apply to all your
-											desktops
+											apply to all desktops
 										</Text>
 									</Box>
 								</HStack>
@@ -196,8 +197,18 @@ export function Personalisation() {
 														position="relative"
 														w="100px"
 														h="100px"
-														borderRadius="md"
+														borderRadius="sm"
 														onClick={handleChangeWallpaper(wallpaper)}
+														filter="brightness(0.975)"
+														_hover={{
+															filter:
+																'brightness(1.025) contrast(1.025) saturate(105%)',
+
+															'& img': {
+																transform: 'scale(1.2)',
+															},
+														}}
+														overflow="hidden"
 													>
 														<Image
 															src={wallpaper}
@@ -207,6 +218,8 @@ export function Personalisation() {
 															style={{
 																objectFit: 'cover',
 																borderRadius: '0.25rem',
+																transition:
+																	'transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95)',
 															}}
 															quality={100}
 															placeholder="blur"
