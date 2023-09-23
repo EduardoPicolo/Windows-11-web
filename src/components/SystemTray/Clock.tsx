@@ -9,7 +9,7 @@ import {
 	VStack,
 } from '@chakra-ui/react';
 
-const useNavigator =
+const useNavigator = () =>
 	typeof navigator === 'undefined' ? null : navigator;
 
 type ClockProps = BoxProps;
@@ -17,7 +17,7 @@ type ClockProps = BoxProps;
 export const Clock = forwardRef<ClockProps, 'div'>((props, ref) => {
 	const [time, setTime] = useState(new Date());
 
-	const navigator = useNavigator;
+	const navigator = useNavigator();
 
 	useLayoutEffect(() => {
 		const timerID = setInterval(() => setTime(new Date()), 1000);

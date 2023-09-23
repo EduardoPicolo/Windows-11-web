@@ -18,6 +18,7 @@ import {
 } from '@chakra-ui/react';
 
 import { StartApp } from '@/components/Apps/Start';
+import { Discover } from '@/components/Discover';
 import { Input } from '@/components/FormFields';
 import { SystemTray } from '@/components/SystemTray';
 import { TaskbarContextMenu } from '@/components/TaskbarContextMenu';
@@ -99,6 +100,10 @@ export function Taskbar(props: TaskbarProps) {
 				onContextMenu={handleContextMenu}
 				{...rest}
 			>
+				<GridItem height="100%">
+					<Discover />
+				</GridItem>
+
 				<GridItem gridColumn={2} justifySelf="center">
 					<HStack spacing={1}>
 						<StartApp />

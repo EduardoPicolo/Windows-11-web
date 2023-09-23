@@ -7,6 +7,7 @@ import { accordionTheme as Accordion } from './components/accordion';
 import { buttonTheme as Button } from './components/button';
 import { cardTheme as Card } from './components/card';
 import { desktopIconTheme as DesktopIcon } from './components/desktopIcon';
+import { drawerTheme as Drawer } from './components/drawer';
 import {
 	formLabelTheme as FormLabel,
 	inputTheme as Input,
@@ -44,6 +45,7 @@ const overrides = {
 		Accordion,
 		Button,
 		Card,
+		Drawer,
 		Input,
 		FormLabel,
 		Popover,
