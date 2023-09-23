@@ -1,4 +1,4 @@
-# [Windows 11 Web](https://windows11web.vercel.app/)
+# [Windows 11 Web](https://windows-web.vercel.app/)
 
 ![Vercel](https://vercelbadge.vercel.app/api/EduardoPicolo/Windows-11-web?style=plastic) [![Main workflow](https://github.com/EduardoPicolo/Windows-11-web/actions/workflows/ci.yml/badge.svg)](https://github.com/EduardoPicolo/Windows-11-web/actions/workflows/ci.yml)
 
