@@ -10,16 +10,16 @@ import DragSelect from 'dragselect';
 
 interface ProviderProps {
 	children: React.ReactNode;
-	settings?: ConstructorParameters<typeof DragSelect>[0];
+	settings?: ConstructorParameters<typeof DragSelect<HTMLElement>>[0];
 }
 
-const Context = createContext<DragSelect | null>(null);
+const Context = createContext<DragSelect<HTMLElement> | null>(null);
 
 function DragSelectProvider({
 	children,
 	settings = {},
 }: ProviderProps) {
-	const [ds, setDS] = useState<DragSelect | null>(null);
+	const [ds, setDS] = useState<DragSelect<HTMLElement> | null>(null);
 
 	useLayoutEffect(() => {
 		setDS((prevState) => {

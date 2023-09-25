@@ -42,7 +42,6 @@ import Wallpapers5 from '@/public/wallpapers/5-win11.jpg';
 import Wallpapers6 from '@/public/wallpapers/6-win11.jpg';
 import Wallpapers7 from '@/public/wallpapers/7-win11.jpg';
 import Wallpapers8 from '@/public/wallpapers/8-win11.png';
-import Wallpapers9 from '@/public/wallpapers/9-win11.jpg';
 
 const Wallpapers = [
 	Wallpapers1,
@@ -53,7 +52,6 @@ const Wallpapers = [
 	Wallpapers6,
 	Wallpapers7,
 	Wallpapers8,
-	Wallpapers9,
 ];
 
 type WallpaperFitOption = OptionBase & {
