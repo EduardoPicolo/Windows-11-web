@@ -19,6 +19,7 @@ import {
 	PopoverTrigger,
 	Portal,
 	Text,
+	useColorModeValue,
 } from '@chakra-ui/react';
 import { IoClose } from 'react-icons/io5';
 
@@ -75,7 +76,7 @@ export function WindowsPreview(props: WindowsPreviewProps) {
 		[closeWindow]
 	);
 
-	// const notchColor = useColorModeValue('blue.600', 'blue.400');
+	const notchColor = useColorModeValue('white', 'gray.400');
 
 	return (
 		<Popover trigger="hover" openDelay={400} gutter={16} {...rest}>
@@ -96,7 +97,7 @@ export function WindowsPreview(props: WindowsPreviewProps) {
 						bg:
 							focusedWindow?.process === process
 								? 'primary'
-								: 'gray.400',
+								: notchColor,
 						opacity: 1,
 						transition: 'all 0.2s',
 					}}

@@ -63,6 +63,11 @@ export default function RootLayout({
 	return (
 		<html lang="en" className={`${segoe.variable}`}>
 			<body>
+				{/* eslint-disable-next-line @next/next/no-sync-scripts -- must not defer/async */}
+				<script
+					data-project-id="9mYUaURtWAbjQsLEkcgfdMrwoQ77zxbG0arEEQub"
+					src="https://snippet.meticulous.ai/v1/meticulous.js"
+				/>
 				<Providers>{children}</Providers>
 				<Analytics />
 			</body>
