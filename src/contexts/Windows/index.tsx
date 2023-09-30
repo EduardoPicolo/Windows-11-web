@@ -88,23 +88,25 @@ export function WindowsProvider(props: WindowsProviderProps) {
 	 * the `body` element. The values also need to be offset by half the
 	 * width/height of the window being created.
 	 */
-	const getInitialPosition = useCallback(
-		(appPreference: App) => ({
-			width: appPreference?.initialSize?.width ?? 600,
-			height: appPreference?.initialSize?.height ?? 600,
-			x:
-				window.innerWidth / 2 -
-				(appPreference?.initialSize?.width
-					? appPreference.initialSize.width / 2
-					: 300),
-			y:
-				window.innerHeight / 2 -
-				(appPreference?.initialSize?.height
-					? appPreference.initialSize.height / 2
-					: 300),
-		}),
-		[]
-	);
+	const getInitialPosition = useCallback((appPreference: App) => {
+		const viewportHeight = window.innerHeight;
+		const viewportWidth = window.innerWidth;
+		let width = appPreference?.initialSize?.width ?? 600;
+		let height = appPreference?.initialSize?.height ?? 600;
+
+		if (height > viewportHeight) height = viewportHeight - 100;
+		if (width > viewportWidth) width = viewportWidth;
+
+		const x = viewportWidth / 2 - width / 2;
+		const y = (viewportHeight - 50) / 2 - height / 2;
+
+		return {
+			width,
+			height,
+			x,
+			y,
+		};
+	}, []);
 
 	const value: WindowsContext = useMemo(
 		() => ({

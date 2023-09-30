@@ -34,21 +34,28 @@ import { apps } from '@/components/Apps/apps';
 import { DesktopIcon } from '@/components/DesktopIcon';
 import { useWindows } from '@/contexts/Windows';
 
-type StartMenuProps = CardProps;
+type StartMenuProps = CardProps & {
+	onClose: () => void;
+};
 
 export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 	(props, ref) => {
-		const { ...rest } = props;
+		const { onClose, ...rest } = props;
 
 		const { addWindow } = useWindows();
 
 		const handleAddWindow = useCallback(
 			(app: App): MouseEventHandler<HTMLElement> =>
 				(event) => {
+					onClose();
 					addWindow(app);
 				},
-			[addWindow]
+			[addWindow, onClose]
 		);
+
+		const handleRestart = useCallback(() => {
+			if (typeof window !== 'undefined') window.location.reload();
+		}, []);
 
 		const backgroundColor = useColorModeValue(
 			'whiteAlpha.600',
@@ -173,12 +180,21 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 						</Portal>
 					</Menu>
 
-					<IconButton
-						aria-label="Power"
-						variant="ghost"
-						colorScheme="gray"
-						icon={<Icon as={SlPower} boxSize={6} />}
-					/>
+					<Menu placement="top" size="sm">
+						<MenuButton
+							as={IconButton}
+							aria-label="Power"
+							variant="ghost"
+							colorScheme="gray"
+							icon={<Icon as={SlPower} boxSize={6} />}
+						/>
+						<Portal>
+							<MenuList minWidth="100px">
+								<MenuItem onClick={handleRestart}>Restart</MenuItem>
+								<MenuItem>Turn off</MenuItem>
+							</MenuList>
+						</Portal>
+					</Menu>
 				</CardFooter>
 			</Card>
 		);

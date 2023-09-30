@@ -55,7 +55,7 @@ export function StartMenuContainer({
 						}}
 						zIndex={2}
 					>
-						<StartMenu ref={menuRef} />
+						<StartMenu ref={menuRef} onClose={onClose} />
 					</MotionDivWithStyles>
 				)}
 			</AnimatePresence>

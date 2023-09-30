@@ -22,7 +22,7 @@ const segoe = localFont({
 });
 
 export const metadata: Metadata = {
-	metadataBase: new URL('https://windows-web-11.vercel.app'),
+	metadataBase: new URL('https://windows-web.vercel.app'),
 	title: 'Windows Web 11',
 	description: `Discover the elegance of Windows 11 in your browser! Powered by Next.js and Chakra UI, this open source project replicates the stylish design and smooth user interface of the real Windows 11. Explore familiar features and play around with the settings - all in your browser.`,
 	applicationName: 'Windows Web 11',
@@ -45,13 +45,16 @@ export const metadata: Metadata = {
 	robots: 'index, follow',
 	openGraph: {
 		type: 'website',
-		url: 'https://windows-web-11.vercel.app',
+		url: 'https://windows-web.vercel.app',
 		title: 'Windows Web 11',
 		siteName: 'Windows Web 11',
 		description: `Discover the elegance of Windows 11 in your browser! Powered by Next.js and Chakra UI, this open source project replicates the stylish design and smooth user interface of the real Windows 11. Explore familiar features and play around with the settings - all in your browser.`,
 	},
 	verification: {
 		google: process.env.GOOGLE_VERIFICATION,
+	},
+	alternates: {
+		canonical: 'https://windows-web.vercel.app',
 	},
 };
 
