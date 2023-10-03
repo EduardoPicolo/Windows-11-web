@@ -1,6 +1,22 @@
-# [Windows 11 Web](https://windows-web.vercel.app/)
+<p align="center">
+  <picture>
+    <img src="https://windows-web.vercel.app/icons/Windows.svg" height="128">
+  </picture>
+  <h1 align="center">
+    <a href="https://windows-web.vercel.app">
+      Windows 11 Web
+    </a>
+  </h1>
+</p>
 
-![Vercel](https://vercelbadge.vercel.app/api/EduardoPicolo/Windows-11-web?style=plastic) [![Main workflow](https://github.com/EduardoPicolo/Windows-11-web/actions/workflows/ci.yml/badge.svg)](https://github.com/EduardoPicolo/Windows-11-web/actions/workflows/ci.yml)
+<p align="center">
+<img alt="Github Checks" src="https://flat.badgen.net/github/checks/EduardoPicolo/Windows-11-web/main"/>
+<img alt="Vercel" src="https://vercelbadge.vercel.app/api/EduardoPicolo/Windows-11-web?style=flat-square"/>
+<img alt="CI" src="https://github.com/EduardoPicolo/Windows-11-web/actions/workflows/ci.yml/badge.svg"/>
+</p>
+
+
+
 
 Welcome to Windows 11 Web, a clone of the Windows 11 operating system built using cutting-edge web technologies, including Next.js, Chakra UI, and React TypeScript. This project brings the Windows 11 experience to your web browser, making it accessible to everyone.
 

@@ -4,7 +4,8 @@ import { StartMenu } from './index';
 
 describe('<StartMenu />', () => {
 	it('renders', () => {
-		// see: https://on.cypress.io/mounting-react
-		cy.mount(<StartMenu />);
+		const spy = cy.stub().as('onClose');
+
+		cy.mount(<StartMenu onClose={spy} />);
 	});
 });
