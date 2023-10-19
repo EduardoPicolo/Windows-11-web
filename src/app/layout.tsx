@@ -19,6 +19,7 @@ const segoe = localFont({
 	],
 	display: 'swap',
 	variable: '--body-font',
+	preload: true,
 });
 
 export const metadata: Metadata = {

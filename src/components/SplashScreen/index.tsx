@@ -6,13 +6,16 @@ import {
 	DarkMode,
 	Grid,
 	GridItem,
+	GridProps,
 	Heading,
 } from '@chakra-ui/react';
 
 import { Loader } from '@/components/Loader';
 import WindowsLogo from '@/public/icons/Windows.svg';
 
-export function SplashScreen() {
+type SplashScreenProps = GridProps;
+
+export function SplashScreen(props: SplashScreenProps) {
 	return (
 		<DarkMode>
 			<Grid
@@ -23,14 +26,13 @@ export function SplashScreen() {
 				background="radial-gradient(ellipse at right, #050f16,#000000 70%) no-repeat"
 				backgroundSize="contain"
 				filter="saturate(2)"
+				{...props}
 			>
 				<GridItem alignSelf="end">
 					<Image
 						src={WindowsLogo as StaticImageData}
 						alt="Logo"
 						width={350}
-						quality={100}
-						priority
 					/>
 				</GridItem>
 
