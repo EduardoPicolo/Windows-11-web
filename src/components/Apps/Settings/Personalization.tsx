@@ -184,7 +184,7 @@ export function Personalisation() {
 								<AccordionIcon />
 							</AccordionButton>
 
-							<AccordionPanel>
+							<AccordionPanel overflow="visible">
 								<Stack spacing={3} divider={<StackDivider />}>
 									<Box>
 										<Text mb={2}>Recent images</Text>

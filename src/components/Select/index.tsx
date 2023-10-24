@@ -57,15 +57,6 @@ export function CustomSelect<
 		<Select
 			defaultValue={null}
 			openMenuOnFocus
-			menuPortalTarget={
-				typeof window === undefined ? null : document.body
-			}
-			styles={{
-				menuPortal: (provided) => ({
-					...provided,
-					zIndex: 2,
-				}),
-			}}
 			chakraStyles={{
 				control: (provided) => ({
 					...provided,
