@@ -168,7 +168,13 @@ export function Personalisation() {
 					</Box>
 
 					<Accordion allowToggle allowMultiple defaultIndex={[0]}>
-						<AccordionItem>
+						<AccordionItem
+							sx={{
+								'.chakra-collapse': {
+									overflow: 'visible !important',
+								},
+							}}
+						>
 							<AccordionButton>
 								<HStack flex={1} textAlign="left" spacing={6}>
 									<Icon as={FaImage} boxSize={6} />
@@ -184,7 +190,7 @@ export function Personalisation() {
 								<AccordionIcon />
 							</AccordionButton>
 
-							<AccordionPanel overflow="visible">
+							<AccordionPanel>
 								<Stack spacing={3} divider={<StackDivider />}>
 									<Box>
 										<Text mb={2}>Recent images</Text>
@@ -247,6 +253,7 @@ export function Personalisation() {
 												onChange={handleChangeWallpaperFit}
 												openMenuOnFocus
 												isSearchable={false}
+												menuPlacement="auto"
 											/>
 										</Box>
 									</HStack>
