@@ -24,6 +24,6 @@ export const Loader = forwardRef<LoadingSpinnerProps, 'span'>(
 			colorScheme,
 		});
 
-		return <chakra.span ref={ref} __css={styles} {...rest} />;
+		return <chakra.span __css={styles} ref={ref} {...rest} />;
 	}
 );

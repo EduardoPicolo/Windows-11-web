@@ -28,7 +28,7 @@ import {
 import { FaImage } from 'react-icons/fa';
 import { RiArrowRightSLine } from 'react-icons/ri';
 import { VscColorMode } from 'react-icons/vsc';
-import { OptionBase } from 'chakra-react-select';
+import type { OptionBase } from 'chakra-react-select';
 import { motion } from 'framer-motion';
 
 import { CustomSelect } from '@/components/Select';
@@ -73,7 +73,9 @@ export function Personalisation() {
 
 	const handleChangeWallpaper = useCallback(
 		(wallpaper: Wallpaper) => () => {
-			startTransition(() => changeWallpaper(wallpaper));
+			startTransition(() => {
+				changeWallpaper(wallpaper);
+			});
 		},
 		[changeWallpaper]
 	);
@@ -88,22 +90,22 @@ export function Personalisation() {
 	return (
 		<Stack spacing={8}>
 			<HStack spacing={4}>
-				<Heading size="lg" fontWeight="medium">
+				<Heading fontWeight="medium" size="lg">
 					Personalization
 				</Heading>
 				<Icon as={RiArrowRightSLine} boxSize={7} />
-				<Heading size="lg" fontWeight="medium">
+				<Heading fontWeight="medium" size="lg">
 					Background
 				</Heading>
 			</HStack>
 
 			<motion.div
+				animate={{ y: 0, opacity: 1 }}
+				exit={{ opacity: 0 }}
 				initial={{
 					y: 100,
 					opacity: 0.33,
 				}}
-				animate={{ y: 0, opacity: 1 }}
-				exit={{ opacity: 0 }}
 				transition={{
 					duration: 0.2,
 					delay: 0.1,
@@ -112,62 +114,62 @@ export function Personalisation() {
 			>
 				<Stack spacing={8}>
 					<Box
-						position="relative"
-						w="350px"
-						h="175px"
 						border="8px solid black"
 						borderRadius="xl"
+						h="175px"
+						position="relative"
+						w="350px"
 					>
 						<Image
-							src={currentWallpaper}
+							alt="current-wallpaper"
 							fill
-							sizes="350px"
 							quality={100}
+							sizes="350px"
+							src={currentWallpaper}
 							placeholder="blur"
 							// blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkCgEAAF4AWD0K18MAAAAASUVORK5CYII="
 							style={{
 								// eslint-disable-next-line no-inline-styles/no-inline-styles -- ignore
 								objectFit: 'cover',
 							}}
-							alt="current-wallpaper"
 						/>
 
 						<Card
-							size="sm"
-							position="absolute"
-							top={4}
-							right={4}
-							width="90px"
 							height="70%"
+							position="absolute"
+							right={4}
+							size="sm"
+							top={4}
+							width="90px"
 						>
 							<CardBody
+								alignItems="flex-end"
 								display="flex"
 								flexDirection="column"
-								alignItems="flex-end"
 								justifyContent="space-between"
 							>
 								<SkeletonText
 									noOfLines={4}
-									w="full"
 									skeletonHeight={0.5}
 									speed={0}
 									startColor="white"
+									w="full"
 								/>
-								<Button size="xs" p={0} h={2.5} borderRadius="sm" />
+								<Button borderRadius="sm" h={2.5} p={0} size="xs" />
 							</CardBody>
 						</Card>
 
 						<Box
-							position="absolute"
 							bottom={0}
-							w="full"
 							pointerEvents="none"
+							position="absolute"
+							w="full"
 						>
 							<Box __css={taskBarStyles} h={4} />
 						</Box>
 					</Box>
 
-					<Accordion allowToggle allowMultiple defaultIndex={[0]}>
+					<Accordion allowMultiple allowToggle defaultIndex={[0]}>
 						<AccordionItem
 							sx={{
 								'.chakra-collapse': {
@@ -176,7 +178,7 @@ export function Personalisation() {
 							}}
 						>
 							<AccordionButton>
-								<HStack flex={1} textAlign="left" spacing={6}>
+								<HStack flex={1} spacing={6} textAlign="left">
 									<Icon as={FaImage} boxSize={6} />
 									<Box>
 										<Text>Personalize your background</Text>
@@ -191,19 +193,13 @@ export function Personalisation() {
 							</AccordionButton>
 
 							<AccordionPanel>
-								<Stack spacing={3} divider={<StackDivider />}>
+								<Stack divider={<StackDivider />} spacing={3}>
 									<Box>
 										<Text mb={2}>Recent images</Text>
 										<Wrap>
 											{Wallpapers.map((wallpaper) => (
-												<WrapItem key={wallpaper?.src}>
+												<WrapItem key={wallpaper.src}>
 													<Box
-														position="relative"
-														w="100px"
-														h="100px"
-														borderRadius="sm"
-														onClick={handleChangeWallpaper(wallpaper)}
-														filter="brightness(0.975)"
 														_hover={{
 															filter:
 																'brightness(1.025) contrast(1.025) saturate(105%)',
@@ -212,20 +208,28 @@ export function Personalisation() {
 																transform: 'scale(1.2)',
 															},
 														}}
+														borderRadius="sm"
+														filter="brightness(0.975)"
+														h="100px"
+														onClick={handleChangeWallpaper(wallpaper)}
 														overflow="hidden"
+														position="relative"
+														w="100px"
 													>
 														<Image
-															src={wallpaper}
 															alt="wallpaper"
 															fill
+															quality={100}
 															sizes="100px"
+															src={wallpaper}
+															/* eslint-disable no-inline-styles/no-inline-styles -- ignore */
 															style={{
 																objectFit: 'cover',
 																borderRadius: '0.25rem',
 																transition:
 																	'transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95)',
 															}}
-															quality={100}
+															/* eslint-enable no-inline-styles/no-inline-styles */
 															placeholder="blur"
 															// blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkCgEAAF4AWD0K18MAAAAASUVORK5CYII="
 														/>
@@ -240,7 +244,11 @@ export function Personalisation() {
 
 										<Box w="160px">
 											<CustomSelect<WallpaperFitOption, false>
-												options={wallpaperFitOptions?.map(
+												isSearchable={false}
+												menuPlacement="auto"
+												onChange={handleChangeWallpaperFit}
+												openMenuOnFocus
+												options={wallpaperFitOptions.map(
 													(option) => ({
 														label: option,
 														value: option,
@@ -250,10 +258,6 @@ export function Personalisation() {
 													label: wallpaperFit,
 													value: wallpaperFit,
 												}}
-												onChange={handleChangeWallpaperFit}
-												openMenuOnFocus
-												isSearchable={false}
-												menuPlacement="auto"
 											/>
 										</Box>
 									</HStack>
@@ -275,7 +279,7 @@ export function Personalisation() {
 					<Accordion allowToggle>
 						<AccordionItem>
 							<AccordionButton>
-								<HStack flex={1} textAlign="left" spacing={6}>
+								<HStack flex={1} spacing={6} textAlign="left">
 									<Icon as={VscColorMode} boxSize={6} />
 									<Box>
 										<Text>Color mode</Text>
@@ -289,17 +293,17 @@ export function Personalisation() {
 
 							<AccordionPanel>
 								<FormControl
-									display="flex"
 									alignItems="center"
+									display="flex"
 									gap={2}
 								>
 									<FormLabel m="0">Light</FormLabel>
 									<Switch
 										defaultChecked={colorMode === 'dark'}
-										isChecked={colorMode === 'dark'}
-										size="lg"
 										id="color-mode"
+										isChecked={colorMode === 'dark'}
 										onChange={toggleColorMode}
+										size="lg"
 									/>
 									<FormLabel m="0">Dark</FormLabel>
 								</FormControl>

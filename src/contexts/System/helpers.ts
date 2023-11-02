@@ -1,18 +1,18 @@
 import WindowsWallpaper from '@/public/wallpapers/1-win11.jpg';
 
 export const systemContextDefaultValues: SystemContext = {
-	sound: [33, () => {}],
+	sound: [33, () => undefined],
 	soundMuted: [
 		false,
 		{
-			on: () => {},
-			off: () => {},
-			toggle: () => {},
+			on: () => undefined,
+			off: () => undefined,
+			toggle: () => undefined,
 		},
 	],
-	brightness: [100, () => {}],
-	wallpaper: [WindowsWallpaper, () => {}],
-	wallpaperFit: ['cover' as WallpaperFitStyle, () => {}],
+	brightness: [100, () => undefined],
+	wallpaper: [WindowsWallpaper, () => undefined],
+	wallpaperFit: ['cover' as WallpaperFitStyle, () => undefined],
 };
 
 export const wallpaperFitOptions: WallpaperFitStyle[] = [

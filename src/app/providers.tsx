@@ -1,12 +1,9 @@
 'use client';
 
-import { ReactNode } from 'react';
 import { CacheProvider } from '@chakra-ui/next-js';
-import {
-	ChakraProvider,
-	ColorModeScript,
-	Theme,
-} from '@chakra-ui/react';
+import type { Theme } from '@chakra-ui/react';
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
+import type { ReactNode } from 'react';
 
 import { CustomToastContainer } from '@/components/ToastContainer';
 import { SystemProvider } from '@/contexts/System/index.';

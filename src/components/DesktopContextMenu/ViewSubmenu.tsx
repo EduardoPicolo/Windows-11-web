@@ -22,9 +22,9 @@ export function ViewSubmenu() {
 		<MenuList>
 			<MenuOptionGroup defaultValue="medium" type="radio">
 				<MenuItemOption
+					closeOnSelect={false}
 					icon={<Icon as={PiDotDuotone} boxSize={5} />}
 					value="large"
-					closeOnSelect={false}
 				>
 					<HStack justifyContent="space-between">
 						<HStack>
@@ -39,9 +39,9 @@ export function ViewSubmenu() {
 				</MenuItemOption>
 
 				<MenuItemOption
+					closeOnSelect={false}
 					icon={<Icon as={PiDotDuotone} boxSize={5} />}
 					value="medium"
-					closeOnSelect={false}
 				>
 					<HStack justifyContent="space-between">
 						<HStack>
@@ -56,9 +56,9 @@ export function ViewSubmenu() {
 				</MenuItemOption>
 
 				<MenuItemOption
+					closeOnSelect={false}
 					icon={<Icon as={PiDotDuotone} boxSize={5} />}
 					value="small"
-					closeOnSelect={false}
 				>
 					<HStack justifyContent="space-between">
 						<HStack>
@@ -77,9 +77,9 @@ export function ViewSubmenu() {
 
 			<MenuOptionGroup type="checkbox">
 				<MenuItemOption
+					closeOnSelect={false}
 					icon={<Icon as={BiCheck} />}
 					value="auto"
-					closeOnSelect={false}
 				>
 					<HStack>
 						<Icon
@@ -100,10 +100,10 @@ export function ViewSubmenu() {
 				</MenuItemOption>
 
 				<MenuItemOption
+					closeOnSelect={false}
+					defaultChecked
 					icon={<Icon as={BiCheck} />}
 					value="align"
-					defaultChecked
-					closeOnSelect={false}
 				>
 					<HStack>
 						<Icon
@@ -123,9 +123,9 @@ export function ViewSubmenu() {
 
 			<MenuOptionGroup type="checkbox">
 				<MenuItemOption
+					closeOnSelect={false}
 					icon={<Icon as={BiCheck} />}
 					value="show"
-					closeOnSelect={false}
 				>
 					<HStack>
 						<Icon as={PiDesktopFill} />

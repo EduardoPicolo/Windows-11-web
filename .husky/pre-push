@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn run test:component:headless && yarn run type-check
+pnpm run test:component:headless && pnpm run type-check

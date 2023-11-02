@@ -1,8 +1,8 @@
+import type { IconButtonProps } from '@chakra-ui/react';
 import {
 	Center,
 	forwardRef,
 	IconButton,
-	IconButtonProps,
 	Tooltip,
 } from '@chakra-ui/react';
 
@@ -18,19 +18,18 @@ function TaskbarIconInner(
 	const { app, ...rest } = props;
 
 	return (
-		<Tooltip label={app?.shortName} openDelay={1000}>
+		<Tooltip label={app.shortName} openDelay={1000}>
 			<IconButton
-				ref={ref}
-				aria-label={app?.shortName}
-				variant="ghost"
-				size="md"
-				borderRadius="md"
-				icon={<Center w="24px">{app?.icon}</Center>}
 				_light={{
 					_hover: {
 						bg: 'hoverBg',
 					},
 				}}
+				aria-label={app.shortName}
+				borderRadius="md"
+				icon={<Center w="24px">{app.icon}</Center>}
+				ref={ref}
+				size="md"
 				sx={{
 					img: {
 						transition: 'transform 0.2s ease-out',
@@ -41,6 +40,7 @@ function TaskbarIconInner(
 						},
 					},
 				}}
+				variant="ghost"
 				{...rest}
 			/>
 		</Tooltip>

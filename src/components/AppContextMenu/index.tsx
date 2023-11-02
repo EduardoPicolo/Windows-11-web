@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { MouseEventHandler, useCallback } from 'react';
+import { useCallback } from 'react';
 import {
 	ButtonGroup,
 	Icon,
@@ -8,6 +8,7 @@ import {
 	MenuItem,
 	MenuList,
 } from '@chakra-ui/react';
+import type { MouseEventHandler } from 'react';
 import { BiRename } from 'react-icons/bi';
 import { BsFolderSymlink, BsPinAngle } from 'react-icons/bs';
 import { FcOpenedFolder } from 'react-icons/fc';
@@ -21,10 +22,8 @@ import {
 	VscSymbolProperty,
 } from 'react-icons/vsc';
 
-import {
-	ContextMenu,
-	ContextMenuProps,
-} from '@/components/ContextMenu';
+import type { ContextMenuProps } from '@/components/ContextMenu';
+import { ContextMenu } from '@/components/ContextMenu';
 import { useWindows } from '@/contexts/Windows';
 import RunIcon from '@/public/icons/run.png';
 
@@ -33,6 +32,10 @@ type AppContextMenuProps = Omit<ContextMenuProps, 'children'> & {
 	children?: ContextMenuProps['children'];
 };
 
+/**
+ * `AppContextMenu` is used to open the context menu for an desktop
+ * app.
+ */
 export function AppContextMenu(props: AppContextMenuProps) {
 	const { app, children, ...rest } = props;
 
@@ -51,7 +54,7 @@ export function AppContextMenu(props: AppContextMenuProps) {
 		<ContextMenu size="sm" {...rest}>
 			{(internalProps) => (
 				<MenuList minWidth="275px">
-					<ButtonGroup variant="ghost" colorScheme="gray" spacing={1}>
+					<ButtonGroup colorScheme="gray" spacing={1} variant="ghost">
 						<IconButton
 							aria-label="Cut"
 							icon={<Icon as={TbCut} boxSize="18px" />}
@@ -70,23 +73,23 @@ export function AppContextMenu(props: AppContextMenuProps) {
 						/>
 						<IconButton
 							aria-label="remove"
-							icon={<Icon as={HiOutlineTrash} boxSize="18px" />}
 							colorScheme="red"
+							icon={<Icon as={HiOutlineTrash} boxSize="18px" />}
 						/>
 					</ButtonGroup>
 
 					<MenuDivider />
 
 					<MenuItem
-						icon={<Image src={RunIcon} alt="open" width={18} />}
-						onClick={handleAddWindow}
 						command="Enter"
+						icon={<Image alt="open" src={RunIcon} width={18} />}
+						onClick={handleAddWindow}
 					>
 						Open
 					</MenuItem>
 
 					<MenuItem
-						icon={<Image src={RunIcon} alt="open" width={18} />}
+						icon={<Image alt="open" src={RunIcon} width={18} />}
 						onClick={handleAddWindow}
 					>
 						Run as administrator
@@ -109,15 +112,15 @@ export function AppContextMenu(props: AppContextMenuProps) {
 					</MenuItem>
 
 					<MenuItem
-						icon={<Icon as={VscFileSymlinkDirectory} />}
 						command="Ctrl+Shift+C"
+						icon={<Icon as={VscFileSymlinkDirectory} />}
 					>
 						Copy as path
 					</MenuItem>
 
 					<MenuItem
-						icon={<Icon as={VscSymbolProperty} />}
 						command="Alt+Enter"
+						icon={<Icon as={VscSymbolProperty} />}
 					>
 						Properties
 					</MenuItem>

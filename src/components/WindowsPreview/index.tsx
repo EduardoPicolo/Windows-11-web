@@ -43,12 +43,12 @@ export function WindowsPreview(props: WindowsPreviewProps) {
 	} = useWindows();
 
 	const isRunning = useMemo(
-		() => Boolean(windows?.[process]),
+		() => Boolean(windows[process]),
 		[windows, process]
 	);
 
 	const allProcessWindows = useMemo(
-		() => getEntries(windows?.[process]),
+		() => getEntries(windows[process]),
 		[windows, process]
 	);
 
@@ -79,10 +79,9 @@ export function WindowsPreview(props: WindowsPreviewProps) {
 	const notchColor = useColorModeValue('white', 'gray.400');
 
 	return (
-		<Popover trigger="hover" openDelay={400} gutter={16} {...rest}>
+		<Popover gutter={16} openDelay={400} trigger="hover" {...rest}>
 			<PopoverTrigger>
 				<Box
-					position="relative"
 					_after={{
 						display: isRunning ? 'block' : 'none',
 						content: '""',
@@ -101,44 +100,45 @@ export function WindowsPreview(props: WindowsPreviewProps) {
 						opacity: 1,
 						transition: 'all 0.2s',
 					}}
+					position="relative"
 				>
 					{children}
 				</Box>
 			</PopoverTrigger>
 			<Portal>
-				{isRunning && (
+				{isRunning ? (
 					<PopoverContent
-						width="fit-content"
-						backgroundColor="transparent"
-						background="transparent"
 						_after={{
 							display: 'none',
 						}}
 						_before={{
 							display: 'none',
 						}}
-						border="none"
 						backdropFilter="none"
+						background="transparent"
+						backgroundColor="transparent"
+						border="none"
 						boxShadow="none"
+						width="fit-content"
 					>
 						<HStack spacing={1.5}>
-							{allProcessWindows?.map(([windowId, app]) => (
+							{allProcessWindows.map(([windowId, app]) => (
 								<Card
+									borderRadius="md"
 									key={windowId}
+									onClick={handleFocusWindow(windowId)}
 									size="sm"
 									w="200px"
-									onClick={handleFocusWindow(windowId)}
-									borderRadius="md"
 								>
 									<CardHeader>
 										<HStack justifyContent="space-between">
 											<HStack>
 												<Box
 													boxSize="18px"
-													userSelect="none"
-													unselectable="on"
 													draggable={false}
 													pointerEvents="none"
+													unselectable="on"
+													userSelect="none"
 												>
 													{app.icon}
 												</Box>
@@ -150,23 +150,23 @@ export function WindowsPreview(props: WindowsPreviewProps) {
 											<IconButton
 												aria-label="close"
 												colorScheme="red"
-												size="xs"
-												variant="ghost"
 												icon={<Icon as={IoClose} boxSize={5} />}
 												onClick={handleCloseWindow(process, windowId)}
+												size="xs"
+												variant="ghost"
 											/>
 										</HStack>
 									</CardHeader>
 									<CardBody borderBottomRadius="inherit">
 										<Center w="full">
-											<Box boxSize="150px">{app?.icon}</Box>
+											<Box boxSize="150px">{app.icon}</Box>
 										</Center>
 									</CardBody>
 								</Card>
 							))}
 						</HStack>
 					</PopoverContent>
-				)}
+				) : null}
 			</Portal>
 		</Popover>
 	);

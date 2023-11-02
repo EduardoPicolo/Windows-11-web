@@ -22,9 +22,13 @@ export function useTimeout(
 			return;
 		}
 
-		const id = setTimeout(() => savedCallback.current(), delay);
+		const id = setTimeout(() => {
+			savedCallback.current();
+		}, delay);
 
 		// eslint-disable-next-line consistent-return -- cleanup function
-		return () => clearTimeout(id);
+		return () => {
+			clearTimeout(id);
+		};
 	}, [delay]);
 }

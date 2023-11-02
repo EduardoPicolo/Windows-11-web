@@ -1,4 +1,4 @@
-import { MouseEventHandler, useCallback } from 'react';
+import { useCallback } from 'react';
 import {
 	Button,
 	Card,
@@ -24,6 +24,7 @@ import {
 	Text,
 	useColorModeValue,
 } from '@chakra-ui/react';
+import type { MouseEventHandler } from 'react';
 import { IoSearch } from 'react-icons/io5';
 import { MdLockOutline } from 'react-icons/md';
 import { RiUserSettingsLine } from 'react-icons/ri';
@@ -64,12 +65,12 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 
 		return (
 			<Card
+				cursor="default"
+				height="700px"
 				ref={ref}
 				size="xl"
-				width="700px"
-				height="700px"
 				userSelect="none"
-				cursor="default"
+				width="700px"
 				{...rest}
 			>
 				<CardHeader>
@@ -92,23 +93,23 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 							</Text>
 
 							<Button
-								variant="solid"
-								size="xs"
-								colorScheme="gray"
 								background={backgroundColor}
+								boxShadow="thin"
+								colorScheme="gray"
 								rightIcon={
 									<Icon as={SlArrowRight} boxSize={2} ml={1} />
 								}
-								boxShadow="thin"
+								size="xs"
+								variant="solid"
 							>
 								All apps
 							</Button>
 						</HStack>
 
 						<Grid
+							gap={0}
 							gridTemplateColumns="repeat(6, 1fr)"
 							gridTemplateRows="repeat(3, 1fr)"
-							gap={0}
 							justifyItems="center"
 							ml={-8}
 							mr={-8}
@@ -116,13 +117,13 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 							{Object.values(apps).map((app) => (
 								<DesktopIcon
 									app={app}
-									key={app.shortName}
-									iconSize="42px"
-									w="full"
 									h="full"
+									iconSize="42px"
+									key={app.shortName}
 									onClick={handleAddWindow(app)}
 									onDoubleClick={undefined}
 									textShadow="none"
+									w="full"
 									color="inherit"
 									/**
 									 * Remove the `className` to avoid react-selecto
@@ -139,14 +140,14 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 							</Text>
 
 							<Button
-								variant="solid"
-								size="xs"
-								colorScheme="gray"
 								background={backgroundColor}
+								boxShadow="thin"
+								colorScheme="gray"
 								rightIcon={
 									<Icon as={SlArrowRight} boxSize={2} ml={1} />
 								}
-								boxShadow="thin"
+								size="xs"
+								variant="solid"
 							>
 								More
 							</Button>
@@ -158,10 +159,10 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 					<Menu placement="top" size="sm">
 						<MenuButton
 							as={Button}
-							variant="ghost"
 							colorScheme="gray"
-							py={6}
 							leftIcon={<SkeletonCircle boxSize={9} />}
+							py={6}
+							variant="ghost"
 						>
 							Eduardo Pícolo
 						</MenuButton>
@@ -182,11 +183,11 @@ export const StartMenu = forwardRef<StartMenuProps, 'div'>(
 
 					<Menu placement="top" size="sm">
 						<MenuButton
-							as={IconButton}
 							aria-label="Power"
-							variant="ghost"
+							as={IconButton}
 							colorScheme="gray"
 							icon={<Icon as={SlPower} boxSize={6} />}
+							variant="ghost"
 						/>
 						<Portal>
 							<MenuList minWidth="100px">

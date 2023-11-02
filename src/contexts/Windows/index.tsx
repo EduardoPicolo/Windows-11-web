@@ -2,17 +2,16 @@
 
 import {
 	createContext,
-	MouseEventHandler,
 	useCallback,
 	useContext,
 	useMemo,
-	useRef,
 	useState,
 } from 'react';
 import { Box, Center, Portal } from '@chakra-ui/react';
+import type { MouseEventHandler } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
-import { Process } from '@/components/Apps/apps';
+import type { Process } from '@/components/Apps/apps';
 import { WindowContainer } from '@/components/WindowContainer';
 import { useWindowsReducer } from '@/contexts/Windows/useWindowsReducer';
 import { getEntries } from '@/utils/getEntries';
@@ -45,25 +44,28 @@ export function WindowsProvider(props: WindowsProviderProps) {
 
 	const handleCloseWindow = useCallback(
 		(processName: Process, id: number): MouseEventHandler =>
-			() =>
-				onCloseWindow(processName, id),
+			() => {
+				onCloseWindow(processName, id);
+			},
 		[onCloseWindow]
 	);
 
 	const handleToggleMaximizeWindow = useCallback(
 		(processName: Process, id: number): MouseEventHandler =>
-			() =>
+			() => {
 				setIsMaximazed((isMaximized) => !isMaximized)(
 					processName,
 					id
-				),
+				);
+			},
 		[setIsMaximazed]
 	);
 
 	const handleMinimizeWindow = useCallback(
 		(processName: Process, id: number): MouseEventHandler =>
-			() =>
-				setIsMinimized(true)(processName, id),
+			() => {
+				setIsMinimized(true)(processName, id);
+			},
 		[setIsMinimized]
 	);
 
@@ -78,7 +80,9 @@ export function WindowsProvider(props: WindowsProviderProps) {
 	);
 
 	const handleFocusWindow = useCallback(
-		(process: Process, id: number) => () => focusWindow(process, id),
+		(process: Process, id: number) => () => {
+			focusWindow(process, id);
+		},
 		[focusWindow]
 	);
 
@@ -91,8 +95,8 @@ export function WindowsProvider(props: WindowsProviderProps) {
 	const getInitialPosition = useCallback((appPreference: App) => {
 		const viewportHeight = window.innerHeight;
 		const viewportWidth = window.innerWidth;
-		let width = appPreference?.initialSize?.width ?? 600;
-		let height = appPreference?.initialSize?.height ?? 600;
+		let width = appPreference.initialSize?.width ?? 600;
+		let height = appPreference.initialSize?.height ?? 600;
 
 		if (height > viewportHeight) height = viewportHeight - 100;
 		if (width > viewportWidth) width = viewportWidth;
@@ -134,48 +138,43 @@ export function WindowsProvider(props: WindowsProviderProps) {
 	console.log('Open windows:', windows);
 	console.groupEnd();
 
-	const mainRef = useRef<HTMLElement | null>(null);
-
-	if (!mainRef.current && typeof window !== 'undefined')
-		[mainRef.current] = document.querySelectorAll('main');
-
 	return (
 		<WindowsContext.Provider value={value}>
 			<Portal appendToParentPortal={false}>
 				<Box
+					left="env(safe-area-inset-left, 0)"
 					position="absolute"
 					top="env(safe-area-inset-top, 0)"
-					left="env(safe-area-inset-left, 0)"
 				>
 					<AnimatePresence mode="popLayout">
 						{getEntries(windows).flatMap(
 							([process, processWindows]) =>
 								getEntries(processWindows).flatMap(([id, app]) => (
 									<WindowContainer
-										key={`${process}-${id}`}
-										title={app.fullName}
 										icon={app.icon}
-										isMinimized={app.isMinimized}
-										isMaximized={app.isMaximized}
+										initialPosition={getInitialPosition(app)}
 										isFocused={focusedWindow?.id === id}
+										isMaximized={app.isMaximized}
+										isMinimized={app.isMinimized}
+										key={`${process}-${id}`}
+										onClose={handleCloseWindow(process, id)}
 										onFocus={handleFocusWindow(process, id)}
-										onMinimize={handleMinimizeWindow(process, id)}
 										onMaximize={handleToggleMaximizeWindow(
 											process,
 											id
 										)}
-										onClose={handleCloseWindow(process, id)}
-										initialPosition={getInitialPosition(app)}
+										onMinimize={handleMinimizeWindow(process, id)}
+										title={app.fullName}
 									>
-										{app?.Window ? (
+										{app.Window ? (
 											<app.Window />
 										) : (
 											<Center
-												h="full"
-												userSelect="none"
-												unselectable="on"
-												pointerEvents="none"
 												draggable={false}
+												h="full"
+												pointerEvents="none"
+												unselectable="on"
+												userSelect="none"
 											>
 												{app.icon}
 											</Center>
@@ -196,6 +195,7 @@ export function WindowsProvider(props: WindowsProviderProps) {
 export function useWindows() {
 	const context = useContext(WindowsContext);
 
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- context can be undefined if not used within a provider
 	if (!context) {
 		throw new Error(
 			'useWindows must be used within a `WindowsProvider`'

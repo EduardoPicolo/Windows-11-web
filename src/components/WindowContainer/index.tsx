@@ -1,12 +1,6 @@
 'use client';
 
-import {
-	type MouseEventHandler,
-	SyntheticEvent,
-	useLayoutEffect,
-	useRef,
-	useState,
-} from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import {
 	Box,
 	ButtonGroup,
@@ -21,6 +15,7 @@ import {
 	useColorModeValue,
 } from '@chakra-ui/react';
 import { useSize } from '@chakra-ui/react-use-size';
+import type { MouseEventHandler, SyntheticEvent } from 'react';
 import { BiSquareRounded } from 'react-icons/bi';
 import { IoClose } from 'react-icons/io5';
 import { VscChromeMinimize } from 'react-icons/vsc';
@@ -68,14 +63,14 @@ export function WindowContainer(props: WindowContainerProps) {
 	} = props;
 
 	useLayoutEffect(() => {
-		onFocus?.();
+		onFocus();
 		// eslint-disable-next-line react-hooks/exhaustive-deps -- only run on mount
 	}, []);
 
 	const mainRef = useRef<HTMLElement | null>(null);
 
 	if (!mainRef.current && typeof window !== 'undefined')
-		[mainRef.current] = document.querySelectorAll('main');
+		mainRef.current = document.querySelectorAll('main')[0] ?? null;
 
 	const maxSize = useSize(mainRef);
 
@@ -100,18 +95,18 @@ export function WindowContainer(props: WindowContainerProps) {
 
 	return (
 		<Rnd
+			bounds="main"
+			default={initialPosition}
 			dragHandleClassName="handle"
+			minHeight="100px"
+			minWidth="140px"
+			position={isMaximized ? staticPosition : rndState}
+			size={isMaximized ? maxSize : rndState}
 			style={{
 				// eslint-disable-next-line no-inline-styles/no-inline-styles -- style prop is needed to style Rnd
 				// display: isMinimized ? 'none' : 'flex',
 				zIndex: isFocused ? 2 : 1,
 			}}
-			default={initialPosition}
-			size={isMaximized ? maxSize : rndState}
-			position={isMaximized ? staticPosition : rndState}
-			bounds="main"
-			minWidth="140px"
-			minHeight="100px"
 			disableDragging={isMaximized}
 			/* eslint-disable react-perf/jsx-no-new-function-as-prop -- ignore */
 			onDragStop={(_e, d) => {
@@ -132,23 +127,6 @@ export function WindowContainer(props: WindowContainerProps) {
 			/* eslint-enable react-perf/jsx-no-new-function-as-prop */
 		>
 			<MotionCard
-				variant="window"
-				height="100%"
-				onClick={onFocus}
-				filter={
-					isFocused
-						? 'brightness(1)'
-						: 'brightness(0.9) contrast(0.9) '
-				}
-				boxShadow={isFocused ? 'dark-lg' : 'base'}
-				borderBottomRadius={isMaximized ? '0' : 'md'}
-				// hidden={isMinimized}
-				initial={{
-					opacity: 0.33,
-					scale: 0.75,
-					y: 0,
-					x: 0,
-				}}
 				animate={
 					isMinimized
 						? {
@@ -161,6 +139,7 @@ export function WindowContainer(props: WindowContainerProps) {
 								scale: 1,
 						  }
 				}
+				boxShadow={isFocused ? 'dark-lg' : 'base'}
 				exit={
 					isMinimized
 						? {
@@ -172,27 +151,43 @@ export function WindowContainer(props: WindowContainerProps) {
 								scale: 0.75,
 						  }
 				}
+				filter={
+					isFocused
+						? 'brightness(1)'
+						: 'brightness(0.9) contrast(0.9) '
+				}
+				height="100%"
+				onClick={onFocus}
 				transition={{
 					type: 'tween',
 					duration: 0.2,
 					ease: 'circOut',
 				}}
+				variant="window"
+				borderBottomRadius={isMaximized ? '0' : 'md'}
+				// hidden={isMinimized}
+				initial={{
+					opacity: 0.33,
+					scale: 0.75,
+					y: 0,
+					x: 0,
+				}}
 				{...rest}
 			>
 				<CardHeader className="handle">
 					<HStack
-						justifyContent="space-between"
-						cursor="grab"
 						_active={{ cursor: 'grabbing' }}
+						cursor="grab"
+						justifyContent="space-between"
 					>
 						<HStack overflow="hidden">
 							<Box
-								w="22px"
-								userSelect="none"
-								unselectable="on"
 								draggable={false}
-								pointerEvents="none"
 								flexShrink={0}
+								pointerEvents="none"
+								unselectable="on"
+								userSelect="none"
+								w="22px"
 							>
 								{icon}
 							</Box>
@@ -201,34 +196,34 @@ export function WindowContainer(props: WindowContainerProps) {
 							</Text>
 						</HStack>
 						<ButtonGroup
-							variant="ghost"
 							colorScheme="gray"
+							cursor="default"
 							size="sm"
 							spacing={1}
-							cursor="default"
+							variant="ghost"
 						>
 							<IconButton
 								aria-label="minimize"
-								icon={<Icon as={VscChromeMinimize} boxSize={5} />}
-								onClick={onMinimize}
 								borderRadius="none"
 								boxShadow="none"
+								icon={<Icon as={VscChromeMinimize} boxSize={5} />}
+								onClick={onMinimize}
 							/>
 							<IconButton
 								aria-label="maximize"
-								icon={<Icon as={BiSquareRounded} boxSize={4} />}
-								onClick={onMaximize}
 								borderRadius="none"
 								boxShadow="none"
+								icon={<Icon as={BiSquareRounded} boxSize={4} />}
+								onClick={onMaximize}
 							/>
 							<IconButton
 								aria-label="close"
-								colorScheme="red"
-								icon={<Icon as={IoClose} boxSize={5} />}
-								onClick={onClose}
 								borderRadius="none"
 								borderTopRightRadius="md"
 								boxShadow="none"
+								colorScheme="red"
+								icon={<Icon as={IoClose} boxSize={5} />}
+								onClick={onClose}
 							/>
 						</ButtonGroup>
 					</HStack>

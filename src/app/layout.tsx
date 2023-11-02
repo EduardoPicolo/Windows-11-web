@@ -65,7 +65,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en" className={`${segoe.variable}`}>
+		<html className={`${segoe.variable}`} lang="en">
 			<body>
 				{/* eslint-disable-next-line @next/next/no-sync-scripts -- must not defer/async */}
 				<script

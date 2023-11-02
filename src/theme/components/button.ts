@@ -1,8 +1,5 @@
-import {
-	defineStyle,
-	defineStyleConfig,
-	Theme,
-} from '@chakra-ui/react';
+import type { Theme } from '@chakra-ui/react';
+import { defineStyle, defineStyleConfig } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
 
 const baseStyle = defineStyle({
@@ -27,7 +24,7 @@ const gradient = defineStyle((props) => {
 		// console.log(theme?.components?.Button?.variants.solid(props));
 
 		return {
-			...(theme as Theme)?.components?.Button?.variants?.solid(props),
+			...(theme as Theme).components.Button.variants?.solid(props),
 		};
 	}
 
@@ -37,9 +34,8 @@ const gradient = defineStyle((props) => {
 			`linear-gradient(to right, ${colorScheme}.400 0%, ${colorScheme}.300  51%, ${colorScheme}.400  100%)`
 		)(props),
 
-		color: (theme as Theme)?.components?.Button?.variants?.solid(
-			props
-		)?.color,
+		color: (theme as Theme).components.Button.variants?.solid(props)
+			?.color,
 
 		backgroundSize: '200% auto',
 		transition: '0.5s',

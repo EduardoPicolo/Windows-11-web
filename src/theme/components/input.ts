@@ -1,8 +1,6 @@
 import { inputAnatomy } from '@chakra-ui/anatomy';
-import {
-	ComponentStyleConfig,
-	createMultiStyleConfigHelpers,
-} from '@chakra-ui/react';
+import type { ComponentStyleConfig } from '@chakra-ui/react';
+import { createMultiStyleConfigHelpers } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
 
 const { definePartsStyle, defineMultiStyleConfig } =

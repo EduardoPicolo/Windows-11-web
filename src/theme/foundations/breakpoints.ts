@@ -1,4 +1,4 @@
-import { Theme } from '@chakra-ui/react';
+import type { Theme } from '@chakra-ui/react';
 
 export const breakpoints = {
 	xs: '20em', // 320px

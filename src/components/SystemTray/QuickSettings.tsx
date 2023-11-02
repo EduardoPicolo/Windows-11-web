@@ -49,39 +49,39 @@ export function QuickSettings() {
 	const { toggleColorMode, colorMode } = useColorMode();
 
 	return (
-		<Popover placement="top" gutter={16} offset={[-95, 16]}>
+		<Popover gutter={16} offset={[-95, 16]} placement="top">
 			<PopoverTrigger>
 				<HStack
-					as="button"
-					py={1}
-					px={2}
-					borderRadius="md"
 					_hover={{
 						background: 'hoverBg',
 						boxShadow: 'thin',
 					}}
+					as="button"
+					borderRadius="md"
 					cursor="default"
+					px={2}
+					py={1}
 					transition="all 0.2s"
 				>
 					<Tooltip
-						openDelay={1000}
-						label="Internet access"
 						gutter={20}
+						label="Internet access"
+						openDelay={1000}
 					>
 						<Flex>
 							<Icon as={PiWifiHighBold} boxSize={5} />
 						</Flex>
 					</Tooltip>
 					<Tooltip
-						openDelay={1000}
-						label={`Speakers (High Definition Audio Device): ${soundLevel}%`}
 						gutter={20}
+						label={`Speakers (High Definition Audio Device): ${soundLevel}%`}
+						openDelay={1000}
 					>
 						<Flex>
 							<SpeakerIcon
-								volumeLevel={soundLevel}
-								isMuted={isSoundMuted}
 								boxSize={5}
+								isMuted={isSoundMuted}
+								volumeLevel={soundLevel}
 							/>
 						</Flex>
 					</Tooltip>
@@ -91,11 +91,11 @@ export function QuickSettings() {
 				<PopoverContent w="400px">
 					<PopoverBody p={6}>
 						<Stack spacing={8}>
-							<Grid templateColumns="repeat(3, 1fr)" gap={4}>
+							<Grid gap={4} templateColumns="repeat(3, 1fr)">
 								<QuickSettingsItem
-									label="Wifi"
-									justifyContent="space-evenly"
 									defaultChecked
+									justifyContent="space-evenly"
+									label="Wifi"
 								>
 									<Icon as={PiWifiHighBold} boxSize={5} />
 									<Divider orientation="vertical" />
@@ -103,9 +103,9 @@ export function QuickSettings() {
 								</QuickSettingsItem>
 
 								<QuickSettingsItem
-									label="Bluetooth"
-									justifyContent="space-evenly"
 									defaultChecked
+									justifyContent="space-evenly"
+									label="Bluetooth"
 								>
 									<Icon as={BiBluetooth} boxSize={5} />
 									<Divider orientation="vertical" />
@@ -117,9 +117,9 @@ export function QuickSettings() {
 								</QuickSettingsItem>
 
 								<QuickSettingsItem
+									isChecked={colorMode === 'dark'}
 									label="Color mode"
 									onClick={toggleColorMode}
-									isChecked={colorMode === 'dark'}
 								>
 									<Icon
 										as={
@@ -143,24 +143,24 @@ export function QuickSettings() {
 							<HStack spacing={4}>
 								<IconButton
 									aria-label="headphones"
-									variant="ghost"
 									colorScheme="gray"
-									size="sm"
 									icon={
 										<SpeakerIcon
-											volumeLevel={soundLevel}
-											isMuted={isSoundMuted}
 											boxSize={5}
+											isMuted={isSoundMuted}
+											volumeLevel={soundLevel}
 										/>
 									}
 									onClick={toggleSoundMuted}
+									size="sm"
+									variant="ghost"
 								/>
 
 								<Slider
 									aria-label="sound-level-slider"
 									defaultValue={soundLevel}
-									onChange={setSoundLevel}
 									isDisabled={isSoundMuted}
+									onChange={setSoundLevel}
 								>
 									<SliderTrack>
 										<SliderFilledTrack />
@@ -170,10 +170,10 @@ export function QuickSettings() {
 
 								<IconButton
 									aria-label="headphones"
-									variant="ghost"
 									colorScheme="gray"
-									size="sm"
 									icon={<Icon as={MdOutlineHeadphones} boxSize={5} />}
+									size="sm"
+									variant="ghost"
 								/>
 							</HStack>
 						</Stack>
@@ -181,9 +181,9 @@ export function QuickSettings() {
 
 					<PopoverFooter>
 						<ButtonGroup
-							w="full"
 							justifyContent="right"
 							variant="ghost"
+							w="full"
 							colorScheme="gray"
 							// size="sm"
 							spacing={3}

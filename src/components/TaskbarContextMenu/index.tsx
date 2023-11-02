@@ -7,10 +7,8 @@ import {
 import { HiOutlineCog6Tooth } from 'react-icons/hi2';
 import { TbActivityHeartbeat } from 'react-icons/tb';
 
-import {
-	ContextMenu,
-	ContextMenuProps,
-} from '@/components/ContextMenu';
+import type { ContextMenuProps } from '@/components/ContextMenu';
+import { ContextMenu } from '@/components/ContextMenu';
 
 type TaskbarContextMenuProps = Omit<ContextMenuProps, 'children'>;
 

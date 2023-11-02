@@ -36,24 +36,22 @@ export function QuickSettingsItem(props: QuickSettingsItemProps) {
 		defaultChecked ?? isChecked
 	);
 
-	const innerIsChecked = isControlled.current
-		? isChecked
-		: innerState;
+	const _isChecked = isControlled.current ? isChecked : innerState;
 
 	const { colorMode } = useColorMode();
 
 	return (
 		<Box textAlign="center">
 			<Button
+				colorScheme={_isChecked ? 'blue' : 'gray'}
+				size="xl"
 				variant={
-					innerIsChecked
+					_isChecked
 						? 'solid'
 						: colorMode === 'dark'
 						? 'outline'
 						: 'solid'
 				}
-				colorScheme={innerIsChecked ? 'blue' : 'gray'}
-				size="xl"
 				w="full"
 				px={0}
 				// borderWidth="1px"
@@ -64,10 +62,10 @@ export function QuickSettingsItem(props: QuickSettingsItemProps) {
 			</Button>
 
 			<Text
+				cursor="default"
 				fontSize="xs"
 				fontWeight="semibold"
 				mt={2}
-				cursor="default"
 			>
 				{label}
 			</Text>

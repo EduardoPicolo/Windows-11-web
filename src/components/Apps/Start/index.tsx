@@ -31,7 +31,7 @@ export function StartMenuContainer({
 	useOutsideClick({
 		ref: menuRef,
 		handler: (event) => {
-			if (anchorEl?.contains(event?.target as Node)) return;
+			if (anchorEl.contains(event.target as Node)) return;
 			onClose();
 		},
 	});
@@ -39,13 +39,14 @@ export function StartMenuContainer({
 	return (
 		<Portal appendToParentPortal={false}>
 			<AnimatePresence>
-				{isOpen && (
+				{isOpen ? (
 					<MotionDivWithStyles
-						position="absolute"
-						left={anchorEl?.offsetLeft ? anchorEl.offsetLeft - 50 : 0}
+						animate={{ y: -60 }}
 						bottom={0}
 						initial={{ y: '75%' }}
-						animate={{ y: -60 }}
+						left={anchorEl.offsetLeft ? anchorEl.offsetLeft - 50 : 0}
+						position="absolute"
+						zIndex={2}
 						exit={{ y: '100%' }}
 						// eslint-disable-next-line react-perf/jsx-no-new-object-as-prop -- ignore
 						transition={{
@@ -53,11 +54,10 @@ export function StartMenuContainer({
 							duration: 0.3,
 							ease: 'circOut',
 						}}
-						zIndex={2}
 					>
-						<StartMenu ref={menuRef} onClose={onClose} />
+						<StartMenu onClose={onClose} ref={menuRef} />
 					</MotionDivWithStyles>
-				)}
+				) : null}
 			</AnimatePresence>
 		</Portal>
 	);
@@ -67,9 +67,9 @@ const startMenuButton: App = {
 	shortName: 'Start',
 	icon: (
 		<ThemeImage
-			srcLight={StartIconLight}
-			srcDark={StartIconDark}
 			alt="start"
+			srcDark={StartIconDark}
+			srcLight={StartIconLight}
 		/>
 	),
 	Window: null,
@@ -83,18 +83,18 @@ export function StartApp() {
 	return (
 		<>
 			<TaskbarIcon
-				ref={ref}
 				app={startMenuButton}
 				onClick={onToggle}
+				ref={ref}
 			/>
 
-			{ref.current && (
+			{ref.current ? (
 				<StartMenuContainer
+					anchorEl={ref.current}
 					isOpen={isOpen}
 					onClose={onClose}
-					anchorEl={ref.current}
 				/>
-			)}
+			) : null}
 		</>
 	);
 }

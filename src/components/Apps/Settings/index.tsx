@@ -36,15 +36,15 @@ export function SettingsSidebar(props: SettingsSidebarProps) {
 	return (
 		<Stack spacing={8} {...props}>
 			<HStack
-				p={2}
 				_hover={{
 					bg: 'hoverBg',
 				}}
 				borderRadius="md"
+				p={2}
 			>
 				<SkeletonCircle size="16" />
 				<Box>
-					<Heading size="sm" fontWeight="semibold">
+					<Heading fontWeight="semibold" size="sm">
 						Eduardo Pícolo
 					</Heading>
 					<Text fontSize="xs" fontWeight="medium">
@@ -58,29 +58,19 @@ export function SettingsSidebar(props: SettingsSidebarProps) {
 					<Icon as={IoSearch} boxSize={4} />
 				</InputRightElement>
 				<Input
-					borderRadius="md"
 					border="none"
 					borderBottom="1px solid"
 					borderColor="whiteAlpha.700"
+					borderRadius="md"
 					borderStyle="inset"
 					placeholder="Find a setting"
 				/>
 			</InputGroup>
 
-			<ButtonGroup variant="ghost" colorScheme="gray">
-				<TabList w="full" gap={1}>
+			<ButtonGroup colorScheme="gray" variant="ghost">
+				<TabList gap={1} w="full">
 					{settingsItems.map((item, index) => (
 						<Tab
-							key={item.label}
-							as={Button}
-							leftIcon={item.icon}
-							iconSpacing={4}
-							justifyContent="flex-start"
-							fontSize="sm"
-							fontWeight="normal"
-							color="inherit"
-							bg={index === selectedIndex ? 'hoverBg' : 'transparent'}
-							position="relative"
 							_selected={{
 								_before: {
 									content: '""',
@@ -94,6 +84,16 @@ export function SettingsSidebar(props: SettingsSidebarProps) {
 									borderRadius: 'lg',
 								},
 							}}
+							as={Button}
+							bg={index === selectedIndex ? 'hoverBg' : 'transparent'}
+							color="inherit"
+							fontSize="sm"
+							fontWeight="normal"
+							iconSpacing={4}
+							justifyContent="flex-start"
+							key={item.label}
+							leftIcon={item.icon}
+							position="relative"
 						>
 							{item.label}
 						</Tab>
@@ -109,26 +109,26 @@ export function Settings() {
 
 	return (
 		<Tabs
+			height="full"
 			index={activeIndex}
+			isLazy
+			lazyBehavior="unmount"
 			onChange={setIndex}
 			orientation="vertical"
 			variant="unstyled"
 			width="full"
-			height="full"
-			isLazy
-			lazyBehavior="unmount"
 		>
-			<Grid gridTemplateColumns="300px 1fr" w="full" p={4} gap={8}>
+			<Grid gap={8} gridTemplateColumns="300px 1fr" p={4} w="full">
 				<GridItem>
 					<SettingsSidebar position="sticky" top={4} />
 				</GridItem>
 
 				<GridItem
+					margin="0 auto"
+					maxWidth="1024px"
 					position="relative"
 					// overflow="clip"
 					width="full"
-					maxWidth="1024px"
-					margin="0 auto"
 				>
 					<TabPanels>
 						{settingsItems.map((item) => (

@@ -1,4 +1,5 @@
-import Image, { StaticImageData } from 'next/image';
+import type { StaticImageData } from 'next/image';
+import Image from 'next/image';
 
 import { Edge } from '@/components/Apps/Edge';
 import { Github } from '@/components/Apps/Github';
@@ -33,9 +34,9 @@ export const TasksApp: App = {
 	processName: 'tasks',
 	icon: (
 		<ThemeImage
-			srcLight={TasksIconLight}
-			srcDark={TasksIconDark}
 			alt="tasks"
+			srcDark={TasksIconDark}
+			srcLight={TasksIconLight}
 		/>
 	),
 	Window: null,
@@ -45,7 +46,7 @@ export const ChatApp: App = {
 	shortName: 'Chat',
 	fullName: 'Microsoft Teams',
 	processName: 'chat',
-	icon: <Image src={ChatIcon} alt="chat" />,
+	icon: <Image alt="chat" src={ChatIcon} />,
 	Window: null,
 };
 
@@ -55,9 +56,9 @@ export const EdgeApp: App = {
 	processName: 'edge',
 	icon: (
 		<Image
-			src={EdgeIcon}
 			alt="edge"
 			quality={100}
+			src={EdgeIcon}
 			style={{
 				// eslint-disable-next-line no-inline-styles/no-inline-styles -- Icon is too small in some cases
 				minWidth: '28px',
@@ -75,7 +76,7 @@ export const FileExplorerApp: App = {
 	shortName: 'File Explorer',
 	fullName: 'File Explorer',
 	processName: 'fileExplorer',
-	icon: <Image src={FileExplorerIcon} alt="file-explorer" />,
+	icon: <Image alt="file-explorer" src={FileExplorerIcon} />,
 	Window: null,
 };
 
@@ -85,9 +86,9 @@ export const StoreApp: App = {
 	processName: 'store',
 	icon: (
 		<ThemeImage
-			srcLight={StoreIconLight}
-			srcDark={StoreDarkIcon}
 			alt="store"
+			srcDark={StoreDarkIcon}
+			srcLight={StoreIconLight}
 		/>
 	),
 	Window: null,
@@ -96,7 +97,7 @@ export const OfficeApp: App = {
 	shortName: 'Office',
 	fullName: 'Microsoft 365 (Office)',
 	processName: 'office',
-	icon: <Image src={OfficeIcon} alt="office" />,
+	icon: <Image alt="office" src={OfficeIcon} />,
 	Window: null,
 };
 
@@ -104,7 +105,7 @@ export const MailApp: App = {
 	shortName: 'Mail',
 	fullName: 'Mail',
 	processName: 'mail',
-	icon: <Image src={MailIcon} alt="mail" />,
+	icon: <Image alt="mail" src={MailIcon} />,
 	Window: null,
 };
 
@@ -112,7 +113,7 @@ export const PhotosApp: App = {
 	shortName: 'Photos',
 	fullName: 'Photos',
 	processName: 'photos',
-	icon: <Image src={PhotosIcon} alt="photos" />,
+	icon: <Image alt="photos" src={PhotosIcon} />,
 	Window: null,
 };
 
@@ -122,8 +123,8 @@ export const SettingsApp: App = {
 	processName: 'settings',
 	icon: (
 		<Image
-			src={SettingsIcon}
 			alt="settings"
+			src={SettingsIcon}
 			style={{
 				// eslint-disable-next-line no-inline-styles/no-inline-styles -- Icon is too small in some cases
 				minWidth: '28px',
@@ -141,7 +142,7 @@ export const XboxApp: App = {
 	shortName: 'Xbox',
 	fullName: 'Xbox',
 	processName: 'xbox',
-	icon: <Image src={XboxIcon as StaticImageData} alt="xbox" />,
+	icon: <Image alt="xbox" src={XboxIcon as StaticImageData} />,
 	Window: null,
 };
 
@@ -150,7 +151,7 @@ export const SolitaireApp: App = {
 	fullName: 'Solitaire',
 	processName: 'solitaire',
 	icon: (
-		<Image src={SolitaireIcon as StaticImageData} alt="solitaire" />
+		<Image alt="solitaire" src={SolitaireIcon as StaticImageData} />
 	),
 	Window: null,
 };
@@ -161,9 +162,9 @@ export const SpotifyApp: App = {
 	processName: 'spotify',
 	icon: (
 		<Image
-			src={SpotifyIcon as StaticImageData}
-			quality={100}
 			alt="spotify"
+			quality={100}
+			src={SpotifyIcon as StaticImageData}
 		/>
 	),
 	Window: Spotify,
@@ -174,7 +175,7 @@ export const InstagramApp: App = {
 	fullName: 'Instagram',
 	processName: 'instagram',
 	icon: (
-		<Image src={InstagramIcon as StaticImageData} alt="instagram" />
+		<Image alt="instagram" src={InstagramIcon as StaticImageData} />
 	),
 	Window: null,
 };
@@ -183,7 +184,7 @@ export const CalculatorApp: App = {
 	shortName: 'Calculator',
 	fullName: 'Calculator',
 	processName: 'calculator',
-	icon: <Image src={CalculatorIcon} alt="calculator" />,
+	icon: <Image alt="calculator" src={CalculatorIcon} />,
 	Window: null,
 };
 
@@ -193,9 +194,9 @@ export const VSCodeApp: App = {
 	processName: 'vscode',
 	icon: (
 		<Image
-			src={VSCodeIcon as StaticImageData}
-			quality={100}
 			alt="vscode"
+			quality={100}
+			src={VSCodeIcon as StaticImageData}
 		/>
 	),
 	Window: VSCode,
@@ -210,7 +211,7 @@ export const WhiteboardApp: App = {
 	fullName: 'Whiteboard',
 	processName: 'whiteboard',
 	icon: (
-		<Image src={WhiteboardIcon as StaticImageData} alt="whiteboard" />
+		<Image alt="whiteboard" src={WhiteboardIcon as StaticImageData} />
 	),
 	Window: null,
 };
@@ -219,7 +220,7 @@ export const WordApp: App = {
 	shortName: 'Word',
 	fullName: 'Word',
 	processName: 'word',
-	icon: <Image src={WordIcon as StaticImageData} alt="word" />,
+	icon: <Image alt="word" src={WordIcon as StaticImageData} />,
 	Window: null,
 };
 
@@ -229,9 +230,9 @@ export const GithubApp: App = {
 	processName: 'github',
 	icon: (
 		<Image
-			src={GithubIcon as StaticImageData}
-			quality={100}
 			alt="github"
+			quality={100}
+			src={GithubIcon as StaticImageData}
 		/>
 	),
 	Window: Github,

@@ -1,9 +1,9 @@
-import {
+import type {
 	GroupBase,
 	OptionProps,
 	Props,
-	Select,
 } from 'chakra-react-select';
+import { Select } from 'chakra-react-select';
 
 const getOptionBg =
 	<
@@ -38,7 +38,6 @@ const getOptionBg =
 	};
 
 /* eslint-disable react-perf/jsx-no-new-object-as-prop -- ignore */
-/* eslint-disable react-perf/jsx-no-new-array-as-prop -- ignore */
 
 type CustomSelectProps<
 	Option = unknown,
@@ -55,8 +54,6 @@ export function CustomSelect<
 
 	return (
 		<Select
-			defaultValue={null}
-			openMenuOnFocus
 			chakraStyles={{
 				control: (provided) => ({
 					...provided,
@@ -106,10 +103,11 @@ export function CustomSelect<
 				}),
 				...chakraStyles,
 			}}
+			defaultValue={null}
+			openMenuOnFocus
 			{...props}
 		/>
 	);
 }
 
 /* eslint-enable react-perf/jsx-no-new-object-as-prop */
-/* eslint-enable react-perf/jsx-no-new-array-as-prop */

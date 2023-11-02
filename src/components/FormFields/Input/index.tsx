@@ -1,4 +1,8 @@
-import { ReactElement, ReactNode } from 'react';
+import type {
+	InputAddonProps,
+	InputElementProps,
+	InputProps as ChakraInputProps,
+} from '@chakra-ui/react';
 import {
 	FormControl,
 	FormErrorMessage,
@@ -6,12 +10,10 @@ import {
 	FormLabel,
 	forwardRef,
 	Input as ChakraInput,
-	InputAddonProps,
-	InputElementProps,
 	InputGroup,
-	InputProps as ChakraInputProps,
 } from '@chakra-ui/react';
-import { FieldError } from 'react-hook-form';
+import type { ReactElement, ReactNode } from 'react';
+import type { FieldError } from 'react-hook-form';
 
 export interface InputProps extends ChakraInputProps {
 	label?: ReactNode;
@@ -66,19 +68,21 @@ export const Input = forwardRef<InputProps, 'input'>((props, ref) => {
 			onClick={onClick}
 			{...rest}
 		>
-			{label && (
+			{label ? (
 				<FormLabel textTransform="capitalize">{label}</FormLabel>
-			)}
+			) : null}
 
 			<InputGroup size={props.size}>
 				{leftAddon ?? null}
 				{leftElement ?? null}
-				<ChakraInput ref={ref} as={as} {...rest} />
+				<ChakraInput as={as} ref={ref} {...rest} />
 				{rightAddon ?? null}
 				{rightElement ?? null}
 			</InputGroup>
 
-			{helperText && <FormHelperText>{helperText}</FormHelperText>}
+			{helperText ? (
+				<FormHelperText>{helperText}</FormHelperText>
+			) : null}
 			<FormErrorMessage color="red.300">
 				{errors?.message}
 			</FormErrorMessage>

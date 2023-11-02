@@ -38,11 +38,11 @@ export function WindowsGrid(props: WindowsGridProps) {
 
 	return (
 		<Grid
-			position="relative"
-			w="100vw"
 			h="100vh"
+			position="relative"
 			templateRows="1fr auto"
 			userSelect="none"
+			w="100vw"
 			{...rest}
 		>
 			<Wallpaper />

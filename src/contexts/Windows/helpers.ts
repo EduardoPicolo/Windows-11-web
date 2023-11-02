@@ -3,12 +3,12 @@ import { type Props } from 'react-rnd';
 export const windowsContextDefaultValues: WindowsContext = {
 	windows: {} as WindowsContext['windows'],
 	focusedWindow: null,
-	addWindow: () => {},
-	closeWindow: () => {},
-	focusWindow: () => {},
+	addWindow: () => undefined,
+	closeWindow: () => undefined,
+	focusWindow: () => undefined,
 	minimize: {
-		on: () => {},
-		off: () => {},
+		on: () => undefined,
+		off: () => undefined,
 	},
 };
 

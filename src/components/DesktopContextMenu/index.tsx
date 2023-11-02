@@ -1,9 +1,4 @@
-import {
-	FocusEventHandler,
-	useCallback,
-	useLayoutEffect,
-	useState,
-} from 'react';
+import { useCallback, useLayoutEffect, useState } from 'react';
 import {
 	chakra,
 	HStack,
@@ -14,6 +9,7 @@ import {
 	Text,
 	useDisclosure,
 } from '@chakra-ui/react';
+import type { FocusEventHandler } from 'react';
 import { BsBrush, BsGrid } from 'react-icons/bs';
 import { CgMoreR } from 'react-icons/cg';
 import { RiArrowRightSLine } from 'react-icons/ri';
@@ -89,13 +85,13 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 		<ContextMenu size="sm" {...props}>
 			<MenuList>
 				<MenuItem
-					icon={<Icon as={BsGrid} />}
-					onFocus={handleOpenSubmenu('view')}
 					bg={
 						submenuDisclosure.isOpen && submenu === 'view'
 							? 'hoverBg'
 							: undefined
 					}
+					icon={<Icon as={BsGrid} />}
+					onFocus={handleOpenSubmenu('view')}
 				>
 					<HStack justifyContent="space-between">
 						<Text>View</Text>
@@ -104,13 +100,13 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 				</MenuItem>
 
 				<MenuItem
-					icon={<SortIcon />}
-					onFocus={handleOpenSubmenu('sortby')}
 					bg={
 						submenuDisclosure.isOpen && submenu === 'sortby'
 							? 'hoverBg'
 							: undefined
 					}
+					icon={<SortIcon />}
+					onFocus={handleOpenSubmenu('sortby')}
 				>
 					<HStack justifyContent="space-between">
 						<Text>Sort by</Text>
@@ -125,13 +121,13 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 				</MenuItem>
 				<MenuDivider />
 				<MenuItem
-					icon={<AddIcon boxSize="20px" />}
-					onFocus={handleOpenSubmenu('new')}
 					bg={
 						submenuDisclosure.isOpen && submenu === 'new'
 							? 'hoverBg'
 							: undefined
 					}
+					icon={<AddIcon boxSize="20px" />}
+					onFocus={handleOpenSubmenu('new')}
 				>
 					<HStack justifyContent="space-between">
 						<Text>New</Text>
@@ -141,15 +137,15 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 				<MenuDivider />
 				<MenuItem
 					icon={<DisplaySettingsIcon boxSize="19px" />}
-					onFocus={submenuDisclosure.onClose}
 					onClick={handleAddWindow(SettingsApp)}
+					onFocus={submenuDisclosure.onClose}
 				>
 					Display Settings
 				</MenuItem>
 				<MenuItem
 					icon={<Icon as={BsBrush} />}
-					onFocus={submenuDisclosure.onClose}
 					onClick={handleAddWindow(SettingsApp)}
+					onFocus={submenuDisclosure.onClose}
 				>
 					Personalize
 				</MenuItem>
@@ -179,25 +175,25 @@ export function DesktopContextMenu(props: DesktopContextMenuProps) {
 			</MenuList>
 
 			<AnimatePresence>
-				{submenuDisclosure.isOpen && (
+				{submenuDisclosure.isOpen ? (
 					<MotionDivWithStyles
-						position="absolute"
-						top={`${submenuPosition?.y}px`}
-						left={`${submenuPosition?.x}px`}
-						zIndex={3}
-						initial={{ x: -20 }}
 						animate={{ x: 0 }}
 						exit={{ scale: 0.9 }}
+						initial={{ x: -20 }}
+						layout="position"
+						left={`${submenuPosition.x}px`}
+						position="absolute"
+						top={`${submenuPosition.y}px`}
 						transition={{
 							type: 'tween',
 							ease: 'circOut',
 							duration: 0.2,
 						}}
-						layout="position"
+						zIndex={3}
 					>
 						{submenu ? submenusMap[submenu] : null}
 					</MotionDivWithStyles>
-				)}
+				) : null}
 			</AnimatePresence>
 		</ContextMenu>
 	);

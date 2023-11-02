@@ -18,28 +18,28 @@ export const settingsItems = [
 	{
 		label: 'System',
 		icon: (
-			<Image src={SystemIcon} alt="system" width={18} unoptimized />
+			<Image alt="system" src={SystemIcon} unoptimized width={18} />
 		),
 		panel: (
-			<Heading size="lg" fontWeight="medium">
+			<Heading fontWeight="medium" size="lg">
 				System
 			</Heading>
 		),
 	},
 	{
 		label: 'Bluetooth & devices',
-		icon: <Image src={BluetoothIcon} alt="bluetooth" width={18} />,
+		icon: <Image alt="bluetooth" src={BluetoothIcon} width={18} />,
 		panel: (
-			<Heading size="lg" fontWeight="medium">
+			<Heading fontWeight="medium" size="lg">
 				Bluetooth & devices
 			</Heading>
 		),
 	},
 	{
 		label: 'Network & internet',
-		icon: <Image src={WifiIcon} alt="network" width={18} />,
+		icon: <Image alt="network" src={WifiIcon} width={18} />,
 		panel: (
-			<Heading size="lg" fontWeight="medium" mb={8}>
+			<Heading fontWeight="medium" mb={8} size="lg">
 				Network & internet
 			</Heading>
 		),
@@ -48,8 +48,8 @@ export const settingsItems = [
 		label: 'Personalization',
 		icon: (
 			<Image
-				src={PersonalisationIcon}
 				alt="personalization"
+				src={PersonalisationIcon}
 				width={18}
 			/>
 		),
@@ -57,36 +57,36 @@ export const settingsItems = [
 	},
 	{
 		label: 'Apps',
-		icon: <Image src={AppsIcon} alt="apps" width={18} />,
+		icon: <Image alt="apps" src={AppsIcon} width={18} />,
 		panel: (
-			<Heading size="lg" fontWeight="medium">
+			<Heading fontWeight="medium" size="lg">
 				Apps
 			</Heading>
 		),
 	},
 	{
 		label: 'Accounts',
-		icon: <Image src={AccountsIcon} alt="accounts" width={18} />,
+		icon: <Image alt="accounts" src={AccountsIcon} width={18} />,
 		panel: (
-			<Heading size="lg" fontWeight="medium">
+			<Heading fontWeight="medium" size="lg">
 				Accounts
 			</Heading>
 		),
 	},
 	{
 		label: 'Time & language',
-		icon: <Image src={TimeIcon} alt="time" width={18} />,
+		icon: <Image alt="time" src={TimeIcon} width={18} />,
 		panel: (
-			<Heading size="lg" fontWeight="medium">
+			<Heading fontWeight="medium" size="lg">
 				Time & language
 			</Heading>
 		),
 	},
 	{
 		label: 'Gaming',
-		icon: <Image src={GamingIcon} alt="gaming" width={18} />,
+		icon: <Image alt="gaming" src={GamingIcon} width={18} />,
 		panel: (
-			<Heading size="lg" fontWeight="medium">
+			<Heading fontWeight="medium" size="lg">
 				Gaming
 			</Heading>
 		),
@@ -94,28 +94,28 @@ export const settingsItems = [
 	{
 		label: 'Accessibility',
 		icon: (
-			<Image src={AccessibilityIcon} alt="accessibility" width={18} />
+			<Image alt="accessibility" src={AccessibilityIcon} width={18} />
 		),
 		panel: (
-			<Heading size="lg" fontWeight="medium">
+			<Heading fontWeight="medium" size="lg">
 				Accessibility
 			</Heading>
 		),
 	},
 	{
 		label: 'Privacy & security',
-		icon: <Image src={PrivacyIcon} alt="privacy" width={18} />,
+		icon: <Image alt="privacy" src={PrivacyIcon} width={18} />,
 		panel: (
-			<Heading size="lg" fontWeight="medium">
+			<Heading fontWeight="medium" size="lg">
 				Privacy & security
 			</Heading>
 		),
 	},
 	{
 		label: 'Windows Update',
-		icon: <Image src={UpdateIcon} alt="update" width={18} />,
+		icon: <Image alt="update" src={UpdateIcon} width={18} />,
 		panel: (
-			<Heading size="lg" fontWeight="medium">
+			<Heading fontWeight="medium" size="lg">
 				Windows Update
 			</Heading>
 		),

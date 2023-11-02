@@ -1,4 +1,5 @@
 import { useLayoutEffect, useState } from 'react';
+import type { DrawerProps } from '@chakra-ui/react';
 import {
 	Drawer,
 	DrawerBody,
@@ -6,7 +7,6 @@ import {
 	DrawerFooter,
 	DrawerHeader,
 	DrawerOverlay,
-	DrawerProps,
 	Icon,
 	IconButton,
 	Text,
@@ -27,11 +27,15 @@ export function Discover(props: DiscoverProps) {
 
 	useLayoutEffect(() => {
 		const timerID = setInterval(
-			() => setTime(new Date()),
+			() => {
+				setTime(new Date());
+			},
 			60 * 60 * 24
 		);
 
-		return () => clearInterval(timerID);
+		return () => {
+			clearInterval(timerID);
+		};
 	}, []);
 
 	const formattedDate = time.toLocaleString(
@@ -45,18 +49,18 @@ export function Discover(props: DiscoverProps) {
 	return (
 		<>
 			<IconButton
-				aria-label="discover"
-				variant="ghost"
-				colorScheme="gray"
-				height="100%"
-				size="sm"
-				icon={<Icon transition="transform 0.3s ease-in-out" />}
 				_light={{
 					_hover: {
 						bg: 'hoverBg',
 					},
 				}}
+				aria-label="discover"
+				colorScheme="gray"
+				height="100%"
+				icon={<Icon transition="transform 0.3s ease-in-out" />}
 				onClick={onOpen}
+				size="sm"
+				variant="ghost"
 			/>
 
 			<Drawer
@@ -68,8 +72,8 @@ export function Discover(props: DiscoverProps) {
 			>
 				<DrawerOverlay />
 				<DrawerContent
-					height="calc(100% - 50px)"
 					borderRadius="md"
+					height="calc(100% - 50px)"
 					sx={{
 						position: 'relative !important',
 					}}

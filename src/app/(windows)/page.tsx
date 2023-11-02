@@ -97,17 +97,21 @@ export default function Home() {
 	return (
 		<main ref={dragContainerRef}>
 			<Moveable
-				ref={moveableRef}
-				target={targets}
-				snapContainer={dragContainerRef.current}
-				draggable
-				snappable
 				bounds={{
 					left: 0,
 					top: 0,
 					right: 0,
 					bottom: 0,
 					position: 'css',
+				}}
+				ref={moveableRef}
+				snapContainer={dragContainerRef.current}
+				snappable
+				target={targets}
+				draggable
+				// eslint-disable-next-line react-perf/jsx-no-new-function-as-prop -- ignore
+				onRender={(e) => {
+					e.target.style.cssText += e.cssText;
 				}}
 				origin={false}
 				/*  eslint-disable react-perf/jsx-no-new-function-as-prop -- ignore */
@@ -117,29 +121,36 @@ export default function Home() {
 						e.inputTarget
 					);
 				}}
-				onRender={(e) => {
-					e.target.style.cssText += e.cssText;
-				}}
 				onRenderGroup={(e) => {
 					e.events.forEach((ev) => {
-						// eslint-disable-next-line no-param-reassign -- ignore
 						ev.target.style.cssText += ev.cssText;
 					});
 				}}
 				/* eslint-enable react-perf/jsx-no-new-function-as-prop */
 			/>
 			<Selecto
-				ref={selectoRef}
 				boundContainer
-				dragContainer={dragContainerRef.current}
-				selectableTargets={['.desktop-icon']}
-				hitRate={0}
-				selectByClick
-				selectFromInside
 				continueSelect={false}
 				continueSelectWithoutDeselect
+				dragContainer={dragContainerRef.current}
+				ref={selectoRef}
+				selectByClick
+				selectFromInside
+				selectableTargets={['.desktop-icon']}
 				toggleContinueSelect="shift"
 				toggleContinueSelectWithoutDeselect={[['ctrl'], ['meta']]}
+				hitRate={0}
+				// eslint-disable-next-line react-perf/jsx-no-new-function-as-prop -- ignore
+				onSelect={(e) => {
+					e.added.forEach((el) => {
+						el.classList.add('selected');
+					});
+					e.removed.forEach((el) => {
+						el.classList.remove('selected');
+					});
+
+					setTargets(e.selected);
+				}}
 				ratio={0}
 				/*  eslint-disable react-perf/jsx-no-new-function-as-prop -- ignore */
 				onDragStart={(event) => {
@@ -152,16 +163,6 @@ export default function Home() {
 					) {
 						event.stop();
 					}
-				}}
-				onSelect={(e) => {
-					e.added.forEach((el) => {
-						el.classList.add('selected');
-					});
-					e.removed.forEach((el) => {
-						el.classList.remove('selected');
-					});
-
-					setTargets(e.selected);
 				}}
 				onSelectEnd={(event) => {
 					if (event.isDragStartEnd) {
@@ -185,25 +186,25 @@ export default function Home() {
 			/>
 
 			<Grid
-				onContextMenu={handleContextMenu}
 				className="elements"
-				gridTemplateColumns="repeat(auto-fill, minmax(90px, 1fr))"
-				gridAutoRows="min-content"
 				gap={1}
+				gridAutoRows="min-content"
+				gridTemplateColumns="repeat(auto-fill, minmax(90px, 1fr))"
 				h="full"
+				onContextMenu={handleContextMenu}
 				textAlign="center"
 			>
 				{defaultDesktopApps.map((app, index) => (
 					<DesktopIcon
-						key={app.processName}
 						app={app}
-						gridRow={index + 1}
-						onContextMenu={handleAppContextMenu(app)}
 						className={`desktop-icon ${
 							app === selectedApp && appMenuDisclosure.isOpen
 								? 'selected'
 								: ''
 						}`}
+						gridRow={index + 1}
+						key={app.processName}
+						onContextMenu={handleAppContextMenu(app)}
 					/>
 				))}
 			</Grid>
@@ -215,8 +216,8 @@ export default function Home() {
 
 			{selectedApp ? (
 				<AppContextMenu
-					position={appMenuPosition}
 					app={selectedApp}
+					position={appMenuPosition}
 					{...appMenuDisclosure}
 				/>
 			) : null}

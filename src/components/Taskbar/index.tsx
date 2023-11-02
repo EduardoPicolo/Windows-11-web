@@ -110,14 +110,12 @@ export function Taskbar(props: TaskbarProps) {
 
 						<HStack spacing={1}>
 							<Input
-								width="200px"
-								height="32px"
-								placeholder="Search"
 								autoComplete="off"
+								height="32px"
 								leftElement={
 									<InputLeftElement
-										pointerEvents="none"
 										boxSize="32px"
+										pointerEvents="none"
 									>
 										<Box
 											boxSize="18px"
@@ -125,27 +123,29 @@ export function Taskbar(props: TaskbarProps) {
 											transform="scaleX(-1)"
 										>
 											<ThemeImage
-												srcLight={SearchIconLight}
-												srcDark={SearchIconDark}
 												alt="search"
+												srcDark={SearchIconDark}
+												srcLight={SearchIconLight}
 											/>
 										</Box>
 									</InputLeftElement>
 								}
+								placeholder="Search"
+								width="200px"
 							/>
 
-							{initialApps?.map((app) => (
+							{initialApps.map((app) => (
 								<WindowsPreview
-									key={app?.processName}
-									process={app?.processName}
+									key={app.processName}
+									process={app.processName}
 								>
 									<TaskbarIcon
 										app={app}
 										onClick={
-											windows?.[app?.processName]
+											windows[app.processName]
 												? handleShowWindow(
-														app?.processName,
-														getKeys(windows?.[app?.processName])?.[0]
+														app.processName,
+														getKeys(windows[app.processName])[0]
 												  )
 												: handleAddWindow(app)
 										}
@@ -154,17 +154,17 @@ export function Taskbar(props: TaskbarProps) {
 							))}
 
 							{runningProcesses
-								?.filter(
+								.filter(
 									([process]) =>
-										!initialApps?.some(
-											(app) => app?.processName === process
+										!initialApps.some(
+											(app) => app.processName === process
 										)
 								)
 								.map(([process, processWindows]) => (
 									<WindowsPreview key={process} process={process}>
 										<TaskbarIcon
-											key={process}
 											app={getValues(processWindows)[0]}
+											key={process}
 											onClick={handleShowWindow(
 												process,
 												getKeys(processWindows)[0]

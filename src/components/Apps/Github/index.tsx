@@ -21,9 +21,9 @@ export function Github() {
 					target="_blank"
 				>
 					<Image
-						src={GithubIcon as StaticImageData}
-						quality={100}
 						alt="github"
+						quality={100}
+						src={GithubIcon as StaticImageData}
 					/>
 					<Text textAlign="center">Go to Github Repository</Text>
 				</LinkOverlay>

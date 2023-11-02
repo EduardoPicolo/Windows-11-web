@@ -10,14 +10,14 @@ export function CustomToastContainer(props: ToastContainerProps) {
 
 	return (
 		<ToastContainer
-			position="bottom-center"
 			autoClose={5000}
+			closeOnClick
+			draggable
 			hideProgressBar={false}
 			newestOnTop
-			closeOnClick
 			pauseOnFocusLoss
-			draggable
 			pauseOnHover
+			position="bottom-center"
 			theme={colorMode}
 			transition={Zoom}
 			{...props}

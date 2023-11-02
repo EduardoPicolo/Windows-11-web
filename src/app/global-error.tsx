@@ -30,11 +30,11 @@ export default function GlobalError({
 					<VStack spacing={8}>
 						<Heading>Something went wrong!</Heading>
 						<Button
-							size="lg"
 							onClick={
 								// Attempt to recover by trying to re-render the segment
 								reset
 							}
+							size="lg"
 						>
 							Try again
 						</Button>

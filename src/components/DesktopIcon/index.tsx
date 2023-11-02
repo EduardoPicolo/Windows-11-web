@@ -1,8 +1,7 @@
 import { useCallback } from 'react';
+import type { BoxProps, CenterProps } from '@chakra-ui/react';
 import {
 	Box,
-	BoxProps,
-	CenterProps,
 	forwardRef,
 	Text,
 	useStyleConfig,
@@ -28,19 +27,19 @@ export const DesktopIcon = forwardRef<DesktopIconProps, 'div'>(
 
 		return (
 			<Box
-				className="desktop-icon"
-				ref={ref}
 				__css={styles}
+				className="desktop-icon"
 				onDoubleClick={handleAddWindow}
+				ref={ref}
 				{...rest}
 			>
 				<Box
 					boxSize={props.iconSize ?? '60px'}
-					margin="0 auto"
-					userSelect="none"
-					unselectable="on"
-					pointerEvents="none"
 					draggable={false}
+					margin="0 auto"
+					pointerEvents="none"
+					unselectable="on"
+					userSelect="none"
 				>
 					{app.icon}
 				</Box>

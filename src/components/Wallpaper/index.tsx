@@ -12,13 +12,12 @@ export function Wallpaper(props: WallpaperProps) {
 
 	return (
 		<Image
-			src={state}
 			alt="Wallpaper"
-			placeholder="blur"
-			quality={100}
-			priority
 			fill
-			sizes="100vw"
+			placeholder="blur"
+			priority
+			quality={100}
+			src={state}
 			/* eslint-disable no-inline-styles/no-inline-styles -- needed */
 			style={{
 				objectFit: wallpaperFit,
@@ -26,8 +25,9 @@ export function Wallpaper(props: WallpaperProps) {
 				pointerEvents: 'none',
 				zIndex: -1,
 			}}
-			/* eslint-enable no-inline-styles/no-inline-styles */
 			unselectable="on"
+			/* eslint-enable no-inline-styles/no-inline-styles */
+			sizes="100vw"
 			{...props}
 		/>
 	);

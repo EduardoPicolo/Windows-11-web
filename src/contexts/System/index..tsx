@@ -52,6 +52,7 @@ export function SystemProvider(props: { children: React.ReactNode }) {
 export function useSystem() {
 	const context = useContext(SystemContext);
 
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- context can be undefined if not used within a provider
 	if (!context) {
 		throw new Error(
 			'useSystem must be used within a `SystemProvider`'

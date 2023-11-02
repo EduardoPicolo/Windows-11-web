@@ -20,9 +20,13 @@ export const Clock = forwardRef<ClockProps, 'div'>((props, ref) => {
 	const navigator = useNavigator();
 
 	useLayoutEffect(() => {
-		const timerID = setInterval(() => setTime(new Date()), 1000);
+		const timerID = setInterval(() => {
+			setTime(new Date());
+		}, 1000);
 
-		return () => clearInterval(timerID);
+		return () => {
+			clearInterval(timerID);
+		};
 	}, []);
 
 	const formattedTime = time.toLocaleTimeString(
@@ -53,21 +57,21 @@ export const Clock = forwardRef<ClockProps, 'div'>((props, ref) => {
 			openDelay={1000}
 		>
 			<VStack
-				ref={ref}
-				spacing={0}
-				align="flex-end"
-				py={1}
-				px={2}
-				borderRadius="md"
-				fontSize="12.5px"
-				fontWeight="medium"
-				lineHeight={1.35}
-				cursor="default"
-				transition="all 0.2s"
 				_hover={{
 					background: 'hoverBg',
 					boxShadow: 'thin',
 				}}
+				align="flex-end"
+				borderRadius="md"
+				cursor="default"
+				fontSize="12.5px"
+				fontWeight="medium"
+				lineHeight={1.35}
+				px={2}
+				py={1}
+				ref={ref}
+				spacing={0}
+				transition="all 0.2s"
 				{...props}
 			>
 				<Text>{formattedTime}</Text>

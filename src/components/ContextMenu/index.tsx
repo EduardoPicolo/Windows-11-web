@@ -1,5 +1,6 @@
 import { useRef } from 'react';
-import { Box, Menu, MenuProps, Portal } from '@chakra-ui/react';
+import type { MenuProps } from '@chakra-ui/react';
+import { Box, Menu, Portal } from '@chakra-ui/react';
 
 import { useEventListener } from '@/hooks/useEventListener';
 
@@ -31,23 +32,23 @@ export function ContextMenu(props: ContextMenuProps) {
 	return (
 		<Portal appendToParentPortal={false}>
 			<Box
-				ref={menuRef}
-				position="absolute"
-				left={position.x}
-				top={position.y}
-				hidden={rest.isOpen === false}
 				display={rest.isOpen ? 'block' : 'none'}
-				w={0}
 				h={0}
+				hidden={rest.isOpen === false}
+				left={position.x}
+				position="absolute"
+				ref={menuRef}
+				top={position.y}
+				w={0}
 			>
 				<Menu
+					computePositionOnMount
 					size="sm"
 					/**
 					 * Fix menu closing on auxclick. It should only reposition
 					 * itself.
 					 */
 					closeOnBlur={false}
-					computePositionOnMount
 					{...rest}
 				>
 					{(internalProps) =>

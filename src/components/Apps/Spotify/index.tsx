@@ -3,13 +3,13 @@ import { chakra } from '@chakra-ui/react';
 export function Spotify() {
 	return (
 		<chakra.iframe
-			src="https://open.spotify.com/embed/playlist/37i9dQZF1DWZeKCadgRdKQ?utm_source=generator&theme=0"
-			width="100%"
-			height="100%"
+			allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
 			allowFullScreen
 			allowTransparency
-			allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+			height="100%"
 			loading="lazy"
+			src="https://open.spotify.com/embed/playlist/37i9dQZF1DWZeKCadgRdKQ?utm_source=generator&theme=0"
+			width="100%"
 		/>
 	);
 }

@@ -13,17 +13,17 @@ export function BlueScreen() {
 	return (
 		<LightMode>
 			<Center
-				flexDirection="column"
-				w="100vw"
-				h="100vh"
 				background="blue.600"
+				flexDirection="column"
+				h="100vh"
+				w="100vw"
 			>
 				<Box maxWidth="110ch">
 					<Heading fontSize="9xl" fontWeight="medium" mb={4}>
 						<chakra.span>&#58;</chakra.span>
 						<chakra.span>&#40;</chakra.span>
 					</Heading>
-					<Heading size="lg" fontWeight="normal">
+					<Heading fontWeight="normal" size="lg">
 						Your PC ran into a problem and needs to restart.
 						We&apos;re just collecting some error info, and then
 						we&apos;ll restart for you.

@@ -1,12 +1,12 @@
 'use client';
 
 import Image, { type StaticImageData } from 'next/image';
+import type { GridProps } from '@chakra-ui/react';
 import {
 	Center,
 	DarkMode,
 	Grid,
 	GridItem,
-	GridProps,
 	Heading,
 } from '@chakra-ui/react';
 
@@ -19,19 +19,19 @@ export function SplashScreen(props: SplashScreenProps) {
 	return (
 		<DarkMode>
 			<Grid
-				h="100vh"
-				w="100vw"
-				gridTemplateRows="1fr 1fr"
-				justifyItems="center"
 				background="radial-gradient(ellipse at right, #050f16,#000000 70%) no-repeat"
 				backgroundSize="contain"
 				filter="saturate(2)"
+				gridTemplateRows="1fr 1fr"
+				h="100vh"
+				justifyItems="center"
+				w="100vw"
 				{...props}
 			>
 				<GridItem alignSelf="end">
 					<Image
-						src={WindowsLogo as StaticImageData}
 						alt="Logo"
+						src={WindowsLogo as StaticImageData}
 						width={350}
 					/>
 				</GridItem>
@@ -39,7 +39,7 @@ export function SplashScreen(props: SplashScreenProps) {
 				<GridItem alignSelf="center">
 					<Center flexDirection="column" gap={6}>
 						<Loader transform="scale(0.75)" />
-						<Heading fontSize="2xl" fontWeight="medium" color="white">
+						<Heading color="white" fontSize="2xl" fontWeight="medium">
 							Getting started
 						</Heading>
 					</Center>

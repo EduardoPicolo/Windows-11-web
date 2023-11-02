@@ -14,16 +14,19 @@ import { MdKeyboardArrowUp } from 'react-icons/md';
 
 export function AppsTray() {
 	return (
-		<Popover placement="top" gutter={16}>
+		<Popover gutter={16} placement="top">
 			{({ isOpen }) => (
 				<>
 					<PopoverTrigger>
 						<IconButton
+							_light={{
+								_hover: {
+									bg: 'hoverBg',
+								},
+							}}
 							aria-label="tray"
-							variant="ghost"
 							colorScheme="gray"
 							height="auto"
-							size="sm"
 							icon={
 								<Icon
 									as={MdKeyboardArrowUp}
@@ -34,35 +37,32 @@ export function AppsTray() {
 									transition="transform 0.3s ease-in-out"
 								/>
 							}
-							_light={{
-								_hover: {
-									bg: 'hoverBg',
-								},
-							}}
+							size="sm"
+							variant="ghost"
 						/>
 					</PopoverTrigger>
 					<Portal>
 						<PopoverContent width="fit-content">
 							<PopoverBody borderRadius="xl">
-								<ButtonGroup variant="ghost" size="sm">
+								<ButtonGroup size="sm" variant="ghost">
 									<IconButton
 										aria-label="NVIDIA"
-										icon={<Icon boxSize={4} as={BsNvidia} />}
 										colorScheme="green"
+										icon={<Icon as={BsNvidia} boxSize={4} />}
 									/>
 									<IconButton
 										aria-label="Steam"
-										icon={<Icon boxSize={4} as={FaSteam} />}
+										icon={<Icon as={FaSteam} boxSize={4} />}
 									/>
 									<IconButton
 										aria-label="Discord"
-										icon={<Icon boxSize={4} as={FaDiscord} />}
 										colorScheme="purple"
+										icon={<Icon as={FaDiscord} boxSize={4} />}
 									/>
 									<IconButton
 										aria-label="Spotify"
-										icon={<Icon boxSize={4} as={FaSpotify} />}
 										colorScheme="green"
+										icon={<Icon as={FaSpotify} boxSize={4} />}
 									/>
 								</ButtonGroup>
 							</PopoverBody>

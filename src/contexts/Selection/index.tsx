@@ -26,8 +26,8 @@ function DragSelectProvider({
 			if (prevState) return prevState;
 
 			return new DragSelect({
-				area: document?.getElementsByTagName('main')[0],
-				selectables: document?.getElementsByClassName?.(
+				area: document.getElementsByTagName('main')[0],
+				selectables: document.getElementsByClassName(
 					'desktop-icon'
 				) as unknown as HTMLElement[],
 				refreshMemoryRate: 1000,
