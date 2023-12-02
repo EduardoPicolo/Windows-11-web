@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect } from 'react';
 import { Button, Center, Heading, VStack } from '@chakra-ui/react';
+import { useEffect } from 'react';
 
 /**
  * Global-error.js replaces the root layout.js when active and so must

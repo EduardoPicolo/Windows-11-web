@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import type { BoxProps, CenterProps } from '@chakra-ui/react';
 import {
 	Box,
@@ -6,6 +5,7 @@ import {
 	Text,
 	useStyleConfig,
 } from '@chakra-ui/react';
+import { useCallback } from 'react';
 
 import { useWindows } from '@/contexts/Windows';
 

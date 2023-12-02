@@ -1,5 +1,5 @@
-import { useCallback, useReducer } from 'react';
 import type { Reducer } from 'react';
+import { useCallback, useReducer } from 'react';
 
 import { windowReducer } from '@/contexts/Windows/windowsReducer';
 

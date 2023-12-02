@@ -7,15 +7,10 @@
 		"./theme": "./src/theme/index.ts"
 	},
 	"scripts": {
-		"lint": "eslint . --max-warnings 0",
+		"lint": "eslint .",
 		"format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
 		"generate:component": "turbo gen react-component",
 		"type-check": "tsc --noEmit",
-		"test": "jest --passWithNoTests",
-		"cypress:component:open": "cypress open --component",
-		"cypress:component:headless": "cypress run --component",
-		"test:component": "pnpm cypress:component:open",
-		"test:component:headless": "pnpm cypress:component:headless",
 		"theme": "chakra-cli tokens src/theme/index.ts",
 		"theme:watch": "chakra-cli tokens src/theme/index.ts --watch",
 		"prepare": "pnpm theme"

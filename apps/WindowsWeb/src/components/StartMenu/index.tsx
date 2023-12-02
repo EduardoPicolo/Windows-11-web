@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import {
 	Button,
 	Card,
@@ -25,6 +24,7 @@ import {
 	useColorModeValue,
 } from '@chakra-ui/react';
 import type { MouseEventHandler } from 'react';
+import { useCallback } from 'react';
 import { IoSearch } from 'react-icons/io5';
 import { MdLockOutline } from 'react-icons/md';
 import { RiUserSettingsLine } from 'react-icons/ri';

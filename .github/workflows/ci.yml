@@ -34,7 +34,7 @@ jobs:
         run: pnpm install
 
       - name: 🧹 Run lint
-        run: pnpm next lint
+        run: pnpm lint
 
   type-check:
     runs-on: ubuntu-latest

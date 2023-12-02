@@ -1,12 +1,12 @@
 'use client';
 
+import DragSelect from 'dragselect';
 import React, {
 	createContext,
 	useContext,
 	useLayoutEffect,
 	useState,
 } from 'react';
-import DragSelect from 'dragselect';
 
 interface ProviderProps {
 	children: React.ReactNode;

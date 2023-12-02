@@ -1,9 +1,9 @@
-import React from 'react';
 import {
 	Icon,
 	type IconProps,
 	useColorModeValue,
 } from '@chakra-ui/react';
+import React from 'react';
 import { IoAddCircleOutline } from 'react-icons/io5';
 
 type AddIconProps = IconProps;

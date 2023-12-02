@@ -1,5 +1,5 @@
-import React from 'react';
 import { Icon, type IconProps } from '@chakra-ui/react';
+import React from 'react';
 
 type TerminalIconProps = IconProps;
 

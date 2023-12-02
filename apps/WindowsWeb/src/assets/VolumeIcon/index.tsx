@@ -1,5 +1,5 @@
-import React from 'react';
 import { chakra, Icon, type IconProps } from '@chakra-ui/react';
+import React from 'react';
 import { FaVolumeMute } from 'react-icons/fa';
 
 interface SpeakerIconProps extends IconProps {

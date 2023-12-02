@@ -1,7 +1,7 @@
 'use client';
 
-import { createContext, useContext, useMemo, useState } from 'react';
 import { useBoolean } from '@chakra-ui/react';
+import { createContext, useContext, useMemo, useState } from 'react';
 
 import DefaultWallpaper from '@/public/wallpapers/1-win11.jpg';
 

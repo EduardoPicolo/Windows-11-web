@@ -1,4 +1,3 @@
-import { useLayoutEffect, useRef } from 'react';
 import {
 	Box,
 	Button,
@@ -7,6 +6,7 @@ import {
 	useColorMode,
 } from '@chakra-ui/react';
 import { useBoolean } from '@chakra-ui/react';
+import { useLayoutEffect, useRef } from 'react';
 
 interface QuickSettingsItemProps
 	extends Omit<ButtonProps, 'value' | 'defaultValue'> {
