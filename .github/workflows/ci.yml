@@ -16,8 +16,10 @@ jobs:
     steps:
       # - name: Checkout code
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v2.0.1
         name: Install pnpm
         with:
           version: 8
@@ -39,8 +41,10 @@ jobs:
     steps:
       # - name: Checkout code
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v2.0.1
         name: Install pnpm
         with:
           version: 8
@@ -62,8 +66,10 @@ jobs:
     steps:
       # - name: Checkout code
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v2.0.1
         name: Install pnpm
         with:
           version: 8
@@ -86,8 +92,10 @@ jobs:
     steps:
       # - name: Checkout code
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v2.0.1
         name: Install pnpm
         with:
           version: 8
