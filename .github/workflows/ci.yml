@@ -15,83 +15,116 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # - name: Checkout code
-      - uses: actions/checkout@v3
-      # - name: Use Node.js 16.x
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
         with:
-          node-version: 18.17.x
-          cache: 'yarn'
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v2.0.1
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18.15.x
+          cache: "pnpm"
 
       - name: 🧰 Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: 🧹 Run lint
-        run: yarn next lint
+        run: pnpm lint
 
   type-check:
     runs-on: ubuntu-latest
     steps:
       # - name: Checkout code
-      - uses: actions/checkout@v3
-      # - name: Use Node.js 16.x
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
         with:
-          node-version: 18.17.x
-          cache: 'yarn'
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v2.0.1
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18.15.x
+          cache: "pnpm"
 
       - name: 🧰 Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: 🔧 Check validity of types
-        run: yarn tsc --noEmit --pretty
+        run: pnpm tsc --noEmit --pretty
 
   test:
     runs-on: ubuntu-latest
     steps:
       # - name: Checkout code
-      - uses: actions/checkout@v3
-      # - name: Use Node.js 16.x
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
         with:
-          node-version: 18.17.x
-          cache: 'yarn'
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v2.0.1
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18.15.x
+          cache: "pnpm"
 
       - name: 🧰 Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: 🧪 Run tests
-        run: yarn test:component:headless
+        run: pnpm test:component:headless
 
   build:
     needs: [lint, type-check]
     runs-on: ubuntu-latest
     steps:
       # - name: Checkout code
-      - uses: actions/checkout@v3
-      # - name: Use Node.js 16.x
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
         with:
-          node-version: 18.17.x
-          cache: 'yarn'
+          fetch-depth: 2
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+      - uses: pnpm/action-setup@v2.0.1
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18.15.x
+          cache: "pnpm"
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
       - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        name: Setup pnpm cache
         with:
           path: |
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            ${{ env.STORE_PATH }}
             ${{ github.workspace }}/.next/cache
           # Generate a new cache whenever packages or source files change.
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           # If source files changed but packages didn't, rebuild from a prior cache.
           restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
+            ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}-
 
       - name: 🧰 Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: 📦 Build project
-        run: yarn build
+        run: pnpm build
