@@ -3,8 +3,8 @@
 	"eslint.format.enable": true,
 	"editor.formatOnSave": true,
 	"editor.codeActionsOnSave": {
-		"source.fixAll.format": true,
-		"source.fixAll.eslint": true
+		"source.fixAll.format": "explicit",
+		"source.fixAll.eslint": "explicit"
 	},
 	"explorer.compactFolders": false,
 	"editor.smoothScrolling": true,
@@ -22,7 +22,6 @@
 	// export-typescript
 	"export-typescript.excludes": ["**/*.{spec.ts,spec.tsx,d.ts}"],
 	"export-typescript.includes": ["**/*.{ts,tsx}"],
-	"export-typescript.exportStar": false,
 	"[xml]": {
 		"editor.defaultFormatter": "redhat.vscode-xml"
 	},
