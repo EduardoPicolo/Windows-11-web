@@ -28,6 +28,10 @@ export const closeWindow: WindowsReducerActionHandler<
 
 	console.log('CLOSE_WINDOW:', processName, id);
 
+	if (!state[processName]) {
+		return state;
+	}
+
 	/**
 	 * Remove the window from the windows object and check if there are
 	 * any windows left for the Process, if not, remove the executable
@@ -35,9 +39,11 @@ export const closeWindow: WindowsReducerActionHandler<
 	 */
 
 	// Do not delete dynamically computed property keys.
-	const { [id]: _removedWindow, ...windows } = state[processName];
+	const { [id]: _removedWindow, ...remainingWindows } =
+		state[processName];
 
-	if (Object.keys(windows).length === 0) {
+	/** If there are no windows left for the Process, remove the Process. */
+	if (Object.keys(remainingWindows).length === 0) {
 		const { [processName]: _removedProcess, ...newWindows } = state;
 
 		return {
@@ -47,7 +53,7 @@ export const closeWindow: WindowsReducerActionHandler<
 
 	return {
 		...state,
-		[processName]: windows,
+		[processName]: remainingWindows,
 	};
 };
 

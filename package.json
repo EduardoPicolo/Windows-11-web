@@ -14,12 +14,6 @@
 		"test:component:headless": "turbo test:component:headless",
 		"prepare": "husky install"
 	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged",
-			"pre-push": "pnpm test:component:headless; pnpm type-check"
-		}
-	},
 	"devDependencies": {
 		"@repo/eslint-config": "workspace:*",
 		"@repo/typescript-config": "workspace:*",
